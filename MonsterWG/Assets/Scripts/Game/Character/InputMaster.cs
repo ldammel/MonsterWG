@@ -28,9 +28,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Interact"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""71e80b7e-68cf-462c-a028-45e26253541a"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
                 }
@@ -150,7 +150,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""98e31747-cffa-4cc8-bb5b-677ce263215e"",
                     ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Interact"",
