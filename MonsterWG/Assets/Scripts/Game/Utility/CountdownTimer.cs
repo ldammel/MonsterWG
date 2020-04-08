@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Game.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,6 +54,7 @@ namespace Game.Utility
             _minutes = 0;
             _seconds = 0;
             target.ToggleObjects();
+            ScoreDisplay.instance.DisplayScore();
         }
  
         private IEnumerator UpdateCoroutine()

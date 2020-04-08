@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Game.Character;
+using Game.UI;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,11 +12,18 @@ namespace Game.Interactions
     public class Pickup : BaseInteraction
     {
         [SerializeField] private Transform handGrabPosition;
-        [SerializeField] private Transform placementPosition;
         [SerializeField] private GameObject interactImage;
+        [SerializeField] private GameObject spawnPoint;
         public bool _isInHand;
         private bool _isInTrigger;
         private Transform _baseParent;
+        private CharacterMovement character;
+
+        private void Start()
+        {
+            character = FindObjectOfType<CharacterMovement>();
+            character.controls.Player.Interact.performed += _ => Interact();
+        }
 
         public override void Interact()
         {
@@ -44,12 +52,17 @@ namespace Game.Interactions
         private void PutDown()
         {
             interactionTarget.GetComponent<Rigidbody>().useGravity = true;
-            interactionTarget.transform.position = placementPosition.position;
             interactionTarget.transform.parent = _baseParent;
         }
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("PickupDest") && !_isInHand)
+            {
+                interactionTarget.transform.position = spawnPoint.transform.position;
+                ScoreDisplay.instance.AddScore(10000);
+            }
+
             if (!other.CompareTag("Player")) return;
             interactImage.SetActive(true);
             _isInTrigger = true;
