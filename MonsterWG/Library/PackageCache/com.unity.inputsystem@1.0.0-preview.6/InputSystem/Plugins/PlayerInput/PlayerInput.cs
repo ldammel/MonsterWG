@@ -1156,8 +1156,8 @@ namespace UnityEngine.InputSystem
                             {
                                 ////REVIEW: really wish we had a single callback
                                 action.performed += actionEvent.Invoke;
-                                //action.canceled += actionEvent.Invoke;
-                                //action.started += actionEvent.Invoke;
+                                action.canceled += actionEvent.Invoke;
+                                action.started += actionEvent.Invoke;
                             }
                             else
                             {
