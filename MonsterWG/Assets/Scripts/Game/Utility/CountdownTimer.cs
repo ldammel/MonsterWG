@@ -9,14 +9,12 @@ namespace Game.Utility
     public class CountdownTimer : MonoBehaviour
     {
         #region Variables
-        
-        public float TimeLeft => timeLeft;
-        
-        [SerializeField] private float timeLeft = 300.0f;
+
+        public float timeLeft = 300.0f;
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private Image timerImage;
         [SerializeField] private ToggleObject target;
- 
+
         private bool _stop = true;
         private float _minutes;
         private float _seconds;
@@ -28,13 +26,17 @@ namespace Game.Utility
         
         private void Start()
         {
-            StartTimer(timeLeft);
+            StartTimer();
         }
 
-        public void StartTimer(float from)
+        public void SetTimeLeft(float value)
+        {
+            timeLeft = value;
+        }
+
+        public void StartTimer()
         {
             _stop = false;
-            timeLeft = from;
             _startTime = timeLeft;
             StartCoroutine(UpdateCoroutine());
         }
@@ -43,7 +45,6 @@ namespace Game.Utility
         {
             if(_stop) return;
             timeLeft -= Time.deltaTime;
-         
             _minutes = Mathf.Floor(timeLeft / 60);
             _seconds = timeLeft % 60;
             if(_seconds > 59) _seconds = 59;

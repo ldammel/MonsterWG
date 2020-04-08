@@ -12,11 +12,16 @@
               <e p="CharacterMovement.cs" t="Include" />
               <e p="InputMaster.cs" t="Include" />
             </e>
+            <e p="Interactions" t="Include">
+              <e p="BaseInteraction.cs" t="Include" />
+              <e p="Pickup.cs" t="Include" />
+            </e>
             <e p="UI" t="Include">
               <e p="ScoreDisplay.cs" t="Include" />
             </e>
             <e p="Utility" t="Include">
               <e p="CountdownTimer.cs" t="Include" />
+              <e p="SceneManager.cs" t="Include" />
               <e p="ToggleObject.cs" t="Include" />
             </e>
           </e>
