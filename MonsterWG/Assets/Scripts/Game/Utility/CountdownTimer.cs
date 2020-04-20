@@ -12,15 +12,12 @@ namespace Game.Utility
         #region Variables
 
         public float timeLeft = 300.0f;
-        [SerializeField] private TextMeshProUGUI text;
+        private float _currentTime = 0f;
         [SerializeField] private Image timerImage;
         [SerializeField] private ToggleObject target;
 
         private bool _stop = true;
-        private float _minutes;
-        private float _seconds;
-        private float _startTime;
-        
+
         #endregion
 
         #region Functions
@@ -32,27 +29,21 @@ namespace Game.Utility
 
         public void SetTimeLeft(float value)
         {
-            timeLeft = value;
+            _currentTime = value;
         }
 
         public void StartTimer()
         {
             _stop = false;
-            _startTime = timeLeft;
             StartCoroutine(UpdateCoroutine());
         }
 
         private void Update() 
         {
             if(_stop) return;
-            timeLeft -= Time.deltaTime;
-            _minutes = Mathf.Floor(timeLeft / 60);
-            _seconds = timeLeft % 60;
-            if(_seconds > 59) _seconds = 59;
-            if (!(_minutes < 0)) return;
+            _currentTime += Time.deltaTime;
+            if (!(_currentTime >= timeLeft)) return;
             _stop = true;
-            _minutes = 0;
-            _seconds = 0;
             target.ToggleObjects();
             ScoreDisplay.instance.DisplayScore();
         }
@@ -61,8 +52,7 @@ namespace Game.Utility
         {
             while(!_stop)
             {
-                text.text = $"{_minutes:0}:{_seconds:00}";
-                timerImage.fillAmount = timeLeft / _startTime;
+                timerImage.fillAmount = _currentTime / timeLeft;
                 yield return new WaitForSeconds(0.2f);
             }
         }

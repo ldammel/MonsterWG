@@ -11,18 +11,21 @@ namespace Game.Interactions
 {
     public class Pickup : BaseInteraction
     {
-        [SerializeField] private Transform handGrabPosition;
+        private Transform _handGrabPosition;
+        [SerializeField] private Transform handGrabPosition1;
+        [SerializeField] private Transform handGrabPosition2;
         [SerializeField] private GameObject interactImage;
         [SerializeField] private GameObject spawnPoint;
         public bool _isInHand;
         private bool _isInTrigger;
         private Transform _baseParent;
-        private CharacterMovement character;
+        [SerializeField]private CharacterMovement character;
+        [SerializeField]private CharacterMovement character2;
 
         private void Start()
         {
-            character = FindObjectOfType<CharacterMovement>();
             character.controls.Player.Interact.performed += _ => Interact();
+            character2.controls.Player1.Interact.performed += _ => Interact();
         }
 
         public override void Interact()
@@ -45,8 +48,8 @@ namespace Game.Interactions
         {
             _baseParent = interactionTarget.transform.parent;
             interactionTarget.GetComponent<Rigidbody>().useGravity = false;
-            interactionTarget.transform.position = handGrabPosition.position;
-            interactionTarget.transform.parent = handGrabPosition;
+            interactionTarget.transform.position = _handGrabPosition.position;
+            interactionTarget.transform.parent = _handGrabPosition;
         }
 
         private void PutDown()
@@ -60,10 +63,13 @@ namespace Game.Interactions
             if (other.CompareTag("PickupDest") && !_isInHand)
             {
                 interactionTarget.transform.position = spawnPoint.transform.position;
+                interactionTarget.transform.rotation = spawnPoint.transform.rotation;
                 ScoreDisplay.instance.AddScore(10000);
             }
 
-            if (!other.CompareTag("Player")) return;
+            if (other.CompareTag("Untagged")) return;
+            
+            _handGrabPosition = other.CompareTag("Player2") ? handGrabPosition2 : handGrabPosition1;
             interactImage.SetActive(true);
             _isInTrigger = true;
         }
