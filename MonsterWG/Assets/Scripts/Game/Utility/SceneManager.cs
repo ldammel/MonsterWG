@@ -6,6 +6,11 @@ namespace Game.Utility
     {
         public void Restart()
         {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
+        
+        public void MainMenu()
+        {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
 

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using Game.Character;
-using Game.UI;
-using UnityEditor;
+﻿using Game.UI;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
+
 
 namespace Game.Interactions
 {
@@ -14,24 +9,14 @@ namespace Game.Interactions
         private Transform _handGrabPosition;
         [SerializeField] private Transform handGrabPosition1;
         [SerializeField] private Transform handGrabPosition2;
-        [SerializeField] private GameObject interactImage;
         [SerializeField] private GameObject spawnPoint;
-        public bool _isInHand;
-        private bool _isInTrigger;
+        [SerializeField] private int scoreGain = 10000;
+        private bool _isInHand = false;
         private Transform _baseParent;
-        [SerializeField]private CharacterMovement character;
-        [SerializeField]private CharacterMovement character2;
-
-        private void Start()
-        {
-            character.controls.Player.Interact.performed += _ => Interact();
-            character2.controls.Player1.Interact.performed += _ => Interact();
-        }
 
         public override void Interact()
         {
             if (!_isInTrigger && !_isInHand) return;
-            Debug.Log("Pressed");
             if (!_isInHand)
             {
                 PickupObject();
@@ -64,7 +49,7 @@ namespace Game.Interactions
             {
                 interactionTarget.transform.position = spawnPoint.transform.position;
                 interactionTarget.transform.rotation = spawnPoint.transform.rotation;
-                ScoreDisplay.instance.AddScore(10000);
+                ScoreDisplay.instance.AddScore(scoreGain);
             }
 
             if (other.CompareTag("Untagged")) return;

@@ -14,10 +14,12 @@
             </e>
             <e p="Interactions" t="Include">
               <e p="BaseInteraction.cs" t="Include" />
+              <e p="Interaction.cs" t="Include" />
               <e p="Pickup.cs" t="Include" />
             </e>
             <e p="UI" t="Include">
               <e p="ScoreDisplay.cs" t="Include" />
+              <e p="UIManager.cs" t="Include" />
             </e>
             <e p="Utility" t="Include">
               <e p="CountdownTimer.cs" t="Include" />
