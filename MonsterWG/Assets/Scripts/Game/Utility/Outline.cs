@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Cinemachine;
+using Game.UI;
 using UnityEngine;
 
 public class Outline : MonoBehaviour
 {
     [SerializeField] private Material outlineMaterial;
     private Renderer outlineRenderer;
+    [SerializeField] private UIBehaviour behaviour;
 
     void Start()
     {
@@ -31,9 +32,20 @@ public class Outline : MonoBehaviour
         outlineRenderer.enabled = true;
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
-        transform.Rotate(Vector3.up, 1f, Space.World);
+        outlineRenderer.enabled = true;
+    }
+
+    private void OnMouseDown()
+    {
+        if (!outlineRenderer.enabled) return;
+        behaviour.Execute();
+    }
+
+    private void OnMouseExit()
+    {
+        outlineRenderer.enabled = false;
     }
 
     private void  OnTriggerExit(Collider other)

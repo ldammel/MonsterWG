@@ -1,67 +1,66 @@
 ﻿using Game.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace Game.Interactions
 {
     public class Pickup : BaseInteraction
     {
-        private Transform _handGrabPosition;
-        [SerializeField] private Transform handGrabPosition1;
-        [SerializeField] private Transform handGrabPosition2;
+        [SerializeField] private Transform[] handGrabPosition;
         [SerializeField] private GameObject spawnPoint;
-        [SerializeField] private int scoreGain = 10000;
+        [SerializeField] private Transform baseParent;
+        [SerializeField] private Sprite itemIcon;
+        [SerializeField] private Image[] playerInvImage;
+        private Transform _handGrabPosition;
         private bool _isInHand = false;
-        private Transform _baseParent;
+        private int _currentPlayer;
 
-        public override void Interact()
+        public override void Interact(int player)
         {
-            if (!_isInTrigger && !_isInHand) return;
-            if (!_isInHand)
-            {
-                PickupObject();
-            }
-            else
-            {
-                PutDown();
-            }
-
-            _isInHand = !_isInHand;
-        }
-
-        private void PickupObject()
-        {
-            _baseParent = interactionTarget.transform.parent;
+            if (isPlayerOne && player != 1) return;
+            if (!isPlayerOne && player != 2) return;
+            if (!isInTrigger && !_isInHand) return;
+            _currentPlayer = isPlayerOne ? 1 : 2;
+            _handGrabPosition = isPlayerOne ? handGrabPosition[0] : handGrabPosition[1];
+            playerInvImage[_currentPlayer-1].sprite = itemIcon;
+            playerInvImage[_currentPlayer-1].gameObject.SetActive(true);
             interactionTarget.GetComponent<Rigidbody>().useGravity = false;
             interactionTarget.transform.position = _handGrabPosition.position;
             interactionTarget.transform.parent = _handGrabPosition;
+            _isInHand = true;
         }
 
-        private void PutDown()
+        public override void Cancel(int player)
         {
+            playerInvImage[player-1].sprite = null;
+            playerInvImage[player-1].gameObject.SetActive(false);
+            if (_currentPlayer != player) return;
+            if (!isInTrigger && !_isInHand) return;
             interactionTarget.GetComponent<Rigidbody>().useGravity = true;
-            interactionTarget.transform.parent = _baseParent;
+            interactionTarget.transform.parent = baseParent;
+            _isInHand = false;
         }
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("Untagged")) return;
             if (other.CompareTag("PickupDest") && !_isInHand)
             {
                 interactionTarget.transform.position = spawnPoint.transform.position;
                 interactionTarget.transform.rotation = spawnPoint.transform.rotation;
                 ScoreDisplay.instance.AddScore(scoreGain);
+                onComplete.Invoke();
             }
-
-            if (other.CompareTag("Untagged")) return;
-            
-            _handGrabPosition = other.CompareTag("Player2") ? handGrabPosition2 : handGrabPosition1;
+            isPlayerOne = other.CompareTag("Player");
             interactImage.SetActive(true);
-            _isInTrigger = true;
+            isInTrigger = true;
         }
+        
         private void OnTriggerExit(Collider other)
         {
             interactImage.SetActive(false);
-            _isInTrigger = false;
+            isInTrigger = false;
         }
     }
 }

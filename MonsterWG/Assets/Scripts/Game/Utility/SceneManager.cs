@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Game.Utility
 {
@@ -6,7 +7,7 @@ namespace Game.Utility
     {
         public void Restart()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            StartCoroutine(StartGame());
         }
         
         public void MainMenu()
@@ -17,6 +18,12 @@ namespace Game.Utility
         public void Quit()
         {
             Application.Quit();
+        }
+
+        private IEnumerator StartGame()
+        {
+            yield return new WaitForSeconds(3);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
     }
 }
