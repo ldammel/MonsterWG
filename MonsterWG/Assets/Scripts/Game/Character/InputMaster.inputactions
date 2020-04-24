@@ -22,6 +22,14 @@
                     "interactions": "Press"
                 },
                 {
+                    "name": "Select",
+                    "type": "PassThrough",
+                    "id": "120cb535-dbaf-4685-939d-bfd0969e8709",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
                     "name": "Menu",
                     "type": "Button",
                     "id": "9b3d8488-b53e-4bff-8975-c1fd6b88366b",
@@ -184,6 +192,28 @@
                     "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5332299f-44a5-4e32-ac5a-f2768e25147e",
+                    "path": "<Keyboard>/f",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aeb345a4-e07e-445f-be82-3ba041918cb6",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -203,6 +233,14 @@
                     "name": "Interact",
                     "type": "PassThrough",
                     "id": "530d17a9-6742-469e-81fe-de092f49ba34",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Select",
+                    "type": "PassThrough",
+                    "id": "b0d262ac-b30c-4551-a2c7-3b07b6fb4c2e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
@@ -368,6 +406,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "536fc25b-4031-4089-a8c4-34e9be8f7b8f",
+                    "path": "<Keyboard>/numpad0",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca13ef31-2b44-4c35-8f02-6d6851f5d0a9",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -35,6 +35,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": ""Press""
                 },
                 {
+                    ""name"": ""Select"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""120cb535-dbaf-4685-939d-bfd0969e8709"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
                     ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""9b3d8488-b53e-4bff-8975-c1fd6b88366b"",
@@ -197,6 +205,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5332299f-44a5-4e32-ac5a-f2768e25147e"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aeb345a4-e07e-445f-be82-3ba041918cb6"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -216,6 +246,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""PassThrough"",
                     ""id"": ""530d17a9-6742-469e-81fe-de092f49ba34"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""b0d262ac-b30c-4551-a2c7-3b07b6fb4c2e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
@@ -383,6 +421,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""536fc25b-4031-4089-a8c4-34e9be8f7b8f"",
+                    ""path"": ""<Keyboard>/numpad0"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca13ef31-2b44-4c35-8f02-6d6851f5d0a9"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -421,11 +481,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
         m_Player1_Interact = m_Player1.FindAction("Interact", throwIfNotFound: true);
+        m_Player1_Select = m_Player1.FindAction("Select", throwIfNotFound: true);
         m_Player1_Menu = m_Player1.FindAction("Menu", throwIfNotFound: true);
     }
 
@@ -478,6 +540,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Select;
     private readonly InputAction m_Player_Menu;
     public struct PlayerActions
     {
@@ -485,6 +548,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public PlayerActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Select => m_Wrapper.m_Player_Select;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -501,6 +565,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Select.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelect;
                 @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
@@ -514,6 +581,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
@@ -527,6 +597,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private IPlayer1Actions m_Player1ActionsCallbackInterface;
     private readonly InputAction m_Player1_Move;
     private readonly InputAction m_Player1_Interact;
+    private readonly InputAction m_Player1_Select;
     private readonly InputAction m_Player1_Menu;
     public struct Player1Actions
     {
@@ -534,6 +605,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public Player1Actions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player1_Move;
         public InputAction @Interact => m_Wrapper.m_Player1_Interact;
+        public InputAction @Select => m_Wrapper.m_Player1_Select;
         public InputAction @Menu => m_Wrapper.m_Player1_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
@@ -550,6 +622,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
+                @Select.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnSelect;
                 @Menu.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
@@ -563,6 +638,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
@@ -592,12 +670,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
     }
     public interface IPlayer1Actions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
     }
 }

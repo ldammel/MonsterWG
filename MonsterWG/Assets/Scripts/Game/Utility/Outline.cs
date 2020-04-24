@@ -7,6 +7,7 @@ public class Outline : MonoBehaviour
     [SerializeField] private Material outlineMaterial;
     private Renderer outlineRenderer;
     [SerializeField] private UIBehaviour behaviour;
+    private static readonly int FirstOutlineColor = Shader.PropertyToID("_FirstOutlineColor");
 
     void Start()
     {
@@ -29,23 +30,25 @@ public class Outline : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Untagged")) return;
+        outlineMaterial.SetColor(FirstOutlineColor, other.CompareTag("Player") ? Color.blue : Color.green);
         outlineRenderer.enabled = true;
     }
 
-    private void OnMouseEnter()
+    public void Select(Color color)
     {
+        outlineMaterial.SetColor(FirstOutlineColor, color );
         outlineRenderer.enabled = true;
     }
+    
+    public void Deselect()
+    {
+        outlineRenderer.enabled = false;
+    }
 
-    private void OnMouseDown()
+    public void Activate()
     {
         if (!outlineRenderer.enabled) return;
         behaviour.Execute();
-    }
-
-    private void OnMouseExit()
-    {
-        outlineRenderer.enabled = false;
     }
 
     private void  OnTriggerExit(Collider other)
