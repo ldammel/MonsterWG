@@ -6,6 +6,18 @@ namespace Game.UI
 {
     public class ScoreDisplay : MonoBehaviour
     {
+        public static ScoreDisplay instance;
+        private void Awake()
+        {
+            if (instance != null)
+            {
+                Debug.LogError("There can only be one instance of ScoreDisplay!");
+                Application.Quit();
+            }
+
+            instance = this;
+        }
+
         [SerializeField] private int score;
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private GameObject[] fullStars = new GameObject[5];
@@ -17,17 +29,14 @@ namespace Game.UI
             {
                 star.SetActive(false);
             }
-
-            CalculateScore();
         }
 
-        private void CalculateScore()
+        public void AddScore(int scoreAdd)
         {
-            //DoCalculation
-            DisplayScore();
+            score += scoreAdd;
         }
 
-        private void DisplayScore()
+        public void DisplayScore()
         {
             scoreText.text = score.ToString();
             for (int i = 0; i < neededStarScore.Length; i++)
