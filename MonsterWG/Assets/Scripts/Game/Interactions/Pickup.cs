@@ -1,5 +1,7 @@
-﻿using Game.UI;
+﻿using Game.Character;
+using Game.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -12,14 +14,16 @@ namespace Game.Interactions
         [SerializeField] private Transform baseParent;
         [SerializeField] private Sprite itemIcon;
         [SerializeField] private Image[] playerInvImage;
+        public UnityEvent onPickUp;
         private Transform _handGrabPosition;
         private bool _isInHand = false;
         private int _currentPlayer;
 
-        public override void Interact(int player)
+        public override void PickUp(int player)
         {
             if (isPlayerOne && player != 1) return;
             if (!isPlayerOne && player != 2) return;
+            if (_isInHand) CancelPickUp(_currentPlayer);
             if (!isInTrigger && !_isInHand) return;
             _currentPlayer = isPlayerOne ? 1 : 2;
             _handGrabPosition = isPlayerOne ? handGrabPosition[0] : handGrabPosition[1];
@@ -29,9 +33,10 @@ namespace Game.Interactions
             interactionTarget.transform.position = _handGrabPosition.position;
             interactionTarget.transform.parent = _handGrabPosition;
             _isInHand = true;
+            onPickUp.Invoke();
         }
 
-        public override void Cancel(int player)
+        public void CancelPickUp(int player)
         {
             playerInvImage[player-1].sprite = null;
             playerInvImage[player-1].gameObject.SetActive(false);
@@ -52,6 +57,7 @@ namespace Game.Interactions
                 ScoreDisplay.instance.AddScore(scoreGain);
                 onComplete.Invoke();
             }
+
             isPlayerOne = other.CompareTag("Player");
             interactImage.SetActive(true);
             isInTrigger = true;

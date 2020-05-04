@@ -29,6 +29,6 @@ Material:
     - Vector1_6DFB6B23: 0
     - Vector1_91FC28B4: -3.5
     - Vector1_A7131FF7: 0
-    - _fogDensity: 0.44
+    - _fogDensity: 3
     m_Colors:
     - _fogColor: {r: 0, g: 0, b: 0, a: 0.7529412}

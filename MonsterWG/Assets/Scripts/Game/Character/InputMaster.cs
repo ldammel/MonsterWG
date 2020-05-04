@@ -209,7 +209,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5332299f-44a5-4e32-ac5a-f2768e25147e"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -282,7 +282,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""5fde0b58-d7fc-48fe-91c4-c07b21b9332d"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -293,7 +293,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""df574013-5e71-490d-a2e3-20213b30d7ee"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -304,7 +304,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""e3ec8ade-ac3a-442e-bfd9-692fa694ebdd"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -315,7 +315,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""bf9fbfb1-3890-4853-94f7-07c351559c78"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -381,7 +381,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""484b11d9-d06f-4184-b7a5-eaeec69f57e2"",
-                    ""path"": ""<Keyboard>/numpad0"",
+                    ""path"": ""<Keyboard>/h"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -403,7 +403,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a33389c1-235d-47d6-9467-966af342c918"",
-                    ""path"": ""<Keyboard>/delete"",
+                    ""path"": ""<Keyboard>/backspace"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -425,7 +425,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""536fc25b-4031-4089-a8c4-34e9be8f7b8f"",
-                    ""path"": ""<Keyboard>/numpad0"",
+                    ""path"": ""<Keyboard>/u"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",

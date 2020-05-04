@@ -25,11 +25,15 @@ namespace Game.Interactions
             character.controls.Player.Interact.performed += _ => Interact(1);
             character2.controls.Player1.Interact.performed += _ => Interact(2);
             
+            character.controls.Player.Select.performed += _ => PickUp(1);
+            character2.controls.Player1.Select.performed += _ => PickUp(2);
+            
             character.controls.Player.Interact.canceled += _ => Cancel(1);
             character2.controls.Player1.Interact.canceled += _ => Cancel(2);
         }
 
         public virtual void Interact(int player){}
+        public virtual void PickUp(int player){}
         public virtual void Cancel(int player){}
         
         

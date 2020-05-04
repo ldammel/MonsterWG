@@ -10,9 +10,11 @@ namespace Game.Interactions
         [SerializeField] private float duration = 5f;
         [SerializeField] private Image timerImage;
         [SerializeField] private GameObject timerbase;
+        [SerializeField] private bool saveProgress;
         private float _startTime;
         private bool _stop = true;
         private bool _isDone;
+
 
         public override void Interact(int player)
         {
@@ -29,7 +31,10 @@ namespace Game.Interactions
             if (isPlayerOne && player != 1) return;
             if (!isPlayerOne && player != 2) return;
             _stop = true;
-            _startTime = 0;
+            if (!saveProgress)
+            {
+                _startTime = 0;
+            }
             timerbase.SetActive(false);
         }
 
