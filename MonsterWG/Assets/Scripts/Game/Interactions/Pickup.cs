@@ -14,6 +14,7 @@ namespace Game.Interactions
         [SerializeField] private Transform baseParent;
         [SerializeField] private Sprite itemIcon;
         [SerializeField] private Image[] playerInvImage;
+        [SerializeField] private bool respawn;
         public UnityEvent onPickUp;
         private Transform _handGrabPosition;
         private bool _isInHand = false;
@@ -52,8 +53,11 @@ namespace Game.Interactions
             if (other.CompareTag("Untagged")) return;
             if (other.CompareTag("PickupDest") && !_isInHand)
             {
-                interactionTarget.transform.position = spawnPoint.transform.position;
-                interactionTarget.transform.rotation = spawnPoint.transform.rotation;
+                if (respawn)
+                {
+                    ResetPosition();
+                }
+                other.gameObject.GetComponent<ItemCollector>().collectedItems.Add(this);
                 ScoreDisplay.instance.AddScore(scoreGain);
                 onComplete.Invoke();
             }
@@ -62,7 +66,13 @@ namespace Game.Interactions
             interactImage.SetActive(true);
             isInTrigger = true;
         }
-        
+
+        public void ResetPosition()
+        {
+            interactionTarget.transform.position = spawnPoint.transform.position;
+            interactionTarget.transform.rotation = spawnPoint.transform.rotation;
+        }
+
         private void OnTriggerExit(Collider other)
         {
             interactImage.SetActive(false);

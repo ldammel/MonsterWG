@@ -1677,7 +1677,7 @@ Transform:
   m_LocalScale: {x: 0.5655549, y: 0.5655549, z: 0.5655549}
   m_Children: []
   m_Father: {fileID: 423134083}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &238410215
 BoxCollider:
@@ -2957,15 +2957,16 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1832392292}
+  - {fileID: 1793889782}
   - {fileID: 547743758}
   - {fileID: 1391614495}
   - {fileID: 1498820963}
   - {fileID: 1792997060}
   - {fileID: 1128280997}
+  - {fileID: 1997694739}
   - {fileID: 623668010}
   - {fileID: 238410214}
   - {fileID: 898628052}
-  - {fileID: 1793889782}
   - {fileID: 1940332760}
   - {fileID: 1281372635}
   m_Father: {fileID: 1403381418}
@@ -3724,7 +3725,7 @@ Transform:
   m_Children:
   - {fileID: 1451972730}
   m_Father: {fileID: 423134083}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &547743759
 MonoBehaviour:
@@ -3752,7 +3753,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1391614490}
+      - m_Target: {fileID: 165647882}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -3763,9 +3764,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 165647882}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1498820964}
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1128281000}
+        m_MethodName: Reset
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3791,6 +3803,7 @@ MonoBehaviour:
   playerInvImage:
   - {fileID: 1905063539}
   - {fileID: 576555047}
+  respawn: 0
   onPickUp:
     m_PersistentCalls:
       m_Calls: []
@@ -4255,7 +4268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621335383}
   m_LocalRotation: {x: 0.19134171, y: -0.8001032, z: 0.46193978, w: 0.33141357}
-  m_LocalPosition: {x: 3.11966, y: 7.2423196, z: 3.1955218}
+  m_LocalPosition: {x: 3.11966, y: 7.2423186, z: 3.1955214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1725847395}
@@ -4372,7 +4385,7 @@ Transform:
   m_Children:
   - {fileID: 800376973}
   m_Father: {fileID: 423134083}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &623668011
 Rigidbody:
@@ -4429,7 +4442,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1391614490}
+      - m_Target: {fileID: 165647882}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -4440,9 +4453,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 165647882}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1498820964}
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1128281000}
+        m_MethodName: Reset
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4462,12 +4486,13 @@ MonoBehaviour:
   handGrabPosition:
   - {fileID: 1983382034}
   - {fileID: 1031434451}
-  spawnPoint: {fileID: 1832392291}
+  spawnPoint: {fileID: 1997694738}
   baseParent: {fileID: 423134083}
   itemIcon: {fileID: 21300000, guid: 7d489eb07b50721458cd53a1c911568f, type: 3}
   playerInvImage:
   - {fileID: 1905063539}
   - {fileID: 576555047}
+  respawn: 0
   onPickUp:
     m_PersistentCalls:
       m_Calls: []
@@ -5777,7 +5802,7 @@ Transform:
   m_LocalScale: {x: 0.4658, y: 0.4658, z: 0.4658}
   m_Children: []
   m_Father: {fileID: 423134083}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &902019205
 GameObject:
@@ -7234,7 +7259,7 @@ Transform:
   - {fileID: 1430847774}
   - {fileID: 547747513}
   m_Father: {fileID: 423134083}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1128280999
 BoxCollider:
@@ -7319,6 +7344,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 623668013}
+        m_MethodName: ResetPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   interactionTarget: {fileID: 1128280996}
   animator: {fileID: 0}
   interactImage: {fileID: 988714497}
@@ -7331,6 +7367,9 @@ MonoBehaviour:
   timerImage: {fileID: 1825231977}
   timerbase: {fileID: 871612567}
   saveProgress: 1
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1128281001
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8000,7 +8039,7 @@ Transform:
   - {fileID: 941977247}
   - {fileID: 2126484281}
   m_Father: {fileID: 423134083}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1285555183
 GameObject:
@@ -8426,7 +8465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297650280}
   m_LocalRotation: {x: 0.19134171, y: -0.8001032, z: 0.46193978, w: 0.33141357}
-  m_LocalPosition: {x: 3.11966, y: 7.2423196, z: 3.1955218}
+  m_LocalPosition: {x: 3.11966, y: 7.2423186, z: 3.1955214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 651063850}
@@ -8740,7 +8779,7 @@ Transform:
   m_LocalScale: {x: 0.4658, y: 0.055136744, z: 0.4658}
   m_Children: []
   m_Father: {fileID: 423134083}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1403381417
 GameObject:
@@ -9373,7 +9412,7 @@ Transform:
   - {fileID: 333628835}
   - {fileID: 1036396359}
   m_Father: {fileID: 423134083}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1498820964
 MonoBehaviour:
@@ -9479,6 +9518,31 @@ MonoBehaviour:
   timerImage: {fileID: 442978849}
   timerbase: {fileID: 1291535021}
   saveProgress: 1
+  onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1793889786}
+        m_MethodName: DisableItems
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1391614490}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!65 &1498820965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11189,7 +11253,7 @@ Transform:
   m_LocalScale: {x: 0.4658, y: 0.055136744, z: 0.4658}
   m_Children: []
   m_Father: {fileID: 423134083}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793889781
 GameObject:
@@ -11203,6 +11267,7 @@ GameObject:
   - component: {fileID: 1793889785}
   - component: {fileID: 1793889784}
   - component: {fileID: 1793889783}
+  - component: {fileID: 1793889786}
   m_Layer: 0
   m_Name: PickupDest
   m_TagString: PickupDest
@@ -11222,7 +11287,7 @@ Transform:
   m_LocalScale: {x: 0.56925416, y: 0.4510073, z: 0.6187525}
   m_Children: []
   m_Father: {fileID: 423134083}
-  m_RootOrder: 9
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1793889783
 BoxCollider:
@@ -11235,8 +11300,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.08, y: 0.27, z: 1.02}
-  m_Center: {x: 0, y: 0.62, z: 0}
+  m_Size: {x: 1.08, y: 0.36, z: 1.02}
+  m_Center: {x: 0, y: 0.71, z: 0}
 --- !u!23 &1793889784
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11284,6 +11349,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793889781}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1793889786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793889781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe1959e0d8a0cc4cacaaea85fdbca8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectedItems: []
 --- !u!1 &1825231975
 GameObject:
   m_ObjectHideFlags: 0
@@ -11755,7 +11833,7 @@ Transform:
   m_Children:
   - {fileID: 1564086169}
   m_Father: {fileID: 423134083}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1940332761
 Rigidbody:
@@ -11818,6 +11896,7 @@ MonoBehaviour:
   playerInvImage:
   - {fileID: 1905063539}
   - {fileID: 576555047}
+  respawn: 0
   onPickUp:
     m_PersistentCalls:
       m_Calls:
@@ -12246,6 +12325,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994501895}
   m_CullTransparentMesh: 0
+--- !u!1 &1997694738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997694739}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1997694739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997694738}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.909, y: 0.8410001, z: 3.248}
+  m_LocalScale: {x: 0.46580002, y: 0.46580002, z: 0.46580002}
+  m_Children: []
+  m_Father: {fileID: 423134083}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2051764716
 GameObject:
   m_ObjectHideFlags: 0

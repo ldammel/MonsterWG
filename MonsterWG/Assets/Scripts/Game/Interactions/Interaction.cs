@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Game.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.Interactions
@@ -11,6 +12,7 @@ namespace Game.Interactions
         [SerializeField] private Image timerImage;
         [SerializeField] private GameObject timerbase;
         [SerializeField] private bool saveProgress;
+        public UnityEvent onStart;
         private float _startTime;
         private bool _stop = true;
         private bool _isDone;
@@ -24,6 +26,12 @@ namespace Game.Interactions
             if (!isInTrigger) return;
             StartTimer();
             timerbase.SetActive(true);
+            onStart.Invoke();
+        }
+
+        public void Reset()
+        {
+            _isDone = false;
         }
 
         public override void Cancel(int player)
@@ -48,6 +56,7 @@ namespace Game.Interactions
             timerbase.SetActive(false);
             onComplete.Invoke();
             _isDone = true;
+            _startTime = 0;
         }
 
         public void StartTimer()
