@@ -8,14 +8,13 @@ namespace Game.Interactions
     public class BaseInteraction : MonoBehaviour
     {
         public UnityEvent onComplete;
-        public GameObject interactionTarget;
         public Animator animator;
         public GameObject interactImage;
-        public CharacterMovement character;
-        public CharacterMovement character2;
-        public bool isInTrigger = false;
+        [HideInInspector]public CharacterMovement character;
+        [HideInInspector]public CharacterMovement character2;
+        [HideInInspector]public bool isInTrigger = false;
         public int scoreGain = 10000;
-        public bool isPlayerOne;
+        [HideInInspector]public bool isPlayerOne;
         
         private void Start()
         {

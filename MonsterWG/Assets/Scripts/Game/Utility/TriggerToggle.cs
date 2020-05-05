@@ -20,6 +20,7 @@ namespace Game.Utility
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("Untagged")) return;
             if (!enter) return;
             Toggle();
         }

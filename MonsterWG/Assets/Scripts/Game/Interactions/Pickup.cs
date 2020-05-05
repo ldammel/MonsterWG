@@ -15,6 +15,7 @@ namespace Game.Interactions
         [SerializeField] private Sprite itemIcon;
         [SerializeField] private Image[] playerInvImage;
         [SerializeField] private bool respawn;
+        [SerializeField] private GameObject interactionTarget;
         public UnityEvent onPickUp;
         private Transform _handGrabPosition;
         private bool _isInHand = false;

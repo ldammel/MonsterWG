@@ -3,6 +3,7 @@ using System.Collections;
 using Game.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.Utility
@@ -15,6 +16,7 @@ namespace Game.Utility
         private float _currentTime = 0f;
         [SerializeField] private Image timerImage;
         [SerializeField] private ToggleObject target;
+        public UnityEvent onFinish;
 
         private bool _stop = true;
 
@@ -44,8 +46,8 @@ namespace Game.Utility
             _currentTime += Time.deltaTime;
             if (!(_currentTime >= timeLeft)) return;
             _stop = true;
-            target.ToggleObjects();
-            ScoreDisplay.instance.DisplayScore();
+            if(target)target.ToggleObjects();
+            onFinish.Invoke();
         }
  
         private IEnumerator UpdateCoroutine()

@@ -49,6 +49,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Notify"",
+                    ""type"": ""Button"",
+                    ""id"": ""64b1c2cf-1b65-4aa2-97bf-31fd816024c0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Emotes"",
+                    ""type"": ""Button"",
+                    ""id"": ""4046b0c2-815d-4fbf-aebc-3ad57ec47631"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -176,7 +192,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ffc9b62f-bb1c-4dac-b7a8-c6983b69050c"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -227,6 +243,116 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c7b6ad6-455a-44ed-9f29-1903277f4fa0"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Notify"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c170c5b0-0144-457c-a692-d4613ab29cae"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Notify"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82d54839-89d5-45f4-8795-f8a83229c5e2"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07e8eee4-e479-4b57-805e-66c6bae8915d"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c75ce0a-ea67-45c7-bb77-77325233d115"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""255ab482-07a1-4682-91f4-aaea8d4c5e07"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5897dd1-99b2-4b5a-a5e9-b5878cde7e73"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97c625b3-742a-49af-804a-cc1aadb80daf"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57c043af-8e7f-45d1-8041-cc8b08da2158"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77fdd89c-563a-46b0-b768-8f9195e3c144"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -262,6 +388,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""1ed2e82e-39e2-4da2-850b-c70cb3680d6c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Notify"",
+                    ""type"": ""Button"",
+                    ""id"": ""8786d84c-a9ed-4f22-86aa-259ec53be50a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Emotes"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e49e57c-c329-4e04-aaa7-ab2916917ff9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press""
@@ -392,7 +534,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""17d455b8-83a2-4a75-ab53-0762e8fb9dc0"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -443,6 +585,116 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c985070f-ead5-4b5a-9cf9-d3c7858d0ad7"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Notify"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""117cbc55-0f35-4de8-a8eb-ad2d4d285f4f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Notify"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07423f48-6f09-4cfd-be44-78aaae924804"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df6e2012-4f25-4766-a460-be2ce0843e7a"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9da1f15b-9897-47bc-9c68-f014498286e5"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff0cc08f-083b-453f-8ce8-846277b093e2"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc9bbe15-944b-4a05-be5a-cbf2bc162b97"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c76a4c2c-9b2f-45e4-8e0a-640940f1ffa0"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e6f1c84-f1e5-4a8c-8699-73b840df803f"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d114b5d5-32da-4f86-ac35-faa7c09ad266"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Emotes"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -483,12 +735,16 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_Notify = m_Player.FindAction("Notify", throwIfNotFound: true);
+        m_Player_Emotes = m_Player.FindAction("Emotes", throwIfNotFound: true);
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
         m_Player1_Interact = m_Player1.FindAction("Interact", throwIfNotFound: true);
         m_Player1_Select = m_Player1.FindAction("Select", throwIfNotFound: true);
         m_Player1_Menu = m_Player1.FindAction("Menu", throwIfNotFound: true);
+        m_Player1_Notify = m_Player1.FindAction("Notify", throwIfNotFound: true);
+        m_Player1_Emotes = m_Player1.FindAction("Emotes", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -542,6 +798,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Select;
     private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_Notify;
+    private readonly InputAction m_Player_Emotes;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -550,6 +808,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Select => m_Wrapper.m_Player_Select;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputAction @Notify => m_Wrapper.m_Player_Notify;
+        public InputAction @Emotes => m_Wrapper.m_Player_Emotes;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -571,6 +831,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @Notify.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNotify;
+                @Notify.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNotify;
+                @Notify.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNotify;
+                @Emotes.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEmotes;
+                @Emotes.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEmotes;
+                @Emotes.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEmotes;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -587,6 +853,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @Notify.started += instance.OnNotify;
+                @Notify.performed += instance.OnNotify;
+                @Notify.canceled += instance.OnNotify;
+                @Emotes.started += instance.OnEmotes;
+                @Emotes.performed += instance.OnEmotes;
+                @Emotes.canceled += instance.OnEmotes;
             }
         }
     }
@@ -599,6 +871,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player1_Interact;
     private readonly InputAction m_Player1_Select;
     private readonly InputAction m_Player1_Menu;
+    private readonly InputAction m_Player1_Notify;
+    private readonly InputAction m_Player1_Emotes;
     public struct Player1Actions
     {
         private @InputMaster m_Wrapper;
@@ -607,6 +881,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player1_Interact;
         public InputAction @Select => m_Wrapper.m_Player1_Select;
         public InputAction @Menu => m_Wrapper.m_Player1_Menu;
+        public InputAction @Notify => m_Wrapper.m_Player1_Notify;
+        public InputAction @Emotes => m_Wrapper.m_Player1_Emotes;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -628,6 +904,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
+                @Notify.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnNotify;
+                @Notify.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnNotify;
+                @Notify.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnNotify;
+                @Emotes.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEmotes;
+                @Emotes.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEmotes;
+                @Emotes.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEmotes;
             }
             m_Wrapper.m_Player1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -644,6 +926,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @Notify.started += instance.OnNotify;
+                @Notify.performed += instance.OnNotify;
+                @Notify.canceled += instance.OnNotify;
+                @Emotes.started += instance.OnEmotes;
+                @Emotes.performed += instance.OnEmotes;
+                @Emotes.canceled += instance.OnEmotes;
             }
         }
     }
@@ -672,6 +960,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnNotify(InputAction.CallbackContext context);
+        void OnEmotes(InputAction.CallbackContext context);
     }
     public interface IPlayer1Actions
     {
@@ -679,5 +969,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnNotify(InputAction.CallbackContext context);
+        void OnEmotes(InputAction.CallbackContext context);
     }
 }
