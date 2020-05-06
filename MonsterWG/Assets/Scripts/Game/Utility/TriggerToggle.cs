@@ -1,34 +1,30 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Utility
 {
     public class TriggerToggle : MonoBehaviour
     {
-        [SerializeField] private GameObject[] toggleObjects;
-        [SerializeField] private bool[] toggles;
-        [SerializeField] private bool enter;
-        [SerializeField] private bool exit;
-
-        private void Toggle()
-        {
-            for (int i = 0; i < toggleObjects.Length; i++)
-            {
-                toggleObjects[i].SetActive(toggles[i]);
-            }
-        }
+        public UnityEvent enterEvents;
+        public UnityEvent exitEvents;
+        public bool disable;
 
         private void OnTriggerEnter(Collider other)
         {
+            if (disable) return;
             if (other.CompareTag("Untagged")) return;
-            if (!enter) return;
-            Toggle();
+            enterEvents.Invoke();
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (!exit) return;
-            Toggle();
+            if (disable) return;
+            exitEvents.Invoke();
+        }
+
+        public void SetBool(bool b)
+        {
+            disable = b;
         }
     }
 }

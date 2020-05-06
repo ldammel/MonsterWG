@@ -20,6 +20,13 @@ namespace Game.Quests
         public void AddActiveQuest(Quest quest)
         {
             if (activeQuests.Contains(quest)) return;
+            for (int i = 0; i < activeQuests.Count; i++)
+            {
+                if (activeQuests[i] != null) continue;
+                activeQuests[i] = quest;
+                ListQuests();
+                return;
+            }
             activeQuests.Add(quest);
             ListQuests();
         }
