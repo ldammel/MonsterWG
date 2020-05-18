@@ -6,44 +6,54 @@ using UnityEngine.UI;
 
 namespace Game.Interactions
 {
-    public class Interaction : BaseInteraction
+    public class Interaction : MonoBehaviour
     {
         [SerializeField] private float duration = 5f;
+        [SerializeField] private bool useTimer;
         [SerializeField] private Image timerImage;
         [SerializeField] private GameObject timerbase;
         [SerializeField] private bool saveProgress;
-        public UnityEvent onStart;
+        public UnityEvent[] onStart;
+        public UnityEvent[] onEnd;
+        
+        private PlayerInteractionController _player;
         private float _startTime;
         private bool _stop = true;
         private bool _isDone;
+        private int _interactAmount = 0;
 
 
-        public override void Interact(int player)
+        public void Interact()
         {
             if (_isDone) return;
-            if (isPlayerOne && player != 1) return;
-            if (!isPlayerOne && player != 2) return;
-            if (!isInTrigger) return;
-            StartTimer();
-            timerbase.SetActive(true);
-            onStart.Invoke();
+            if (!_player.isInTrigger) return;
+            if (useTimer)
+            {
+                StartTimer();
+                timerbase.SetActive(true);
+            }
+            onStart[_interactAmount].Invoke();
         }
 
         public void Reset()
         {
             _isDone = false;
+            _interactAmount = 0;
         }
 
-        public override void Cancel(int player)
+        public void SetDuration(int newDuration)
         {
-            if (isPlayerOne && player != 1) return;
-            if (!isPlayerOne && player != 2) return;
+            duration = newDuration;
+        }
+
+        private void Cancel()
+        {
             _stop = true;
             if (!saveProgress)
             {
                 _startTime = 0;
             }
-            timerbase.SetActive(false);
+            if(useTimer)timerbase.SetActive(false);
         }
 
         private void Update()
@@ -52,10 +62,10 @@ namespace Game.Interactions
             _startTime += Time.deltaTime;
             if (!(_startTime >= duration)) return;
             _stop = true;
-            ScoreDisplay.instance.AddScore(scoreGain);
             timerbase.SetActive(false);
-            onComplete.Invoke();
-            _isDone = true;
+            onEnd[_interactAmount].Invoke();
+            if (_interactAmount < onEnd.Length) _interactAmount++;
+            if (_interactAmount >= onEnd.Length) _isDone = true;
             _startTime = 0;
         }
 
@@ -68,15 +78,32 @@ namespace Game.Interactions
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Untagged")) return;
-            isPlayerOne = other.CompareTag("Player");
-            interactImage.SetActive(true);
-            isInTrigger = true;
+            _player = other.GetComponent<PlayerInteractionController>();
+            if (_player.isPlayerOne)
+            {
+                _player.character.controls.Player.Interact.Enable();
+                _player.character.controls.Player.Interact.performed += _ => Interact();
+                _player.character.controls.Player.Interact.canceled += _ => Cancel();
+            }
+            else
+            {
+                _player.character.controls.Player2.Interact.Enable();
+                _player.character.controls.Player2.Interact.performed += _ => Interact();
+                _player.character.controls.Player2.Interact.canceled += _ => Cancel();
+            }
+            _player.interactImage.SetActive(true);
+            _player.isInTrigger = true;
         }
+                
         private void OnTriggerExit(Collider other)
         {
-            interactImage.SetActive(false);
-            isInTrigger = false;
-            timerbase.SetActive(false);
+            if (_player == null) return; 
+            _player.character.controls.Player.Interact.Disable();
+            _player.character.controls.Player2.Interact.Disable();
+            _player.interactImage.SetActive(false);
+            _player.isInTrigger = false;
+            if(useTimer)timerbase.SetActive(false);
+            _player = null;
         }
         
         private IEnumerator UpdateCoroutine()

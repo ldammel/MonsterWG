@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1620644833024910233}
   - component: {fileID: 1620644833024910232}
   - component: {fileID: 1620644833024910235}
+  - component: {fileID: 3593193927760082035}
   - component: {fileID: 1620644833024910234}
   - component: {fileID: 1620644833024910229}
   - component: {fileID: 1620644833024910228}
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 1620644833024910230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.77, y: 0.52, z: 0.1}
-  m_LocalScale: {x: 0.6, y: 0.44237, z: 0.6}
+  m_LocalScale: {x: 0.6, y: 0.57534647, z: 0.6}
   m_Children:
   - {fileID: 3866566414508078394}
   m_Father: {fileID: 0}
@@ -99,6 +100,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3593193927760082035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620644833024910230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a283a7cc361e0a14cb41c02bbdd48546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactImage: {fileID: 0}
+  playerInvImage: {fileID: 0}
+  handGrabPosition: {fileID: 1620644833649366001}
+  isInTrigger: 0
+  isPlayerOne: 0
+  character: {fileID: 1620644833024910234}
 --- !u!114 &1620644833024910234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +160,14 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9fc57b61-ac0b-4944-80cd-0d43bd37c95a
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 71e80b7e-68cf-462c-a028-45e26253541a
+    m_ActionName: Player/Interact[/Keyboard/f]
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1620644833024910234}
         m_MethodName: Move
@@ -153,23 +180,47 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 9fc57b61-ac0b-4944-80cd-0d43bd37c95a
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 71e80b7e-68cf-462c-a028-45e26253541a
-    m_ActionName: Player/Interact[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: cc854ee5-d011-433c-9e52-29545934c2f0
     m_ActionName: Player1/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 530d17a9-6742-469e-81fe-de092f49ba34
     m_ActionName: Player1/Interact[/Keyboard/numpad0]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9b3d8488-b53e-4bff-8975-c1fd6b88366b
+    m_ActionName: Player/Menu[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1ed2e82e-39e2-4da2-850b-c70cb3680d6c
+    m_ActionName: Player1/Menu[/Keyboard/delete]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 120cb535-dbaf-4685-939d-bfd0969e8709
+    m_ActionName: Player/Select[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64b1c2cf-1b65-4aa2-97bf-31fd816024c0
+    m_ActionName: Player/Notify[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4046b0c2-815d-4fbf-aebc-3ad57ec47631
+    m_ActionName: Player/Emotes[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b0d262ac-b30c-4551-a2c7-3b07b6fb4c2e
+    m_ActionName: Player2/Select[/Keyboard/u]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8786d84c-a9ed-4f22-86aa-259ec53be50a
+    m_ActionName: Player2/Notify[/Keyboard/o]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0e49e57c-c329-4e04-aaa7-ab2916917ff9
+    m_ActionName: Player2/Emotes[/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/0]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player1
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!54 &1620644833024910228
@@ -231,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620644833649366000}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.58999985, z: -1.1599998}
+  m_LocalPosition: {x: 0, y: 1.4, z: -1.1599998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3866566414508078394}

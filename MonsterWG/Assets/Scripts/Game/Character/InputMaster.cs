@@ -357,7 +357,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
             ]
         },
         {
-            ""name"": ""Player1"",
+            ""name"": ""Player2"",
             ""id"": ""cd552508-2a32-4fd7-9bef-780824cb5d6c"",
             ""actions"": [
                 {
@@ -737,14 +737,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_Notify = m_Player.FindAction("Notify", throwIfNotFound: true);
         m_Player_Emotes = m_Player.FindAction("Emotes", throwIfNotFound: true);
-        // Player1
-        m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
-        m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
-        m_Player1_Interact = m_Player1.FindAction("Interact", throwIfNotFound: true);
-        m_Player1_Select = m_Player1.FindAction("Select", throwIfNotFound: true);
-        m_Player1_Menu = m_Player1.FindAction("Menu", throwIfNotFound: true);
-        m_Player1_Notify = m_Player1.FindAction("Notify", throwIfNotFound: true);
-        m_Player1_Emotes = m_Player1.FindAction("Emotes", throwIfNotFound: true);
+        // Player2
+        m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
+        m_Player2_Move = m_Player2.FindAction("Move", throwIfNotFound: true);
+        m_Player2_Interact = m_Player2.FindAction("Interact", throwIfNotFound: true);
+        m_Player2_Select = m_Player2.FindAction("Select", throwIfNotFound: true);
+        m_Player2_Menu = m_Player2.FindAction("Menu", throwIfNotFound: true);
+        m_Player2_Notify = m_Player2.FindAction("Notify", throwIfNotFound: true);
+        m_Player2_Emotes = m_Player2.FindAction("Emotes", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -864,54 +864,54 @@ public class @InputMaster : IInputActionCollection, IDisposable
     }
     public PlayerActions @Player => new PlayerActions(this);
 
-    // Player1
-    private readonly InputActionMap m_Player1;
-    private IPlayer1Actions m_Player1ActionsCallbackInterface;
-    private readonly InputAction m_Player1_Move;
-    private readonly InputAction m_Player1_Interact;
-    private readonly InputAction m_Player1_Select;
-    private readonly InputAction m_Player1_Menu;
-    private readonly InputAction m_Player1_Notify;
-    private readonly InputAction m_Player1_Emotes;
-    public struct Player1Actions
+    // Player2
+    private readonly InputActionMap m_Player2;
+    private IPlayer2Actions m_Player2ActionsCallbackInterface;
+    private readonly InputAction m_Player2_Move;
+    private readonly InputAction m_Player2_Interact;
+    private readonly InputAction m_Player2_Select;
+    private readonly InputAction m_Player2_Menu;
+    private readonly InputAction m_Player2_Notify;
+    private readonly InputAction m_Player2_Emotes;
+    public struct Player2Actions
     {
         private @InputMaster m_Wrapper;
-        public Player1Actions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Player1_Move;
-        public InputAction @Interact => m_Wrapper.m_Player1_Interact;
-        public InputAction @Select => m_Wrapper.m_Player1_Select;
-        public InputAction @Menu => m_Wrapper.m_Player1_Menu;
-        public InputAction @Notify => m_Wrapper.m_Player1_Notify;
-        public InputAction @Emotes => m_Wrapper.m_Player1_Emotes;
-        public InputActionMap Get() { return m_Wrapper.m_Player1; }
+        public Player2Actions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Player2_Move;
+        public InputAction @Interact => m_Wrapper.m_Player2_Interact;
+        public InputAction @Select => m_Wrapper.m_Player2_Select;
+        public InputAction @Menu => m_Wrapper.m_Player2_Menu;
+        public InputAction @Notify => m_Wrapper.m_Player2_Notify;
+        public InputAction @Emotes => m_Wrapper.m_Player2_Emotes;
+        public InputActionMap Get() { return m_Wrapper.m_Player2; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Player1Actions set) { return set.Get(); }
-        public void SetCallbacks(IPlayer1Actions instance)
+        public static implicit operator InputActionMap(Player2Actions set) { return set.Get(); }
+        public void SetCallbacks(IPlayer2Actions instance)
         {
-            if (m_Wrapper.m_Player1ActionsCallbackInterface != null)
+            if (m_Wrapper.m_Player2ActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
-                @Interact.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnInteract;
-                @Select.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnSelect;
-                @Select.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnSelect;
-                @Select.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnSelect;
-                @Menu.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
-                @Menu.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
-                @Menu.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMenu;
-                @Notify.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnNotify;
-                @Notify.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnNotify;
-                @Notify.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnNotify;
-                @Emotes.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEmotes;
-                @Emotes.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEmotes;
-                @Emotes.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnEmotes;
+                @Move.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove;
+                @Interact.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnInteract;
+                @Select.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnSelect;
+                @Menu.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMenu;
+                @Notify.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnNotify;
+                @Notify.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnNotify;
+                @Notify.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnNotify;
+                @Emotes.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnEmotes;
+                @Emotes.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnEmotes;
+                @Emotes.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnEmotes;
             }
-            m_Wrapper.m_Player1ActionsCallbackInterface = instance;
+            m_Wrapper.m_Player2ActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
@@ -935,7 +935,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
             }
         }
     }
-    public Player1Actions @Player1 => new Player1Actions(this);
+    public Player2Actions @Player2 => new Player2Actions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -963,7 +963,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnNotify(InputAction.CallbackContext context);
         void OnEmotes(InputAction.CallbackContext context);
     }
-    public interface IPlayer1Actions
+    public interface IPlayer2Actions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);

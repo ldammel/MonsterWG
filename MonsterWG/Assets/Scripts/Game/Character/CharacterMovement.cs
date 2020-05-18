@@ -19,22 +19,22 @@ namespace Game.Character
         private void OnEnable()
         {
             if(playerOne)controls.Player.Enable();
-            else controls.Player1.Enable();
+            else controls.Player2.Enable();
         }
 
         private void OnDisable()
         {
             if(playerOne)controls.Player.Disable();
-            else controls.Player1.Disable();
+            else controls.Player2.Disable();
         }
 
         private void Update() => Move();
         #endregion
-        
+
         #region Public Functions
         public void Move()
         {
-            var movementInput = playerOne ? controls.Player.Move.ReadValue<Vector2>() : controls.Player1.Move.ReadValue<Vector2>();
+            var movementInput = playerOne ? controls.Player.Move.ReadValue<Vector2>() : controls.Player2.Move.ReadValue<Vector2>();
             var movement = new Vector3
             {
                 x = movementInput.x,

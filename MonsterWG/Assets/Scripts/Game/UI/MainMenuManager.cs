@@ -13,25 +13,25 @@ namespace Game.UI
         private void OnEnable()
         {
             _controls.Player.Enable();
-            _controls.Player1.Enable();
+            _controls.Player2.Enable();
         }
 
         private void OnDisable()
         {
             _controls.Player.Disable();
-            _controls.Player1.Disable();
+            _controls.Player2.Disable();
         }
 
         private void Start()
         {
             _controls.Player.Move.performed += _ => MoveElement(Color.blue);            
-            _controls.Player1.Move.performed += _ => MoveElement(Color.green);
+            _controls.Player2.Move.performed += _ => MoveElement(Color.green);
             
             _controls.Player.Select.performed += _ => SelectUIElement();
-            _controls.Player1.Select.performed += _ => SelectUIElement();
+            _controls.Player2.Select.performed += _ => SelectUIElement();
             
             _controls.Player.Menu.performed += _ => BackToMenu();            
-            _controls.Player1.Menu.performed += _ => BackToMenu();
+            _controls.Player2.Menu.performed += _ => BackToMenu();
         }
 
         private void BackToMenu()
@@ -43,7 +43,7 @@ namespace Game.UI
         public void MoveElement(Color color)
         {
             var movementInput = _controls.Player.Move.ReadValue<Vector2>(); 
-            var movementInput2 = _controls.Player1.Move.ReadValue<Vector2>();
+            var movementInput2 = _controls.Player2.Move.ReadValue<Vector2>();
             
             var movement = new Vector3
             {

@@ -8,6 +8,7 @@ TagManager:
   - Hand
   - Player2
   - Dish
+  - Storage
   layers:
   - Default
   - TransparentFX

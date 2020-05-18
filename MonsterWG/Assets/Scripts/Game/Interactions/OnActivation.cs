@@ -1,30 +1,48 @@
-﻿using Game.UI;
+﻿using Game.Character;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Interactions
 {
-    public class OnActivation : BaseInteraction
+    public class OnActivation : MonoBehaviour
     {
+        public UnityEvent onActivation;
+
+        private PlayerInteractionController _player;
         private bool _isInTrigger;
-        public override void PickUp(int player)
+        public void PickUp()
         {
-            if (isPlayerOne && player != 1) return;
-            if (!isPlayerOne && player != 2) return;
-            if (!isInTrigger) return;
-            onComplete.Invoke();
+            if (_player == null) return;
+            if (!_player.isInTrigger) return;
+            onActivation.Invoke();
         }
         
         private void OnTriggerEnter(Collider other)
         {
+            if (_player != null) return;
             if (other.CompareTag("Untagged")) return;
-            isPlayerOne = other.CompareTag("Player");
-            interactImage.SetActive(true);
-            isInTrigger = true;
+            _player = other.GetComponent<PlayerInteractionController>();
+            if (_player.isPlayerOne)
+            {
+                _player.character.controls.Player.Select.Enable();
+                _player.character.controls.Player.Select.performed += _ => PickUp();
+            }
+            else
+            {
+                _player.character.controls.Player2.Select.Enable();
+                _player.character.controls.Player2.Select.performed += _ => PickUp();
+            }
+            _player.interactImage.SetActive(true);
+            _player.isInTrigger = true;
         }
         private void OnTriggerExit(Collider other)
         {
-            interactImage.SetActive(false);
-            isInTrigger = false;
+            if (_player == null) return;
+            _player.character.controls.Player.Select.Disable();
+            _player.character.controls.Player2.Select.Disable();
+            _player.interactImage.SetActive(false);
+            _player.isInTrigger = false;
+            _player = null;
         }
     }
 }

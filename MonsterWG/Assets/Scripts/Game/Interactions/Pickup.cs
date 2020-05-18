@@ -1,57 +1,79 @@
-﻿using Game.Character;
-using Game.UI;
+﻿using System;
+using System.Runtime.CompilerServices;
+using Game.Character;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 
 namespace Game.Interactions
 {
-    public class Pickup : BaseInteraction
+    public class Pickup : MonoBehaviour
     {
-        [SerializeField] private Transform[] handGrabPosition;
         [SerializeField] private GameObject spawnPoint;
         [SerializeField] private Transform baseParent;
         [SerializeField] private Sprite itemIcon;
-        [SerializeField] private Image[] playerInvImage;
         [SerializeField] private bool respawn;
-        [SerializeField] private GameObject interactionTarget;
         public UnityEvent onPickUp;
-        private Transform _handGrabPosition;
+        public UnityEvent onDrop;
+        
+        private PlayerInteractionController _player;
         private bool _isInHand = false;
-        private int _currentPlayer;
+        private GameObject _interactionTarget;
 
-        public override void PickUp(int player)
+        private bool _currentPlayer;
+
+        private void Start()
         {
-            if (isPlayerOne && player != 1) return;
-            if (!isPlayerOne && player != 2) return;
-            if (_isInHand) CancelPickUp(_currentPlayer);
-            if (!isInTrigger && !_isInHand) return;
-            _currentPlayer = isPlayerOne ? 1 : 2;
-            _handGrabPosition = isPlayerOne ? handGrabPosition[0] : handGrabPosition[1];
-            playerInvImage[_currentPlayer-1].sprite = itemIcon;
-            playerInvImage[_currentPlayer-1].gameObject.SetActive(true);
-            interactionTarget.GetComponent<Rigidbody>().useGravity = false;
-            interactionTarget.transform.position = _handGrabPosition.position;
-            interactionTarget.transform.parent = _handGrabPosition;
-            _isInHand = true;
-            onPickUp.Invoke();
+            _interactionTarget = gameObject;
         }
 
-        public void CancelPickUp(int player)
+        private void PickUp()
         {
-            playerInvImage[player-1].sprite = null;
-            playerInvImage[player-1].gameObject.SetActive(false);
-            if (_currentPlayer != player) return;
-            if (!isInTrigger && !_isInHand) return;
-            interactionTarget.GetComponent<Rigidbody>().useGravity = true;
-            interactionTarget.transform.parent = baseParent;
+            if (_player == null) return;
+            if (_currentPlayer != _player.isPlayerOne) return;
+            if (_isInHand)
+            {
+                CancelPickUp();
+                return;
+            }
+            _player.playerInvImage.sprite = itemIcon;
+            _player.playerInvImage.gameObject.SetActive(true);
+            _interactionTarget.GetComponent<Rigidbody>().useGravity = false;
+            _interactionTarget.transform.position = _player.handGrabPosition.position;
+            _interactionTarget.transform.parent = _player.handGrabPosition;
+            _isInHand = true;
+            onPickUp.Invoke();
+            Debug.Log("Picked up Item");
+        }
+
+        private void CancelPickUp()
+        {
+            _player.playerInvImage.sprite = null;
+            _player.playerInvImage.gameObject.SetActive(false);
+            _interactionTarget.GetComponent<Rigidbody>().useGravity = true;
+            _interactionTarget.transform.parent = baseParent;
             _isInHand = false;
+            Debug.Log("Dropped Item");
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Untagged")) return;
+            if (_player != null) return;
+            _player = other.GetComponent<PlayerInteractionController>();
+            if (_player.isPlayerOne)
+            { 
+                _player.character.controls.Player.Select.Enable();
+                _player.character.controls.Player.Select.performed += _ => PickUp();
+                _currentPlayer = true;
+            }
+            else
+            {
+                _player.character.controls.Player2.Select.Enable();
+                _player.character.controls.Player2.Select.performed += _ => PickUp();
+                _currentPlayer = false;
+            }
             if (other.CompareTag("PickupDest") && !_isInHand)
             {
                 if (respawn)
@@ -59,25 +81,38 @@ namespace Game.Interactions
                     ResetPosition();
                 }
                 other.gameObject.GetComponent<ItemCollector>().collectedItems.Add(this);
-                ScoreDisplay.instance.AddScore(scoreGain);
-                onComplete.Invoke();
+                onDrop.Invoke();
             }
 
-            isPlayerOne = other.CompareTag("Player");
-            interactImage.SetActive(true);
-            isInTrigger = true;
+            if (other.CompareTag("Storage") && !_isInHand)
+            {
+                if (!other.gameObject.GetComponent<StoreInteraction>().storedObjects.Contains(gameObject))
+                {
+                    other.gameObject.GetComponent<StoreInteraction>().AddObject(gameObject);
+                    gameObject.SetActive(false);
+                }
+            }            
+            _player.interactImage.SetActive(true);
+            _player.isInTrigger = true;
+            Debug.Log("Registered Player");
         }
 
         public void ResetPosition()
         {
-            interactionTarget.transform.position = spawnPoint.transform.position;
-            interactionTarget.transform.rotation = spawnPoint.transform.rotation;
+            _interactionTarget.transform.position = spawnPoint.transform.position;
+            _interactionTarget.transform.rotation = spawnPoint.transform.rotation;
         }
 
         private void OnTriggerExit(Collider other)
         {
-            interactImage.SetActive(false);
-            isInTrigger = false;
+            if (_isInHand) return;
+            if (_player == null) return;
+            _player.character.controls.Player.Select.Disable();
+            _player.character.controls.Player2.Select.Disable();
+            _player.interactImage.SetActive(false);
+            _player.isInTrigger = false;
+            _player = null;
+            Debug.Log("Unregistered Player");
         }
     }
 }

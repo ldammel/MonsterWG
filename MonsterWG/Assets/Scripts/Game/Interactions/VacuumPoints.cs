@@ -11,7 +11,7 @@ namespace Game.Interactions
         {
             if (other.CompareTag("Untagged")) return;
             nextPoint.SetActive(true);
-            gameObject.SetActive(false);
+            transform.parent.gameObject.SetActive(false);
         }
     }
 }

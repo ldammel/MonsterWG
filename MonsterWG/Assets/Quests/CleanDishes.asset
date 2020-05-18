@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questTitle: Clean the Dishes
   questDescription: collect dirty dishes and clean them at the sink
-  questReward: 0
+  questReward: 25000
