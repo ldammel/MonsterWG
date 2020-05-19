@@ -16,17 +16,17 @@ namespace Game.Interactions
         public UnityEvent[] onStart;
         public UnityEvent[] onEnd;
         
-        private PlayerInteractionController _player;
+        public PlayerInteractionController player;
         private float _startTime;
         private bool _stop = true;
         private bool _isDone;
         private int _interactAmount = 0;
+        public bool Stop => _stop;
 
 
         public void Interact()
         {
             if (_isDone) return;
-            if (!_player.isInTrigger) return;
             if (useTimer)
             {
                 StartTimer();
@@ -46,7 +46,7 @@ namespace Game.Interactions
             duration = newDuration;
         }
 
-        private void Cancel()
+        public void Cancel()
         {
             _stop = true;
             if (!saveProgress)
@@ -78,32 +78,15 @@ namespace Game.Interactions
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Untagged")) return;
-            _player = other.GetComponent<PlayerInteractionController>();
-            if (_player.isPlayerOne)
-            {
-                _player.character.controls.Player.Interact.Enable();
-                _player.character.controls.Player.Interact.performed += _ => Interact();
-                _player.character.controls.Player.Interact.canceled += _ => Cancel();
-            }
-            else
-            {
-                _player.character.controls.Player2.Interact.Enable();
-                _player.character.controls.Player2.Interact.performed += _ => Interact();
-                _player.character.controls.Player2.Interact.canceled += _ => Cancel();
-            }
-            _player.interactImage.SetActive(true);
-            _player.isInTrigger = true;
+            //player.interactImage.SetActive(true);
+            player.isInTrigger = true;
         }
                 
         private void OnTriggerExit(Collider other)
         {
-            if (_player == null) return; 
-            _player.character.controls.Player.Interact.Disable();
-            _player.character.controls.Player2.Interact.Disable();
-            _player.interactImage.SetActive(false);
-            _player.isInTrigger = false;
+            //if (player == null) return;
+            //player.interactImage.SetActive(false);
             if(useTimer)timerbase.SetActive(false);
-            _player = null;
         }
         
         private IEnumerator UpdateCoroutine()

@@ -9,6 +9,8 @@ TagManager:
   - Player2
   - Dish
   - Storage
+  - Interaction
+  - Pickup
   layers:
   - Default
   - TransparentFX
