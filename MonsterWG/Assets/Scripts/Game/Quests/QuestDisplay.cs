@@ -10,6 +10,7 @@ namespace Game.Quests
     public class QuestDisplay : MonoBehaviour
     {
         [SerializeField] private List<Quest> activeQuests;
+        
         public void AddActiveQuest(Quest quest)
         {
             if (activeQuests.Contains(quest)) return;
@@ -25,6 +26,8 @@ namespace Game.Quests
         public void FinishQuest(Quest quest)
         {
             if (!activeQuests.Contains(quest)) return;
+            quest.taskDisplay.DoneQuestAmount++;
+            quest.taskDisplay.AddRoomDisplayDone();
             activeQuests.Remove(quest);
             activeQuests.Add(null);
             ScoreDisplay.instance.AddScore(quest.questReward);

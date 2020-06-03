@@ -7,6 +7,7 @@ namespace Game.Quests
     {
         public string questTitle;
         [TextArea]public string questDescription;
+        public TaskDisplay taskDisplay;
         public int questReward;
     }
 }

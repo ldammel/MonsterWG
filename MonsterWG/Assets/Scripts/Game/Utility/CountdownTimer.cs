@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Timers;
 using Game.UI;
 using TMPro;
 using UnityEngine;
@@ -24,7 +25,7 @@ namespace Game.Utility
 
         #region Functions
         
-        private void Start()
+        private void OnEnable()
         {
             StartTimer();
         }
@@ -38,6 +39,11 @@ namespace Game.Utility
         {
             _stop = false;
             StartCoroutine(UpdateCoroutine());
+        }
+
+        public void ResetTimer()
+        {
+            _currentTime = 0;
         }
 
         private void Update() 

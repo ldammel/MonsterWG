@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Game.Quests;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,27 +11,52 @@ namespace Game.Interactions
     {
         [Header("How many objects can we store:")]
         [SerializeField] private int limit;
-        public List<GameObject> storedObjects;
-        [Space]
-        [Header("OnStored Events --> Size == Limit!")]
+        [Header("OnStored Events --> Size == Limit! - used for model swap")]
         public UnityEvent[] onStored;
+        public int storedObjectsAmount = 0;
+        [Header("Is the Storage part of a Quest (e.g. Clean Dishes)")]
+        public bool isQuestStorage;
+        public Quest storageQuest;
+        [Space]
         [Space]
         [Header("Explosion Events")]
+        public DirtPile dirtPile;
         public UnityEvent onExplosion;
 
-        public void AddObject(GameObject o)
+        private QuestDisplay _display;
+        private PlayerInteractionController[] _players;
+
+        private void Start()
         {
-            if (storedObjects.Contains(o)) return;
-            storedObjects.Add(o);
-            o.SetActive(false);
-            onStored[storedObjects.Count-1].Invoke();
-            if(storedObjects.Count >= limit) RemoveObjects();
+            _display = FindObjectOfType<QuestDisplay>();
+            _players = FindObjectsOfType<PlayerInteractionController>();
+        }
+
+        public void AddObject(Pickup o)
+        {
+            foreach (var p in _players)
+            {
+                if (p.pickups.Contains(o)) p.pickups.Remove(o);
+            }
+            Destroy(o.gameObject);
+            if (isQuestStorage)
+            {
+                storedObjectsAmount++;   
+                if (storedObjectsAmount >= limit) _display.FinishQuest(storageQuest);
+            }
+            else
+            {
+                onStored[storedObjectsAmount].Invoke();
+                storedObjectsAmount++; 
+                if (storedObjectsAmount >= limit) RemoveObjects();
+            }
         }
 
         private void RemoveObjects()
         {
-            storedObjects.Clear();
+            storedObjectsAmount = 0;
             onExplosion.Invoke();
+            if(dirtPile)dirtPile.PileUp(limit);
             enabled = false;
         }
     }

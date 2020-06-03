@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Quests;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -7,9 +8,12 @@ namespace Game.Utility
     public class BoxDissolve : MonoBehaviour
     {
         [SerializeField] private MeshRenderer target;
+        [SerializeField] private RoomDisplay roomDisplay;
         [SerializeField] private float increaseDuration;
         [SerializeField] private float reduceDuration;
-        
+
+        public bool RoomCleared { get; set; }
+
         private float _dur;
         private static readonly int Density = Shader.PropertyToID("_fogDensity");
         private float _op;
@@ -33,7 +37,13 @@ namespace Game.Utility
             _dur -= Time.deltaTime;
             _op = _dur / reduceDuration;
             target.material.SetFloat(Density, _op);
-            if(_dur <= 0) _reduce = false;
+            if (_dur <= 0)
+            {
+                _reduce = false;
+                if (RoomCleared) return;
+                RoomCleared = true;
+                if(roomDisplay)roomDisplay.InitializeRoom();
+            }
         }
         private void IncreaseFog()
         {

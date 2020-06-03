@@ -14,6 +14,7 @@ namespace Game.Interactions
         [SerializeField] private Transform baseParent;
         [SerializeField] private Sprite itemIcon;
         [SerializeField] private bool respawn;
+        [SerializeField] private bool cleaned;
         public UnityEvent onPickUp;
         public UnityEvent onDrop;
         
@@ -21,6 +22,7 @@ namespace Game.Interactions
         public bool isInHand = false;
         private GameObject _interactionTarget;
 
+        private Outline _outline;
         private bool _currentPlayer;
         private Rigidbody _rigidbody;
 
@@ -28,10 +30,18 @@ namespace Game.Interactions
         {
             _interactionTarget = gameObject;
             _rigidbody = _interactionTarget.GetComponent<Rigidbody>();
+            _outline = GetComponentInChildren<Outline>();
         }
 
         public void PickUp()
         {
+            if (_outline != null)
+            {
+                if (_outline.roomTarget)
+                {
+                    if (!_outline.roomTarget.RoomCleared) return;
+                }
+            }
             if (isInHand)
             {
                 CancelPickUp();
@@ -60,23 +70,35 @@ namespace Game.Interactions
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Untagged")) return;
+            if (_outline != null)
+            {
+                if (_outline.roomTarget)
+                {
+                    if (!_outline.roomTarget.RoomCleared) return;
+                }
+            }
             if (other.CompareTag("PickupDest") && !isInHand)
             {
                 if (respawn)
                 {
                     ResetPosition();
                 }
-                other.gameObject.GetComponent<ItemCollector>().collectedItems.Add(this);
+                if(other.gameObject.GetComponent<ItemCollector>())other.gameObject.GetComponent<ItemCollector>().InsertItem(this);
                 onDrop.Invoke();
             }
 
             if (other.CompareTag("Storage") && !isInHand)
             {
-                if (!other.gameObject.GetComponent<StoreInteraction>().storedObjects.Contains(gameObject))
+                if (respawn)
                 {
-                    other.gameObject.GetComponent<StoreInteraction>().AddObject(gameObject);
-                    gameObject.SetActive(false);
+                    ResetPosition();
                 }
+                if (other.gameObject.GetComponent<StoreInteraction>().isQuestStorage)
+                {
+                    if(!cleaned) return;
+                }
+                other.gameObject.GetComponent<StoreInteraction>().AddObject(this);
+                gameObject.SetActive(false);
             }
         }
 

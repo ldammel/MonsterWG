@@ -19,21 +19,29 @@ namespace Game.Interactions
         public List<Interaction> interactions;
         public List<Pickup> pickups;
         public List<OnActivation> activations;
-
-        private bool _pressed;
+        
+        private bool _pressedPickup;
+        private bool _pressedActivation;
         public Pickup currentItem;
+
+        private bool _storeInteraction;
+        private bool _plan;
+        private ActivatePlan _activatePlan;
+        private StoreInteraction _storeInteractionObject;
 
         private void Update()
         {
-            Interact();
-            Pickups();
+            var inputI = isPlayerOne ? character.controls.Player.Interact.ReadValue<float>() : character.controls.Player2.Interact.ReadValue<float>();
+            var inputS = isPlayerOne ? character.controls.Player.Select.ReadValue<float>() : character.controls.Player2.Select.ReadValue<float>();
+            Interact(inputI);
+            Pickups(inputS);
+            Activation(inputI);
         }
 
-        public void Interact()
+        public void Interact(float input)
         {
-            var input = isPlayerOne ? character.controls.Player.Interact.ReadValue<float>() : character.controls.Player2.Interact.ReadValue<float>();
             if (interactions.Count < 1) return;
-            if (input >= 1f)
+            if (input >= 1f && interactions[0].gameObject.activeSelf)
             {
                 interactions[0].Interact();
             }
@@ -43,27 +51,55 @@ namespace Game.Interactions
             }
         }
 
-        public void Pickups()
+        public void Pickups(float input)
         {
-            var input = isPlayerOne ? character.controls.Player.Select.ReadValue<float>() : character.controls.Player2.Select.ReadValue<float>();
-            if(activations.Count >= 1) activations[0].PickUp();
-            if (pickups.Count < 1) return;
-            if (input >= 1f && !_pressed)
+            if (input >= 1f && !_pressedPickup)
             {
+                _pressedPickup = true;
+
+                if (_storeInteraction && currentItem)
+                {
+                    _storeInteractionObject.AddObject(currentItem);
+                    return;
+                }
+                
+                if (_plan)
+                {
+                    _activatePlan.Toggle();
+                    return;
+                }
+
+                if (pickups.Count < 1) return;
+                if (!pickups[0].gameObject.activeSelf) return;
                 if (currentItem != pickups[0] && currentItem) return;
-                _pressed = true;
-                pickups[0].PickUp();
                 pickups[0].player = this;
+                pickups[0].PickUp();
+            }
+            else if(input < 1f)
+            {
+                _pressedPickup = false;
+            }
+        }
+        
+        public void Activation(float input)
+        {
+            if (input >= 1f && !_pressedActivation)
+            {
+                if (activations.Count < 1) return;
+                if (!activations[0].gameObject.activeSelf) return;
+                activations[0].player = this;
+                activations[0]?.PickUp();
+                _pressedActivation = true;
             }
             else if (input < 1f)
             {
-                _pressed = false;
+                _pressedActivation = false;
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-             if (other.GetComponent<Interaction>())
+             if (other.GetComponent<Interaction>() && other.gameObject.activeSelf)
              {
                  if (!interactions.Contains(other.GetComponent<Interaction>()))
                  {
@@ -73,21 +109,35 @@ namespace Game.Interactions
              }
              if (other.GetComponent<Pickup>())
              {
-                 if (!pickups.Contains(other.GetComponent<Pickup>()))
+                 if (!pickups.Contains(other.GetComponent<Pickup>()) && other.gameObject.activeSelf)
                  {
                      pickups.Add(other.GetComponent<Pickup>());
                      other.GetComponent<Pickup>().player = this;
                  }
-                 if (!activations.Contains(other.GetComponent<OnActivation>()))
-                 {
-                     activations.Add(other.GetComponent<OnActivation>());
-                 }
              }
              if (other.GetComponent<OnActivation>())
              {
-                 if (!activations.Contains(other.GetComponent<OnActivation>()))
+                 if (!activations.Contains(other.GetComponent<OnActivation>()) && other.gameObject.activeSelf)
                  {
                      activations.Add(other.GetComponent<OnActivation>());
+                     other.GetComponent<OnActivation>().player = this;
+                 }
+             }
+             if (other.GetComponent<StoreInteraction>())
+             {
+                 if (other.gameObject.activeSelf)
+                 {
+                     _storeInteraction = true;
+                     _storeInteractionObject = other.GetComponent<StoreInteraction>();
+                 }
+             }
+             if (other.GetComponent<ActivatePlan>())
+             {
+                 if (other.gameObject.activeSelf)
+                 {
+                     _plan = true;
+                     _activatePlan = other.GetComponent<ActivatePlan>();
+                     _activatePlan.player = this;
                  }
              }
         }
@@ -109,6 +159,20 @@ namespace Game.Interactions
             {
                 activations.Remove(other.GetComponent<OnActivation>());
             }
+
+            if (_storeInteraction)
+            {
+                _storeInteraction = false;
+                _storeInteractionObject = null;
+            }
+
+            if (_plan)
+            {
+                _plan = false;
+                _activatePlan.player = null;
+                _activatePlan = null;
+            }
+
         } 
     }
 }

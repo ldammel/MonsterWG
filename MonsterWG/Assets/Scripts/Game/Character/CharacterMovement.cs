@@ -11,6 +11,7 @@ namespace Game.Character
         public InputMaster controls = null;
         [SerializeField] private bool playerOne;
         [SerializeField] private GameObject playerModel;
+        public bool canMove = true;
         #endregion
 
         #region Event Functions
@@ -20,6 +21,7 @@ namespace Game.Character
         {
             if(playerOne)controls.Player.Enable();
             else controls.Player2.Enable();
+            canMove = true;
         }
 
         private void OnDisable()
@@ -34,6 +36,7 @@ namespace Game.Character
         #region Public Functions
         public void Move()
         {
+            if (!canMove) return;
             var movementInput = playerOne ? controls.Player.Move.ReadValue<Vector2>() : controls.Player2.Move.ReadValue<Vector2>();
             var movement = new Vector3
             {

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Game.UI;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,15 +19,28 @@ namespace Game.Interactions
         public UnityEvent[] onEnd;
         
         public PlayerInteractionController player;
+        private Outline _outline;
         private float _startTime;
         private bool _stop = true;
         private bool _isDone;
         private int _interactAmount = 0;
         public bool Stop => _stop;
 
+        private void Start()
+        {
+            _outline = GetComponentInChildren<Outline>();
+        }
+
 
         public void Interact()
         {
+            if (_outline != null)
+            {
+                if (_outline.roomTarget)
+                {
+                    if (!_outline.roomTarget.RoomCleared) return;
+                }
+            }
             if (_isDone) return;
             if (useTimer)
             {
@@ -37,6 +52,13 @@ namespace Game.Interactions
 
         public void Reset()
         {
+            if (_outline != null)
+            {
+                if (_outline.roomTarget)
+                {
+                    if (!_outline.roomTarget.RoomCleared) return;
+                }
+            }
             _isDone = false;
             _interactAmount = 0;
         }
@@ -48,6 +70,13 @@ namespace Game.Interactions
 
         public void Cancel()
         {
+            if (_outline != null)
+            {
+                if (_outline.roomTarget)
+                {
+                    if (!_outline.roomTarget.RoomCleared) return;
+                }
+            }
             _stop = true;
             if (!saveProgress)
             {
@@ -59,11 +88,19 @@ namespace Game.Interactions
         private void Update()
         {
             if(_stop) return;
+            if (_outline != null)
+            {
+                if (_outline.roomTarget)
+                {
+                    if (!_outline.roomTarget.RoomCleared) return;
+                }
+            }
             _startTime += Time.deltaTime;
             if (!(_startTime >= duration)) return;
             _stop = true;
             timerbase.SetActive(false);
             onEnd[_interactAmount].Invoke();
+            if (player.interactions.Contains(this)) player.interactions.Remove(this);
             if (_interactAmount < onEnd.Length) _interactAmount++;
             if (_interactAmount >= onEnd.Length) _isDone = true;
             _startTime = 0;
@@ -73,13 +110,6 @@ namespace Game.Interactions
         {
             _stop = false;
             StartCoroutine(UpdateCoroutine());
-        }
-        
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Untagged")) return;
-            //player.interactImage.SetActive(true);
-            player.isInTrigger = true;
         }
                 
         private void OnTriggerExit(Collider other)
