@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using Game.Character;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -35,7 +36,7 @@ namespace Game.Interactions
 
         public void PickUp()
         {
-            if (_outline != null)
+            if (_outline)
             {
                 if (_outline.roomTarget)
                 {

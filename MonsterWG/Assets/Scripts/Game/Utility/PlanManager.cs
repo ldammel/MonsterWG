@@ -35,6 +35,7 @@ namespace Game.Utility
         public void EnablePlanMovement()
         {
             CurPlayer.character.canMove = false;
+            _count = 0;
         }
 
         public void DisablePlanMovement()
@@ -69,9 +70,8 @@ namespace Game.Utility
                     _count++;
                     while(!roomdisplays[_count].IsInitialized)
                     {
-                        if (_count == menuObjects.Length - 1)
+                        if (_count == menuObjects.Length -1)
                         {
-                            Debug.LogError("No active room found!");
                             return;
                         }
                         _count++;
@@ -96,7 +96,6 @@ namespace Game.Utility
                     {
                         if (_count == 0)
                         {
-                            Debug.LogError("No active room found!");
                             return;
                         }
                         _count--;

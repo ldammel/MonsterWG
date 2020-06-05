@@ -24,7 +24,7 @@ namespace Game.Quests
             }
         }
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             _displayText.text = DoneQuestAmount + " / " + ActiveQuestAmount;
             if (DoneQuestAmount >= ActiveQuestAmount)

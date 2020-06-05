@@ -11,6 +11,7 @@ namespace Game.Quests
     {
         [SerializeField] private TextMeshProUGUI displayText;
         [SerializeField] private Image fillImage;
+        [SerializeField] private Image greyImage;
         public int ActiveQuestAmount { get; set; }
         public int DoneQuestAmount { get; set; }
         public bool startRoom;
@@ -32,6 +33,7 @@ namespace Game.Quests
             }
 
             IsInitialized = true;
+            greyImage.gameObject.SetActive(false);
         }
 
         private void LateUpdate()

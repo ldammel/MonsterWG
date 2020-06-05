@@ -42,7 +42,8 @@ namespace Game.Utility
                 _reduce = false;
                 if (RoomCleared) return;
                 RoomCleared = true;
-                if(roomDisplay)roomDisplay.InitializeRoom();
+                if (!roomDisplay) return;
+                if(!roomDisplay.IsInitialized)roomDisplay.InitializeRoom();
             }
         }
         private void IncreaseFog()

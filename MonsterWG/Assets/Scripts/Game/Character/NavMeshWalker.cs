@@ -9,7 +9,7 @@ public class NavMeshWalker : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField] private Transform[] waypoints;
 
-    public int _nextPoint;
+    private int _nextPoint;
 
     private void Start()
     {

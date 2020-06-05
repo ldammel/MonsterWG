@@ -1,17 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DirtPile : MonoBehaviour
+namespace Game.Interactions
 {
-
-    [SerializeField] private GameObject[] pileObjects;
-
-    public void PileUp(int maxObjects)
+    public class DirtPile : MonoBehaviour
     {
-        for (int i = 0; i < maxObjects; i++)
+
+        [SerializeField] private GameObject[] pileObjects;
+
+        public void PileUp(int maxObjects)
         {
-            pileObjects[i].SetActive(true);
+            for (int i = 0; i < maxObjects; i++)
+            {
+                pileObjects[i].SetActive(true);
+            }
         }
     }
 }

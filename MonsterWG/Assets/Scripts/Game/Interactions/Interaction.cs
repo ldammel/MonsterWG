@@ -5,6 +5,7 @@ using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Outline = Game.Utility.Outline;
 
 namespace Game.Interactions
 {
@@ -34,7 +35,7 @@ namespace Game.Interactions
 
         public void Interact()
         {
-            if (_outline != null)
+            if (_outline)
             {
                 if (_outline.roomTarget)
                 {
@@ -52,7 +53,7 @@ namespace Game.Interactions
 
         public void Reset()
         {
-            if (_outline != null)
+            if (_outline)
             {
                 if (_outline.roomTarget)
                 {
@@ -70,7 +71,7 @@ namespace Game.Interactions
 
         public void Cancel()
         {
-            if (_outline != null)
+            if (_outline)
             {
                 if (_outline.roomTarget)
                 {
@@ -88,7 +89,7 @@ namespace Game.Interactions
         private void Update()
         {
             if(_stop) return;
-            if (_outline != null)
+            if (_outline)
             {
                 if (_outline.roomTarget)
                 {
@@ -114,8 +115,6 @@ namespace Game.Interactions
                 
         private void OnTriggerExit(Collider other)
         {
-            //if (player == null) return;
-            //player.interactImage.SetActive(false);
             if(useTimer)timerbase.SetActive(false);
         }
         

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Utility;
+using UnityEngine;
 
 namespace Game.UI
 {
@@ -87,7 +88,6 @@ namespace Game.UI
 
         private void SelectUIElement()
         {
-            Debug.Log("Execute");
             menuObjects[_count].Activate();
         }
     }
