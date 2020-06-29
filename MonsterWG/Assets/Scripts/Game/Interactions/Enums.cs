@@ -5,6 +5,7 @@
         Dirty,
         Wet,
         Dry,
+        Folded,
         Stored
     }
 
@@ -15,5 +16,11 @@
         Wait,
         Click,
         Store
+    }
+    
+    public enum CleanState{
+        Wash,
+        Dry,
+        Fold
     }
 }

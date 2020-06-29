@@ -5,20 +5,10 @@ namespace Game.Interactions
 {
     public class ItemCollector : MonoBehaviour
     {
-        public List<Pickup> collectedItems;
-        private PlayerInteractionController[] _players;
+        public List<Item> collectedItems;
         
-        private void Start()
+        public void InsertItem(Item o)
         {
-            _players = FindObjectsOfType<PlayerInteractionController>();
-        }
-
-        public void InsertItem(Pickup o)
-        {
-            foreach (var p in _players)
-            {
-                if (p.pickups.Contains(o)) p.pickups.Remove(o);
-            }
             collectedItems.Add(o);
         }
 

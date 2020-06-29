@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Diagnostics;
 using UnityEngine;
 
 namespace Game.Interactions
@@ -7,5 +7,15 @@ namespace Game.Interactions
     public class Item : MonoBehaviour
     {
         public ItemStates itemState;
+
+        private void Start()
+        {
+            itemState = ItemStates.Dirty;
+        }
+
+        public void SetItemState(ItemStates state)
+        {
+            itemState = state;
+        }
     }
 }

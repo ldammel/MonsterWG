@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using Game.UI;
-using Game.Utility;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -16,8 +13,12 @@ namespace Game.Interactions
         [SerializeField] private Image timerImage;
         [SerializeField] private GameObject timerbase;
         [SerializeField] private bool saveProgress;
+        [SerializeField] private ItemCollector collector;
+        [Header("Size: 1 = Wash, 2 = Dry, 3 = Fold")]
         public UnityEvent[] onStart;
         public UnityEvent[] onEnd;
+        public bool endHold;
+        public bool pressedButton;
         
         public PlayerInteractionController player;
         private Outline _outline;
@@ -25,24 +26,21 @@ namespace Game.Interactions
         private bool _stop = true;
         private bool _isDone;
         private int _interactAmount = 0;
+        private CleanState _cleanState;
         public bool Stop => _stop;
 
         private void Start()
         {
             _outline = GetComponentInChildren<Outline>();
+            endHold = true;
         }
 
 
         public void Interact()
         {
-            if (_outline)
-            {
-                if (_outline.roomTarget)
-                {
-                    if (!_outline.roomTarget.RoomCleared) return;
-                }
-            }
+            if (!CheckRoom()) return;
             if (_isDone) return;
+            if (!collector) return;
             if (useTimer)
             {
                 StartTimer();
@@ -53,13 +51,7 @@ namespace Game.Interactions
 
         public void Reset()
         {
-            if (_outline)
-            {
-                if (_outline.roomTarget)
-                {
-                    if (!_outline.roomTarget.RoomCleared) return;
-                }
-            }
+            if (!CheckRoom()) return;
             _isDone = false;
             _interactAmount = 0;
         }
@@ -71,13 +63,7 @@ namespace Game.Interactions
 
         public void Cancel()
         {
-            if (_outline)
-            {
-                if (_outline.roomTarget)
-                {
-                    if (!_outline.roomTarget.RoomCleared) return;
-                }
-            }
+            if (!CheckRoom()) return;
             _stop = true;
             if (!saveProgress)
             {
@@ -88,34 +74,58 @@ namespace Game.Interactions
 
         private void Update()
         {
+            if(player)pressedButton = player.inputI >= 1f;
             if(_stop) return;
-            if (_outline)
-            {
-                if (_outline.roomTarget)
-                {
-                    if (!_outline.roomTarget.RoomCleared) return;
-                }
-            }
+            if (!CheckRoom()) return;
             _startTime += Time.deltaTime;
             if (!(_startTime >= duration)) return;
             _stop = true;
             timerbase.SetActive(false);
             onEnd[_interactAmount].Invoke();
-            if (player.interactions.Contains(this)) player.interactions.Remove(this);
+            SetCleanState();
+            endHold = true;
             if (_interactAmount < onEnd.Length) _interactAmount++;
-            if (_interactAmount >= onEnd.Length) _isDone = true;
+            if (_interactAmount >= onEnd.Length)_isDone = true;
             _startTime = 0;
+        }
+
+        private void SetCleanState()
+        {
+            switch (_interactAmount)
+            {
+                case 1:
+                    _cleanState = CleanState.Wash;
+                    break;
+                case 2:
+                    _cleanState = CleanState.Dry;
+                    break;
+                case 3:
+                    _cleanState = CleanState.Fold;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void StartTimer()
         {
             _stop = false;
+            endHold = false;
             StartCoroutine(UpdateCoroutine());
         }
-                
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Untagged")) return;
+            if (!other.CompareTag("Player") && !other.CompareTag("Player2")) return;
+            if (player) return;
+            player = other.GetComponentInChildren<PlayerInteractionController>();
+        }
+
         private void OnTriggerExit(Collider other)
         {
             if(useTimer)timerbase.SetActive(false);
+            player = null;
         }
         
         private IEnumerator UpdateCoroutine()
@@ -125,6 +135,14 @@ namespace Game.Interactions
                 timerImage.fillAmount = _startTime / duration;
                 yield return new WaitForSeconds(0.2f);
             }
+        }
+
+        private bool CheckRoom()
+        {
+            if (!_outline) return true;
+            if (!_outline.roomTarget) return true;
+            if (collector.collectedItems.Count < 1) return false;
+            return _outline.roomTarget.RoomCleared;
         }
 
     }

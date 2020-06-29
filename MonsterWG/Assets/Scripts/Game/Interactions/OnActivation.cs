@@ -24,7 +24,6 @@ namespace Game.Interactions
                 if (!_outline.roomTarget.RoomCleared) return;
             }
             onActivation.Invoke();
-            if (player.activations.Contains(this)) player.activations.Remove(this);
         }
     }
 }

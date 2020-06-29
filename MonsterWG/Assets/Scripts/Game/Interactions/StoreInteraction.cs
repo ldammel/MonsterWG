@@ -32,10 +32,6 @@ namespace Game.Interactions
 
         public void AddObject(Pickup o)
         {
-            foreach (var p in _players)
-            {
-                if (p.pickups.Contains(o)) p.pickups.Remove(o);
-            }
             Destroy(o.gameObject);
             if (isQuestStorage)
             {
