@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7adcb0107e6e14c9a99feede951754, type: 3}
   m_Name: Vacuum
   m_EditorClassIdentifier: 
-  questTitle: Vacuum
-  questDescription: Vacuum
+  taskDisplay: {fileID: 0}
+  doneAmount: 0
   questReward: 25000
+  miniQuestReward: 0
+  taskImage: {fileID: 0}
+  taskFailedImage: {fileID: 0}
+  taskSuccessImage: {fileID: 0}
+  isDone: 0
+  hasFailed: 0
+  hasCheated: 0
+  isRewarded: 0

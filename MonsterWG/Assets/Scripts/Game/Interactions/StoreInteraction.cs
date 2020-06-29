@@ -17,8 +17,6 @@ namespace Game.Interactions
         [Header("Is the Storage part of a Quest (e.g. Clean Dishes)")]
         public bool isQuestStorage;
         public Quest storageQuest;
-        [Space]
-        [Space]
         [Header("Explosion Events")]
         public DirtPile dirtPile;
         public UnityEvent onExplosion;

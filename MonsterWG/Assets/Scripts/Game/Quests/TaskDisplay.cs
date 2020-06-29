@@ -8,7 +8,7 @@ namespace Game.Quests
     public class TaskDisplay : MonoBehaviour
     {
         [SerializeField] private RoomDisplay roomDisplay;
-        [SerializeField] private Quest[] quests;
+        public Quest[] quests;
         public int ActiveQuestAmount { get; set; }
         public int DoneQuestAmount { get; set; }
         private TextMeshProUGUI _displayText;

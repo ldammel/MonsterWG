@@ -1,34 +1,34 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class NavMeshWalker : MonoBehaviour
+namespace Game.Character
 {
-    private NavMeshAgent _agent;
-    [SerializeField] private Transform[] waypoints;
-
-    private int _nextPoint;
-
-    private void Start()
+    public class NavMeshWalker : MonoBehaviour
     {
-        _agent = GetComponent<NavMeshAgent>();
-        _nextPoint = 0;
-    }
+        public NavMeshAgent _agent;
+        [SerializeField] private Transform[] waypoints;
+        private int _nextPoint;
 
-    void Update()
-    {
-        if (waypoints == null) return;
-
-        if (Vector3.Distance(waypoints[_nextPoint].position, transform.position) > 1)
+        private void Start()
         {
-            _agent.SetDestination(waypoints[_nextPoint].position);
+            _agent = GetComponent<NavMeshAgent>();
         }
-        else
+
+        private void Update()
         {
-            if (_nextPoint < waypoints.Length-1) _nextPoint++;
-            else _nextPoint = 0;
+            if (waypoints == null) return;
+            if (_agent.isStopped) return;
+
+            if (Vector3.Distance(waypoints[_nextPoint].position, transform.position) > 1)
+            {
+                _agent.SetDestination(waypoints[_nextPoint].position);
+            }
+            else
+            {
+                if (_nextPoint < waypoints.Length-1) _nextPoint++;
+                else _nextPoint = 0;
+                _agent.isStopped = true;
+            }
         }
     }
 }

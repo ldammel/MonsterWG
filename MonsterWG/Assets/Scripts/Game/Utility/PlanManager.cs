@@ -56,52 +56,44 @@ namespace Game.Utility
                 x = movementInput.x,
                 z = movementInput.y
             };
-            if (movement.x >= 1)
-            {
-                if (_count == menuObjects.Length - 1)
-                {
-                    menuObjects[_count].SetActive(false);
-                    _count = 0;
-                    menuObjects[_count].SetActive(true);
-                }
-                else
-                {
-                    menuObjects[_count].SetActive(false);
-                    _count++;
-                    while(!roomdisplays[_count].IsInitialized)
-                    {
-                        if (_count == menuObjects.Length -1)
-                        {
-                            return;
-                        }
-                        _count++;
-                    }
-                    menuObjects[_count].SetActive(true);
-                }
-            }
-
             if (movement.x <= -1)
             {
-                if (_count == 0)
+                var baseCount = _count;
+                if (_count == menuObjects.Length - 1) _count = 0;
+                else _count++;
+                while(!roomdisplays[_count].IsInitialized)
                 {
-                    menuObjects[_count].SetActive(false);
-                    _count = menuObjects.Length - 1;
-                    menuObjects[_count].SetActive(true);
-                }
-                else
-                {
-                    menuObjects[_count].SetActive(false);
-                    _count--;
-                    while(!roomdisplays[_count].IsInitialized)
+                    if (_count == menuObjects.Length -1)
                     {
-                        if (_count == 0)
-                        {
-                            return;
-                        }
-                        _count--;
+                        StartCoroutine(WaitTrigger());
+                        menuObjects[baseCount].SetActive(false);
+                        menuObjects[0].SetActive(true);
+                        return;
                     }
-                    menuObjects[_count].SetActive(true);
+                    _count++;
                 }
+                menuObjects[baseCount].SetActive(false);
+                menuObjects[_count].SetActive(true); 
+            }
+
+            if (movement.x >= 1)
+            {
+                var baseCount = _count;
+                if (_count == 0) _count = menuObjects.Length - 1;
+                else _count--;
+                while(!roomdisplays[_count].IsInitialized)
+                {
+                    if (_count == 0)
+                    {
+                        StartCoroutine(WaitTrigger());
+                        menuObjects[baseCount].SetActive(false);
+                        menuObjects[_count].SetActive(true);
+                        return;
+                    }
+                    _count--;
+                }
+                menuObjects[baseCount].SetActive(false);
+                menuObjects[_count].SetActive(true);
             }
             StartCoroutine(WaitTrigger());
         }

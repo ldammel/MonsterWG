@@ -1,6 +1,7 @@
 ﻿using System;
+using Game.AI;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using StateMachineBehaviour = Game.AI.StateMachineBehaviour;
 
 namespace Game.Character
 {
@@ -12,6 +13,8 @@ namespace Game.Character
         [SerializeField] private bool playerOne;
         [SerializeField] private GameObject playerModel;
         public bool canMove = true;
+        private State _calledState;
+        [SerializeField]private StateMachineBehaviour _behaviour;
         #endregion
 
         #region Event Functions
@@ -30,7 +33,14 @@ namespace Game.Character
             else controls.Player2.Disable();
         }
 
-        private void Update() => Move();
+        private void Update()
+        {
+            Move();
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                CallMom();
+            }
+        }
         #endregion
 
         #region Public Functions
@@ -49,8 +59,13 @@ namespace Game.Character
             }
 
             transform.Translate(Time.deltaTime * movementSpeed * movement);
-
         }
+
+        public void CallMom()
+        {
+            _behaviour.Call(transform, 3);
+        }
+
         #endregion
     }
 }

@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1037071756360446719}
-  - component: {fileID: 1037071756360446689}
+  - component: {fileID: 3369773245132072160}
   - component: {fileID: 1037071756360446718}
-  - component: {fileID: 1037071756360446690}
   - component: {fileID: 1037071756360446693}
+  - component: {fileID: 1037071756360446689}
+  - component: {fileID: 1037071756360446690}
   m_Layer: 0
   m_Name: DishDirty
   m_TagString: Pickup
@@ -29,25 +30,25 @@ Transform:
   m_GameObject: {fileID: 1037071756360446716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.15, y: 0.336, z: -9.965}
-  m_LocalScale: {x: 0.4658, y: 0.4658, z: 0.4658}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1494592350986669341}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1037071756360446689
-BoxCollider:
+--- !u!114 &3369773245132072160
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037071756360446716}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.41, z: 1}
-  m_Center: {x: 0, y: -0.45, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688a5bbf12d64bf4ca91d49b8ce5169a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quest: {fileID: 11400000, guid: 26c0082962bbbb94bb3c295ab5b4b932, type: 2}
 --- !u!114 &1037071756360446718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,10 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab4bc8c524a2a44e8278eb0a0d61c46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 0}
   baseParent: {fileID: 0}
   itemIcon: {fileID: 21300000, guid: 7d489eb07b50721458cd53a1c911568f, type: 3}
-  respawn: 0
   cleaned: 0
   onPickUp:
     m_PersistentCalls:
@@ -84,19 +83,6 @@ MonoBehaviour:
         m_CallState: 2
   player: {fileID: 0}
   isInHand: 0
---- !u!65 &1037071756360446690
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1037071756360446716}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.57, y: 1.36, z: 2.39}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1037071756360446693
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -113,6 +99,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!65 &1037071756360446689
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037071756360446716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.61, y: -0.03, z: 0.51}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1037071756360446690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037071756360446716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.95, y: 0.65, z: 0.73}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &2658004939278263170
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 2658004939278263170}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 271.01758, y: 271.01758, z: 271.01758}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 1037071756360446719}
   m_RootOrder: 0
@@ -207,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: 77d61211028bf2449b287e3212a41131, type: 2}
+  roomTarget: {fileID: 0}
   behaviour: {fileID: 0}
 --- !u!65 &2658004939278263172
 BoxCollider:
@@ -219,5 +232,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.007, y: 0.007, z: 0.001}
-  m_Center: {x: -0.0000000018654438, y: -9.7463634e-12, z: 0.000069463844}
+  m_Size: {x: 0.005, y: 0.005, z: 0.0005}
+  m_Center: {x: 0, y: 0, z: 0}

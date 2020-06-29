@@ -1,8 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace Game.Quests
@@ -14,9 +12,10 @@ namespace Game.Quests
         [SerializeField] private Image greyImage;
         public int ActiveQuestAmount { get; set; }
         public int DoneQuestAmount { get; set; }
+        public List<Quest> roomQuests;
         public bool startRoom;
         private TaskDisplay[] _taskDisplays;
-        public bool IsInitialized { get; set; }
+        public bool IsInitialized;
 
         private void Start()
         {
@@ -30,6 +29,10 @@ namespace Game.Quests
             foreach (var t in _taskDisplays)
             {
                 ActiveQuestAmount += t.ActiveQuestAmount;
+                foreach (var q in t.quests)
+                {
+                    roomQuests.Add(q);
+                }
             }
 
             IsInitialized = true;

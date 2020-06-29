@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Game.UI
@@ -19,6 +18,7 @@ namespace Game.UI
         }
 
         [SerializeField] private int score;
+        public int Score => score;
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private GameObject[] fullStars = new GameObject[5];
         [SerializeField] private int[] neededStarScore = new int[5];

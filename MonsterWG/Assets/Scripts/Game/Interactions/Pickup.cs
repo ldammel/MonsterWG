@@ -11,10 +11,8 @@ namespace Game.Interactions
 {
     public class Pickup : MonoBehaviour
     {
-        [SerializeField] private GameObject spawnPoint;
         [SerializeField] private Transform baseParent;
         [SerializeField] private Sprite itemIcon;
-        [SerializeField] private bool respawn;
         [SerializeField] private bool cleaned;
         public UnityEvent onPickUp;
         public UnityEvent onDrop;
@@ -80,20 +78,12 @@ namespace Game.Interactions
             }
             if (other.CompareTag("PickupDest") && !isInHand)
             {
-                if (respawn)
-                {
-                    ResetPosition();
-                }
                 if(other.gameObject.GetComponent<ItemCollector>())other.gameObject.GetComponent<ItemCollector>().InsertItem(this);
                 onDrop.Invoke();
             }
 
             if (other.CompareTag("Storage") && !isInHand)
             {
-                if (respawn)
-                {
-                    ResetPosition();
-                }
                 if (other.gameObject.GetComponent<StoreInteraction>().isQuestStorage)
                 {
                     if(!cleaned) return;
@@ -101,12 +91,6 @@ namespace Game.Interactions
                 other.gameObject.GetComponent<StoreInteraction>().AddObject(this);
                 gameObject.SetActive(false);
             }
-        }
-
-        public void ResetPosition()
-        {
-            _interactionTarget.transform.position = spawnPoint.transform.position;
-            _interactionTarget.transform.rotation = spawnPoint.transform.rotation;
         }
     }
 }

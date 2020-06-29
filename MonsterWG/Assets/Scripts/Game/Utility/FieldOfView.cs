@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.Quests;
 using UnityEngine;
 
 namespace Game.Utility
@@ -13,7 +14,7 @@ namespace Game.Utility
 		public LayerMask targetMask;
 		public LayerMask obstacleMask;
 		
-		public List<Transform> visibleTargets = new List<Transform>();
+		public List<GameObject> visibleTargets = new List<GameObject>();
 
 		public float meshResolution;
 		public int edgeResolveIterations;
@@ -22,7 +23,10 @@ namespace Game.Utility
 		public float maskCutawayDst = .1f;
 
 		public MeshFilter viewMeshFilter;
-		Mesh _viewMesh;
+		
+		private Mesh _viewMesh;
+
+		public BoxDissolve room;
 
 		private void Start() {
 			_viewMesh = new Mesh {name = "View Mesh"};
@@ -30,7 +34,6 @@ namespace Game.Utility
 
 			StartCoroutine (FindTargetsWithDelay(1f));
 		}
-
 
 		private IEnumerator FindTargetsWithDelay(float delay) {
 			while (true) {
@@ -42,17 +45,20 @@ namespace Game.Utility
 		private void LateUpdate() {
 			DrawFieldOfView ();
 		}
-
+		
 		private void FindVisibleTargets() {
 			Collider[] targetsInViewRadius = Physics.OverlapSphere (transform.position, viewRadius, targetMask);
 
 			for (int i = 0; i < targetsInViewRadius.Length; i++) {
-				Transform target = targetsInViewRadius [i].transform;
-				Vector3 dirToTarget = (target.position - transform.position).normalized;
+				GameObject target = targetsInViewRadius [i].gameObject;
+				Vector3 dirToTarget = (target.transform.position - transform.position).normalized;
 				if (Vector3.Angle (transform.forward, dirToTarget) < viewAngle / 2) {
-					float dstToTarget = Vector3.Distance (transform.position, target.position);
+					float dstToTarget = Vector3.Distance (transform.position, target.transform.position);
 					if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
-						if(!visibleTargets.Contains(target))visibleTargets.Add (target);
+						if (!visibleTargets.Contains(target))
+						{
+							visibleTargets.Add (target);
+						}
 					}
 				}
 			}
@@ -105,7 +111,6 @@ namespace Game.Utility
 			_viewMesh.RecalculateNormals ();
 		}
 
-
 		private EdgeInfo FindEdge(ViewCastInfo minViewCast, ViewCastInfo maxViewCast) {
 			float minAngle = minViewCast.angle;
 			float maxAngle = maxViewCast.angle;
@@ -128,7 +133,6 @@ namespace Game.Utility
 
 			return new EdgeInfo (minPoint, maxPoint);
 		}
-
 
 		private ViewCastInfo ViewCast(float globalAngle) {
 			Vector3 dir = DirFromAngle (globalAngle, true);
