@@ -373,7 +373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingState: {fileID: 3803052199272308022}
-  pickup: {fileID: 1037071756360446718}
 --- !u!1 &2654392377483316461
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64602a4b8b174120b3e13f6f4fa31db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.5
+  duration: 1
   onTimerEnd:
     m_PersistentCalls:
       m_Calls:

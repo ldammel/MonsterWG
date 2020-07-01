@@ -51,7 +51,6 @@ namespace Game.Interactions
 
         public void Reset()
         {
-            if (!CheckRoom()) return;
             _isDone = false;
             _interactAmount = 0;
         }

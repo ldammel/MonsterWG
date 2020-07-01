@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Game.AI
+namespace Game.AI.Conditions
 {
     public class TimerCondition : StateTransitionCondition
     {
