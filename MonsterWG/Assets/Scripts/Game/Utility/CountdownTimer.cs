@@ -14,7 +14,7 @@ namespace Game.Utility
         #region Variables
 
         public float timeLeft = 300.0f;
-        private float _currentTime = 0f;
+        public float currentTime = 0f;
         [SerializeField] private Image timerImage;
         [SerializeField] private ToggleObject target;
         public UnityEvent onFinish;
@@ -32,7 +32,7 @@ namespace Game.Utility
 
         public void SetTimeLeft(float value)
         {
-            _currentTime = value;
+            currentTime = value;
         }
 
         public void StartTimer()
@@ -43,14 +43,14 @@ namespace Game.Utility
 
         public void ResetTimer()
         {
-            _currentTime = 0;
+            currentTime = 0;
         }
 
         private void Update() 
         {
             if(_stop) return;
-            _currentTime += Time.deltaTime;
-            if (!(_currentTime >= timeLeft)) return;
+            currentTime += Time.deltaTime;
+            if (!(currentTime >= timeLeft)) return;
             _stop = true;
             if(target)target.ToggleObjects();
             onFinish.Invoke();
@@ -60,7 +60,7 @@ namespace Game.Utility
         {
             while(!_stop)
             {
-                timerImage.fillAmount = _currentTime / timeLeft;
+                timerImage.fillAmount = currentTime / timeLeft;
                 yield return new WaitForSeconds(0.2f);
             }
         }

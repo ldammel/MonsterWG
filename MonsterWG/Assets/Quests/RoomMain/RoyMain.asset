@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fd6c437e63b294397ac2a0a14cfac2, type: 3}
+  m_Name: RoyMain
+  m_EditorClassIdentifier: 
+  subQuests:
+  - {fileID: 11400000, guid: 98f59bd512ed7854ebc8a81b23accd78, type: 2}
+  - {fileID: 11400000, guid: 923ee3adb4342004a964984288ca410a, type: 2}
+  - {fileID: 11400000, guid: 4eeee61a643df354fa9fcd7026c6e0b1, type: 2}
+  - {fileID: 11400000, guid: ff4e6f9302e09d640b5995aa20893b0c, type: 2}
+  - {fileID: 11400000, guid: e291d4400ff312541b762987bccc6d67, type: 2}
+  - {fileID: 11400000, guid: fadaf7ebc692fe44bb41af2639e5c09e, type: 2}
+  questReward: 250
+  isDone: 0
+  hasFailed: 0

@@ -21,26 +21,37 @@ namespace Game.AI
 
         public void EvaluateObjects()
         {
-            _evaluated = true;
-            if (fov.visibleTargets.Count <= 0) return;
-            foreach (var obj in fov.visibleTargets)
+            if (fov.visibleTargets.Count > 0)
             {
-                var quest = obj.GetComponent<QuestAssign>().quest;
-                if (quest.isDone) return;
-                if (!obj.activeSelf) return;
-                quest.hasFailed = true;
-                quest.isRewarded = true;
-                obj.gameObject.SetActive(false);
+                foreach (var obj in fov.visibleTargets)
+                {
+                    if (obj.GetComponent<QuestAssign>())
+                    {
+                        var quest = obj.GetComponent<QuestAssign>().quest;
+                        if (quest.isDone) return;
+                        if (!obj.activeSelf) return;
+                        quest.hasFailed = true;
+                        quest.isRewarded = true;
+                        obj.gameObject.SetActive(false);
+                    }
+                }
+                fov.visibleTargets.Clear();
             }
 
-            if (!fov.room.roomDisplay) return;
-            if (fov.room.roomDisplay.roomQuests.Count <= 0) return;
-            var roomQuests = fov.room.roomDisplay.roomQuests;
-            foreach (var quest in roomQuests.Where(quest => !quest.isDone))
+            if (fov.room.roomDisplay)
             {
-                quest.hasFailed = true;
-                quest.isRewarded = true;
+                if (fov.room.roomDisplay.roomQuests.Count > 0)
+                {
+                    var roomQuests = fov.room.roomDisplay.roomQuests;
+                    foreach (var quest in roomQuests.Where(quest => !quest.isDone))
+                    {
+                        quest.hasFailed = true;
+                        quest.isRewarded = true;
+                    }
+                }
             }
+
+            _evaluated = true;
         }
     }
 }

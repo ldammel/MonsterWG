@@ -1,7 +1,7 @@
 ﻿using Game.Character;
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.AI.Conditions
 {
     public class AtPointCondition : StateTransitionCondition
     {
@@ -9,12 +9,12 @@ namespace Game.AI
 
         public override bool IsMet()
         {
-            return walker._agent.isStopped;
+            return walker.agent.isStopped && walker.canContinue;
         }
 
         public void GoToNextPoint()
         {
-            walker._agent.isStopped = false;
+            walker.agent.isStopped = false;
         }
     }
 }

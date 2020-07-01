@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a7adcb0107e6e14c9a99feede951754, type: 3}
-  m_Name: CleanLaundry
+  m_Name: CollectTrashBathroom
   m_EditorClassIdentifier: 
-  taskDisplay: {fileID: 0}
-  doneAmount: 0
-  questReward: 25000
+  taskDisplay: []
+  doneAmount: 1
+  questReward: 100
   miniQuestReward: 0
   taskImage: {fileID: 0}
   taskFailedImage: {fileID: 0}
-  taskSuccessImage: {fileID: 21300000, guid: 7d489eb07b50721458cd53a1c911568f, type: 3}
+  taskSuccessImage: {fileID: 0}
   isDone: 0
-  hasFailed: 0
+  hasFailed: 1
   hasCheated: 0
-  isRewarded: 0
+  isRewarded: 1
+  hasAmount: 0

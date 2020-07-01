@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.UI;
+using Game.Utility;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Quests
 {
@@ -25,9 +28,17 @@ namespace Game.Quests
         [SerializeField] private float pointRateOfDecay;
         [SerializeField] private int previousPointAmount;
         [SerializeField] private List<Quest> miniQuests;
+        [SerializeField] private Image timerImage;
+        [SerializeField] private CountdownTimer timer;
         public float timeRateOfDecay;
-
+        
+        private float _startTime;
         private bool _start;
+
+        private void Start()
+        {
+            StartFinalScoring();
+        }
 
         private void Update()
         {
@@ -35,10 +46,11 @@ namespace Game.Quests
             if (timeTillEnd > 0)
             {
                 timeTillEnd -= Time.deltaTime * timeRateOfDecay;
+                timerImage.fillAmount = timeTillEnd / _startTime;
             }
             else
             {
-                //finish
+                EndScoring();
             }
         }
 
@@ -46,6 +58,7 @@ namespace Game.Quests
         {
             previousPointAmount = ScoreDisplay.instance.Score;
             timeTillEnd = previousPointAmount * 0.3f;
+            _startTime = timeTillEnd;
             foreach (var q in miniQuests)
             {
                 q.miniQuestReward = (timeTillEnd / miniQuests.Count);
@@ -53,9 +66,16 @@ namespace Game.Quests
             _start = true;
         }
 
-        public void AddScore(int score)
+        public void EndScoring()
         {
-            finalScore += score;
+            if (timeTillEnd > 0)
+            {
+                finalScore = Mathf.RoundToInt(timeTillEnd) + bonusPoints;
+                ScoreDisplay.instance.AddScore(Mathf.RoundToInt(finalScore));
+            }
+
+            timer.currentTime = timer.timeLeft;
+            _start = false;
         }
     }
 }

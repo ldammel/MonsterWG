@@ -36,7 +36,7 @@ namespace Game.AI
             _isCalled = true;
             _canCall = false;
             callTimer.duration = duration;
-            walker._agent.isStopped = true;
+            walker.agent.isStopped = true;
             callTimer.StartTimer();
             walker.gameObject.transform.LookAt(target);
         }
@@ -44,7 +44,7 @@ namespace Game.AI
         public void StopCall()
         {
             callTimer.EndTimer();
-            walker._agent.isStopped = false;
+            walker.agent.isStopped = false;
             _isCalled = false;
             canCallTimer.duration = 5;
             _canCall = false;

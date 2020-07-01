@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Game.UI;
+using UnityEngine;
 
 namespace Game.Quests
 {
     [CreateAssetMenu(fileName = "New Quest", menuName = "Quests")]
     public class Quest : ScriptableObject
     {
-        public TaskDisplay taskDisplay;
+        public List<TaskDisplay> taskDisplay;
         public int doneAmount;
         public int questReward;
         public float miniQuestReward;
@@ -17,19 +19,16 @@ namespace Game.Quests
         public bool hasCheated;
         public bool isRewarded;
 
-        private int _hasAmount;
+        public int hasAmount;
         
         public void CheckDone()
         {
-            if (_hasAmount != doneAmount)
-            {
-                _hasAmount++;
-            }
-            else
-            {
-                isDone = true;
-                QuestDisplay.instance.FinishQuest(this);
-            }
+            if (isDone || isRewarded) return;
+            hasAmount++;
+            ScoreDisplay.instance.AddScore(questReward);
+            if (hasAmount < doneAmount) return;
+            isDone = true;
+            QuestDisplay.instance.FinishQuest(this);
         }
     }
 }

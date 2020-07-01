@@ -8,6 +8,9 @@ namespace Game.AI.Conditions
         [SerializeField] private float rotationSpeed;
         private bool _rotate;
         [SerializeField] private GameObject objectToRotate;
+        
+        private Quaternion localRotation;
+        private bool _rotateLeft;
         public override bool IsMet()
         {
             return timerEnded;
@@ -17,6 +20,7 @@ namespace Game.AI.Conditions
         {
             timerEnded = false;
             _rotate = true;
+            localRotation = objectToRotate.transform.localRotation;
         }
 
         public void StopRotation()
@@ -29,8 +33,25 @@ namespace Game.AI.Conditions
         {
             if (_rotate)
             {
-                objectToRotate.transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+                if (_rotateLeft)
+                {
+                    if (objectToRotate.transform.localRotation.eulerAngles.y >= localRotation.eulerAngles.y - 90)
+                    {
+                        objectToRotate.transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
+                    }
+                    else _rotateLeft = false;
+                }
+                else
+                {
+                    if (objectToRotate.transform.localRotation.eulerAngles.y <= localRotation.eulerAngles.y + 90)
+                    {
+                        objectToRotate.transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+                    }
+                    else _rotateLeft = true;
+                }
             }
         }
+        
+        
     }
 }

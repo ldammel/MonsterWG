@@ -20,7 +20,7 @@ namespace Game.Quests
             ActiveQuestAmount = quests.Length;
             foreach (var q in quests)
             {
-                q.taskDisplay = this;
+                q.taskDisplay.Add(this);
             }
         }
 

@@ -5,30 +5,39 @@ namespace Game.Character
 {
     public class NavMeshWalker : MonoBehaviour
     {
-        public NavMeshAgent _agent;
+        public NavMeshAgent agent;
+        public bool canContinue = true;
         [SerializeField] private Transform[] waypoints;
         private int _nextPoint;
 
         private void Start()
         {
-            _agent = GetComponent<NavMeshAgent>();
+            agent = GetComponent<NavMeshAgent>();
+            agent.isStopped = false;
+            canContinue = true;
         }
 
         private void Update()
         {
             if (waypoints == null) return;
-            if (_agent.isStopped) return;
+            if (agent.isStopped) return;
 
             if (Vector3.Distance(waypoints[_nextPoint].position, transform.position) > 1)
             {
-                _agent.SetDestination(waypoints[_nextPoint].position);
+                agent.SetDestination(waypoints[_nextPoint].position);
             }
             else
             {
                 if (_nextPoint < waypoints.Length-1) _nextPoint++;
                 else _nextPoint = 0;
-                _agent.isStopped = true;
+                agent.isStopped = true;
             }
+        }
+
+        public void StopWalker()
+        {
+            agent.isStopped = true;
+            canContinue = false;
         }
     }
 }
