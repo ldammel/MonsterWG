@@ -15,7 +15,6 @@ MonoBehaviour:
   subQuests:
   - {fileID: 11400000, guid: abf6f23e999d21b42beef29a50fd0aad, type: 2}
   - {fileID: 11400000, guid: 87182099d8c7aba4c980ad81828e99de, type: 2}
-  - {fileID: 11400000, guid: 8ee4f64b05eebbb46ba095ec7f099079, type: 2}
   - {fileID: 11400000, guid: ee23410fbc8d84b47b0e664935ab2608, type: 2}
   - {fileID: 11400000, guid: 4ecb89db97b5e2a4dbe01bd92efda27a, type: 2}
   - {fileID: 11400000, guid: 982b92e338ce9ff40abcf47b22309ff7, type: 2}

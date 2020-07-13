@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StartWashingMachineJimmy
   m_EditorClassIdentifier: 
   taskDisplay: []
+  questType: 2
   doneAmount: 1
   questReward: 100
   miniQuestReward: 0
@@ -20,7 +21,7 @@ MonoBehaviour:
   taskFailedImage: {fileID: 0}
   taskSuccessImage: {fileID: 21300000, guid: 7d489eb07b50721458cd53a1c911568f, type: 3}
   isDone: 0
-  hasFailed: 1
+  hasFailed: 0
   hasCheated: 0
-  isRewarded: 1
+  isRewarded: 0
   hasAmount: 0

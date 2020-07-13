@@ -3,23 +3,34 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Outline = Game.Utility.Outline;
+using Sirenix.OdinInspector;
 
 namespace Game.Interactions
 {
     public class Interaction : MonoBehaviour
     {
+        [FoldoutGroup("Settings")]
         [SerializeField] private float duration = 5f;
+        [FoldoutGroup("Settings")]
         [SerializeField] private bool useTimer;
-        [SerializeField] private Image timerImage;
-        [SerializeField] private GameObject timerbase;
+        [FoldoutGroup("Settings")]
         [SerializeField] private bool saveProgress;
+        [FoldoutGroup("Settings")]
         [SerializeField] private ItemCollector collector;
+        [FoldoutGroup("Settings")]
+        [SerializeField] private DishDisplay dishDisplay;
+        [FoldoutGroup("UI")]
+        [SerializeField] private Image timerImage;
+        [FoldoutGroup("UI")]
+        [SerializeField] private GameObject timerbase;
+        [FoldoutGroup("Events")]
         [Header("Size: 1 = Wash, 2 = Dry, 3 = Fold")]
         public UnityEvent[] onStart;
+        [FoldoutGroup("Events")]
         public UnityEvent[] onEnd;
-        public bool endHold;
-        public bool pressedButton;
         
+        [HideInInspector] public bool endHold;
+        [HideInInspector] public bool pressedButton;
         public PlayerInteractionController player;
         private Outline _outline;
         private float _startTime;
@@ -28,6 +39,7 @@ namespace Game.Interactions
         private int _interactAmount = 0;
         private CleanState _cleanState;
         public bool Stop => _stop;
+        public bool CanStart { get; set; }
 
         private void Start()
         {
@@ -73,7 +85,7 @@ namespace Game.Interactions
 
         private void Update()
         {
-            if(player)pressedButton = player.inputI >= 1f;
+            if(player)pressedButton = player.InputI >= 1f;
             if(_stop) return;
             if (!CheckRoom()) return;
             _startTime += Time.deltaTime;
@@ -85,6 +97,16 @@ namespace Game.Interactions
             endHold = true;
             if (_interactAmount < onEnd.Length) _interactAmount++;
             if (_interactAmount >= onEnd.Length)_isDone = true;
+            if (dishDisplay)
+            {
+                if (dishDisplay.displayAmount > 0)
+                {
+                    Reset();
+                    _startTime = 0;
+                    return;
+                }
+            }
+            if (_isDone) player._interactions.Remove(this);
             _startTime = 0;
         }
 
@@ -138,9 +160,10 @@ namespace Game.Interactions
 
         private bool CheckRoom()
         {
+            if(collector) if(collector.collectedItems.Count < 1) CanStart = true;
+            if (!CanStart) return false;
             if (!_outline) return true;
             if (!_outline.roomTarget) return true;
-            if (collector.collectedItems.Count < 1) return false;
             return _outline.roomTarget.RoomCleared;
         }
 

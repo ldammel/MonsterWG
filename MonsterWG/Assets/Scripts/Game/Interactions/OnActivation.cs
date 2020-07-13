@@ -19,10 +19,6 @@ namespace Game.Interactions
 
         public void PickUp()
         {
-            if (_outline.roomTarget)
-            {
-                if (!_outline.roomTarget.RoomCleared) return;
-            }
             onActivation.Invoke();
         }
     }

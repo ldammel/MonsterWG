@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7adcb0107e6e14c9a99feede951754, type: 3}
   m_Name: CleanDishes
   m_EditorClassIdentifier: 
-  taskDisplay: {fileID: 0}
+  taskDisplay: []
+  questType: 1
   doneAmount: 9
   questReward: 100
   miniQuestReward: 0

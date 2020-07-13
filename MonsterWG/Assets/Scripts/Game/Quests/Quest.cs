@@ -8,6 +8,7 @@ namespace Game.Quests
     public class Quest : ScriptableObject
     {
         public List<TaskDisplay> taskDisplay;
+        public QuestType questType;
         public int doneAmount;
         public int questReward;
         public float miniQuestReward;
@@ -30,5 +31,13 @@ namespace Game.Quests
             isDone = true;
             QuestDisplay.instance.FinishQuest(this);
         }
+    }
+
+    public enum QuestType
+    {
+        CollectTrash,
+        CleanDishes,
+        CleanLaundry,
+        CleanEnvironment
     }
 }

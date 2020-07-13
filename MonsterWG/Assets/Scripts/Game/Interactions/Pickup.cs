@@ -1,75 +1,87 @@
-﻿using UnityEngine;
+﻿using Game.Quests;
+using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 
 namespace Game.Interactions
 {
     public class Pickup : MonoBehaviour
     {
+        #region Variables
+        [FoldoutGroup("Settings")]
         [SerializeField] private Transform baseParent;
+        [FoldoutGroup("Settings")]
         [SerializeField] private bool cleaned;
+        [FoldoutGroup("Events")]
         public UnityEvent onPickUp;
+        [FoldoutGroup("Events")]
         public UnityEvent onDrop;
         
-        public PlayerInteractionController player;
-        public bool isInHand = false;
+        [HideInInspector]public bool isInHand = false;
+        [HideInInspector]public bool inTrigger;
+        [HideInInspector]public bool pressedButton;
+
         private GameObject _interactionTarget;
-        public bool inTrigger;
-        public bool pressedButton;
-
+        private PlayerInteractionController _player;
         private bool _isPickedUp;
-
         private bool _currentPlayer;
-        private Rigidbody _rigidbody;
+        private Rigidbody _rigidBody;
+        #endregion
+        
+        #region Start/Update
+        private void Start()
+        {
+            _interactionTarget = gameObject;
+            _rigidBody = _interactionTarget.GetComponent<Rigidbody>();
+        }
 
         private void Update()
         {
-            if(player)pressedButton = player.inputS >= 1f;
+            if(_player)pressedButton = _player.InputS >= 1f;
 
             if (_isPickedUp)
             {
-                _rigidbody.isKinematic = true;
-                _interactionTarget.transform.position = player.handGrabPosition.position;
-                _interactionTarget.transform.parent = player.handGrabPosition;
+                _rigidBody.isKinematic = true;
+                _interactionTarget.transform.position = _player.handGrabPosition.position;
+                _interactionTarget.transform.parent = _player.handGrabPosition;
                 isInHand = true;
             }
             else
             {
                 _interactionTarget.transform.parent = baseParent;
-                _rigidbody.isKinematic = false;
+                _rigidBody.isKinematic = false;
                 isInHand = false;
             }
             
         }
-
-        private void Start()
-        {
-            _interactionTarget = gameObject;
-            _rigidbody = _interactionTarget.GetComponent<Rigidbody>();
-        }
-
+        #endregion
+        
+        #region PickUp Functions
         public void PickUp()
         {
-            player.currentItem = this;
+            _player.CurrentItem = this;
             _isPickedUp = true;
             onPickUp.Invoke();
         }
 
         public void CancelPickUp()
         {
-            player.currentItem = null;
+            _player.CurrentItem = null;
             _isPickedUp = false;
             pressedButton = false;
-            player = null;
+            _player = null;
         }
-
+        #endregion
+        
+        #region OnTriggerEnter/Exit
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Untagged")) return;
             if (other.CompareTag("Player") || other.CompareTag("Player2"))
             {
-                if (player) return;
-                player = other.GetComponentInChildren<PlayerInteractionController>();
+                if (_player) return;
+                _player = other.GetComponentInChildren<PlayerInteractionController>();
                 inTrigger = true;
             }
 
@@ -83,9 +95,9 @@ namespace Game.Interactions
             {
                 if (other.gameObject.GetComponent<StoreInteraction>().isQuestStorage)
                 {
-                    if(!cleaned) return;
+                    //if(!cleaned) return;
                 }
-                other.gameObject.GetComponent<StoreInteraction>().AddObject(this);
+                other.gameObject.GetComponent<StoreInteraction>().AddObject(this.GetComponent<QuestAssign>());
                 gameObject.SetActive(false);
             }
         }
@@ -96,8 +108,9 @@ namespace Game.Interactions
             {
                 inTrigger = false;
                 if (isInHand) return;
-                player = null;
+                _player = null;
             }
         }
+        #endregion
     }
 }

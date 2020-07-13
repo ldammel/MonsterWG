@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Character;
+using Game.Quests;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,44 +13,44 @@ namespace Game.Interactions
         public bool isPlayerOne;
         public CharacterMovement character;
 
-        public List<Interaction> interactions;
-        public List<OnActivation> activations;
-        public List<Pickup> pickups;
 
-        public Pickup currentItem;
+        public Pickup CurrentItem { get; set; }
+        public float InputI { get; private set; }
+        public float InputS { get; private set; }
+        
         private bool _plan;
         private bool _pressedActivation;
         private bool _storeInteraction;
         private ActivatePlan _activatePlan;
         private StoreInteraction _storeInteractionObject;
-        public float inputI;
-        public float inputS;
         private bool _pressedPickup;
+        public List<Interaction> _interactions = new List<Interaction>();
+        private readonly List<OnActivation> _activations = new List<OnActivation>();
 
         private void Update()
         {
-            inputI = isPlayerOne
+            InputI = isPlayerOne
                 ? character.controls.Player.Interact.ReadValue<float>()
                 : character.controls.Player2.Interact.ReadValue<float>();
-            inputS = isPlayerOne
+            InputS = isPlayerOne
                 ? character.controls.Player.Select.ReadValue<float>()
                 : character.controls.Player2.Select.ReadValue<float>();
             
-            Interact(inputI);
-            Pickups(inputS);
-            Activation(inputI);
+            Interact(InputI);
+            Pickups(InputS);
+            Activation(InputI);
         }
         
         public void Interact(float input)
         {
-            if (interactions.Count < 1) return;
-            if (input >= 1f && interactions[0].gameObject.activeSelf)
+            if (_interactions.Count < 1) return;
+            if (input >= 1f && _interactions[0].gameObject.activeSelf)
             {
-                interactions[0].Interact();
+                _interactions[0].Interact();
             }
-            else if (!interactions[0].Stop)
+            else if (!_interactions[0].Stop)
             {
-                interactions[0].Cancel();
+                _interactions[0].Cancel();
             }
         }
         
@@ -59,9 +60,9 @@ namespace Game.Interactions
             {
                 _pressedPickup = true;
 
-                if (_storeInteraction && currentItem)
+                if (_storeInteraction && CurrentItem)
                 {
-                    _storeInteractionObject.AddObject(currentItem);
+                    _storeInteractionObject.AddObject(CurrentItem.GetComponent<QuestAssign>());
                     return;
                 }
                 
@@ -87,10 +88,10 @@ namespace Game.Interactions
         {
             if (input >= 1f && !_pressedActivation)
             {
-                if (activations.Count < 1) return;
-                if (!activations[0].gameObject.activeSelf) return;
-                activations[0].player = this;
-                activations[0]?.PickUp();
+                if (_activations.Count < 1) return;
+                if (!_activations[0].gameObject.activeSelf) return;
+                _activations[0].player = this;
+                _activations[0]?.PickUp();
                 _pressedActivation = true;
             }
             else if (input < 1f)
@@ -103,17 +104,17 @@ namespace Game.Interactions
         {
             if (other.GetComponent<Interaction>() && other.gameObject.activeSelf)
             {
-                if (!interactions.Contains(other.GetComponent<Interaction>()))
+                if (!_interactions.Contains(other.GetComponent<Interaction>()))
                 {
-                    interactions.Add(other.GetComponent<Interaction>());
+                    _interactions.Add(other.GetComponent<Interaction>());
                     other.GetComponent<Interaction>().player = this;
                 }
             }
             if (other.GetComponent<OnActivation>())
             {
-                if (!activations.Contains(other.GetComponent<OnActivation>()) && other.gameObject.activeSelf)
+                if (!_activations.Contains(other.GetComponent<OnActivation>()) && other.gameObject.activeSelf)
                 {
-                    activations.Add(other.GetComponent<OnActivation>());
+                    _activations.Add(other.GetComponent<OnActivation>());
                     other.GetComponent<OnActivation>().player = this;
                 }
             }
@@ -148,15 +149,15 @@ namespace Game.Interactions
         }   
         private void OnTriggerExit(Collider other)
         {
-            if (interactions.Contains(other.GetComponent<Interaction>()))
+            if (_interactions.Contains(other.GetComponent<Interaction>()))
             {
-                interactions.Remove(other.GetComponent<Interaction>());
+                _interactions.Remove(other.GetComponent<Interaction>());
                 other.GetComponent<Interaction>().player = null;
             }
             
-            if (activations.Contains(other.GetComponent<OnActivation>()))
+            if (_activations.Contains(other.GetComponent<OnActivation>()))
             {
-                activations.Remove(other.GetComponent<OnActivation>());
+                _activations.Remove(other.GetComponent<OnActivation>());
             }
             
            //if (pickups.Contains(other.GetComponent<Pickup>()))

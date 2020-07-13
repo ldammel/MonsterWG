@@ -15,8 +15,6 @@ MonoBehaviour:
   subQuests:
   - {fileID: 11400000, guid: 03bea3bd609010b46a770983ca769c4b, type: 2}
   - {fileID: 11400000, guid: c5ae65a6635021640af1f1fcdcfd0069, type: 2}
-  - {fileID: 11400000, guid: 28f0a436fe367bd47bf8b0297521380e, type: 2}
-  - {fileID: 11400000, guid: e2ec3e5992fd2b042bebe2f7176123c9, type: 2}
   questReward: 250
   isDone: 0
   hasFailed: 0

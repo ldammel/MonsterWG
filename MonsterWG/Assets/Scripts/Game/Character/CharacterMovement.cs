@@ -9,12 +9,14 @@ namespace Game.Character
     {
         #region Variables
         [SerializeField] private float movementSpeed = 2.0f;
-        public InputMaster controls = null;
         [SerializeField] private bool playerOne;
         [SerializeField] private GameObject playerModel;
+        [SerializeField]private StateMachineBehaviour behaviour;
+        
+        public InputMaster controls = null;
         public bool canMove = true;
+        
         private State _calledState;
-        [SerializeField]private StateMachineBehaviour _behaviour;
         #endregion
 
         #region Event Functions
@@ -63,7 +65,7 @@ namespace Game.Character
 
         public void CallMom()
         {
-            _behaviour.Call(transform, 3);
+            behaviour.Call(transform, 3);
         }
 
         #endregion

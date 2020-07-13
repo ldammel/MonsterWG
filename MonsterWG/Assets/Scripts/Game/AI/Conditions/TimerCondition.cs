@@ -35,7 +35,7 @@ namespace Game.AI.Conditions
             {
                 if (_rotateLeft)
                 {
-                    if (objectToRotate.transform.localRotation.eulerAngles.y >= localRotation.eulerAngles.y - 90)
+                    if (objectToRotate.transform.localRotation.eulerAngles.y >= localRotation.eulerAngles.y - 60)
                     {
                         objectToRotate.transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0);
                     }
@@ -43,7 +43,7 @@ namespace Game.AI.Conditions
                 }
                 else
                 {
-                    if (objectToRotate.transform.localRotation.eulerAngles.y <= localRotation.eulerAngles.y + 90)
+                    if (objectToRotate.transform.localRotation.eulerAngles.y <= localRotation.eulerAngles.y + 60)
                     {
                         objectToRotate.transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
                     }

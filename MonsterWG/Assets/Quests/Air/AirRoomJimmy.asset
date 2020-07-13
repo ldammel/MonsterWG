@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AirRoomJimmy
   m_EditorClassIdentifier: 
   taskDisplay: []
+  questType: 3
   doneAmount: 0
   questReward: 0
   miniQuestReward: 0

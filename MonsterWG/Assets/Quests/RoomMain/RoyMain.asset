@@ -16,7 +16,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 98f59bd512ed7854ebc8a81b23accd78, type: 2}
   - {fileID: 11400000, guid: 923ee3adb4342004a964984288ca410a, type: 2}
   - {fileID: 11400000, guid: 4eeee61a643df354fa9fcd7026c6e0b1, type: 2}
-  - {fileID: 11400000, guid: ff4e6f9302e09d640b5995aa20893b0c, type: 2}
   - {fileID: 11400000, guid: e291d4400ff312541b762987bccc6d67, type: 2}
   - {fileID: 11400000, guid: fadaf7ebc692fe44bb41af2639e5c09e, type: 2}
   questReward: 250

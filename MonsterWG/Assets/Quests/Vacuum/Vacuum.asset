@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Vacuum
   m_EditorClassIdentifier: 
   taskDisplay: []
+  questType: 3
   doneAmount: 0
   questReward: 100
   miniQuestReward: 0
@@ -20,7 +21,7 @@ MonoBehaviour:
   taskFailedImage: {fileID: 0}
   taskSuccessImage: {fileID: 0}
   isDone: 0
-  hasFailed: 1
+  hasFailed: 0
   hasCheated: 0
-  isRewarded: 1
+  isRewarded: 0
   hasAmount: 0
