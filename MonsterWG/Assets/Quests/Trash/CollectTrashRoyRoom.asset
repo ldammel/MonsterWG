@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: CollectTrashRoyRoom
   m_EditorClassIdentifier: 
   taskDisplay: []
-  doneAmount: 1
+  questType: 0
+  doneAmount: 2
   questReward: 100
   miniQuestReward: 0
   taskImage: {fileID: 0}
   taskFailedImage: {fileID: 0}
   taskSuccessImage: {fileID: 0}
   isDone: 0
-  hasFailed: 1
+  hasFailed: 0
   hasCheated: 0
-  isRewarded: 1
+  isRewarded: 0
   hasAmount: 0

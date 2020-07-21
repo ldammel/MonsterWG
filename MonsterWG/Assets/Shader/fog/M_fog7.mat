@@ -24,14 +24,14 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - Vector1_1C369FC9: 0.5
-    - Vector1_1EE2110A: 15.5
+    - Vector1_1EE2110A: 22.5
     - Vector1_418788D1: 13.15
     - Vector1_6DFB6B23: 0
     - Vector1_91FC28B4: -3.5
     - Vector1_A7131FF7: 0
     - Vector1_C46C1C4E: 0.01
     - Vector1_D2787599: 25.5
-    - _fogDensity: 0.938
+    - _fogDensity: 1
     m_Colors:
     - Color_28734C42: {r: 0, g: 0, b: 0, a: 1}
     - _fogColor: {r: 0.18863475, g: 0.254717, b: 0.254717, a: 1}

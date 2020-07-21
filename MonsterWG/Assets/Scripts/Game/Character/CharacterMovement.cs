@@ -11,7 +11,9 @@ namespace Game.Character
         [SerializeField] private float movementSpeed = 2.0f;
         [SerializeField] private bool playerOne;
         [SerializeField] private GameObject playerModel;
+        [SerializeField] private NavMeshWalker mom;
         [SerializeField]private StateMachineBehaviour behaviour;
+        [SerializeField] private GameObject scoreScreen1;
         
         public InputMaster controls = null;
         public bool canMove = true;
@@ -37,8 +39,10 @@ namespace Game.Character
 
         private void Update()
         {
+            if (mom.FinalWayPoint || scoreScreen1.activeSelf) return;
             Move();
-            if (Input.GetKeyDown(KeyCode.V))
+            if(Input.GetKeyDown(KeyCode.M)) NavMeshWalker.instance.StartMiniQuest();
+            if (Input.GetKeyDown(playerOne? KeyCode.V : KeyCode.N))
             {
                 CallMom();
             }

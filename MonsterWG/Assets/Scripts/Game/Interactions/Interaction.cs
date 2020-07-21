@@ -19,6 +19,10 @@ namespace Game.Interactions
         [SerializeField] private ItemCollector collector;
         [FoldoutGroup("Settings")]
         [SerializeField] private DishDisplay dishDisplay;
+        [FoldoutGroup("Settings")]
+        [SerializeField] private bool useCleaningCondition;
+        [FoldoutGroup("Settings")]
+        [SerializeField] private CleaningCondition cleaningCondition;
         [FoldoutGroup("UI")]
         [SerializeField] private Image timerImage;
         [FoldoutGroup("UI")]
@@ -33,26 +37,30 @@ namespace Game.Interactions
         [HideInInspector] public bool pressedButton;
         public PlayerInteractionController player;
         private Outline _outline;
-        private float _startTime;
-        private bool _stop = true;
-        private bool _isDone;
-        private int _interactAmount = 0;
+        public float _startTime;
+        public bool _stop = true;
+        public bool _isDone;
+        public int _interactAmount = 0;
         private CleanState _cleanState;
         public bool Stop => _stop;
-        public bool CanStart { get; set; }
+        public bool CanStart;
 
         private void Start()
         {
             _outline = GetComponentInChildren<Outline>();
             endHold = true;
+            if(!collector)CanStart = true;
         }
 
 
         public void Interact()
         {
+            if (useCleaningCondition)
+            {
+                if (!cleaningCondition.IsMet) return;
+            }
             if (!CheckRoom()) return;
             if (_isDone) return;
-            if (!collector) return;
             if (useTimer)
             {
                 StartTimer();
@@ -160,7 +168,7 @@ namespace Game.Interactions
 
         private bool CheckRoom()
         {
-            if(collector) if(collector.collectedItems.Count < 1) CanStart = true;
+            if(collector) if(collector.collectedItems.Count >= 1) CanStart = true;
             if (!CanStart) return false;
             if (!_outline) return true;
             if (!_outline.roomTarget) return true;

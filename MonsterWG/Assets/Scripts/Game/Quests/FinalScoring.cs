@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Character;
 using Game.UI;
 using Game.Utility;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.Quests
@@ -30,14 +32,25 @@ namespace Game.Quests
         [SerializeField] private List<Quest> miniQuests;
         [SerializeField] private Image timerImage;
         [SerializeField] private CountdownTimer timer;
+        [SerializeField] private GameObject timerBar;
         public float timeRateOfDecay;
         
         private float _startTime;
         private bool _start;
+        public Quest currentQuest; 
+        
 
         private void Start()
         {
             StartFinalScoring();
+            foreach (var q in miniQuests)
+            {
+                q.isDone = false;
+                q.hasCheated = false;
+                q.hasFailed = false;
+                q.isRewarded = false;
+                q.hasAmount = 0;
+            }
         }
 
         private void Update()
@@ -47,11 +60,24 @@ namespace Game.Quests
             {
                 timeTillEnd -= Time.deltaTime * timeRateOfDecay;
                 timerImage.fillAmount = timeTillEnd / _startTime;
+                if (currentQuest.isDone)
+                {
+                    EndScoring();
+                }
             }
             else
             {
-                EndScoring();
+                QuestFailed();
             }
+        }
+
+        public void StartMiniQuest()
+        {
+            _start = true;
+            timeTillEnd = previousPointAmount * 0.3f;
+            _startTime = timeTillEnd;
+            currentQuest = miniQuests[0];
+            timerBar.SetActive(true);
         }
 
         public void StartFinalScoring()
@@ -63,7 +89,16 @@ namespace Game.Quests
             {
                 q.miniQuestReward = (timeTillEnd / miniQuests.Count);
             }
-            _start = true;
+        }
+
+        public void QuestFailed()
+        {
+            timer.currentTime = timer.timeLeft;
+            _start = false;
+            currentQuest.hasFailed = true;
+            currentQuest.isRewarded = true;
+            timerBar.SetActive(false);
+            NavMeshWalker.instance.MiniQuest = false;
         }
 
         public void EndScoring()
@@ -73,9 +108,10 @@ namespace Game.Quests
                 finalScore = Mathf.RoundToInt(timeTillEnd) + bonusPoints;
                 ScoreDisplay.instance.AddScore(Mathf.RoundToInt(finalScore));
             }
-
+            timerBar.SetActive(false);
             timer.currentTime = timer.timeLeft;
             _start = false;
+            NavMeshWalker.instance.MiniQuest = false;
         }
     }
 }

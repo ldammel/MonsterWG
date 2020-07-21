@@ -8,10 +8,24 @@ namespace Game.AI
     public class FoundObjectsCondition : StateTransitionCondition
     {
         [SerializeField] private FieldOfView fov;
+        [SerializeField] private FinalScoring score;
         private bool _evaluated;
+        
         public override bool IsMet()
         {
-            return _evaluated;
+            if (score.currentQuest)
+            {
+                if (score.currentQuest.isRewarded)
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else
+            {
+                return _evaluated;
+            }
+
         }
 
         public void Reset()
@@ -30,6 +44,7 @@ namespace Game.AI
                         var quest = obj.GetComponent<QuestAssign>().quest;
                         if (quest.isDone) return;
                         if (!obj.activeSelf) return;
+                        if (quest.hasCheated) score.timeRateOfDecay += 0.5f;
                         quest.hasFailed = true;
                         quest.isRewarded = true;
                         obj.gameObject.SetActive(false);

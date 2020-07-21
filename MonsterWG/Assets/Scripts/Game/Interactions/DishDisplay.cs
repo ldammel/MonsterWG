@@ -9,10 +9,11 @@ namespace Game.Interactions
         public GameObject[] dishes;
         public int displayAmount;
         public Interaction interaction;
+        public bool stayVisible;
 
         private void Start()
         {
-            dishes.ForEach(d => d.SetActive(false));
+            if(!stayVisible)dishes.ForEach(d => d.SetActive(false));
         }
 
         private void Update()

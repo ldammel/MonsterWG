@@ -82,10 +82,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  player: {fileID: 0}
   isInHand: 0
   inTrigger: 0
   pressedButton: 0
+  player: {fileID: 0}
+  _isPickedUp: 0
 --- !u!114 &1026185526578041501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +374,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingState: {fileID: 3803052199272308022}
+  stateObjects:
+  - {fileID: 1431651861238816395}
+  - {fileID: 2654392377483316461}
+  - {fileID: 1582569603934526596}
 --- !u!1 &2654392377483316461
 GameObject:
   m_ObjectHideFlags: 0

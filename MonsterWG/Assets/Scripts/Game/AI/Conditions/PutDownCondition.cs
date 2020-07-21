@@ -10,6 +10,7 @@ namespace Game.AI.Conditions
         public override bool IsMet()
         {
             if (!_timerEnded) return false;
+            if(pickup.player)if(pickup.player.StoreInteraction) return false;
             return pickup.isInHand && pickup.pressedButton && !pickup.inTrigger;
         }
 

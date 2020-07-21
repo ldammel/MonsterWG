@@ -9,7 +9,7 @@ namespace Game.AI.Conditions
 
         public override bool IsMet()
         {
-            return walker.agent.isStopped && walker.canContinue;
+            return walker.agent.isStopped && walker.canContinue && !walker.FinalWayPoint;
         }
 
         public void GoToNextPoint()

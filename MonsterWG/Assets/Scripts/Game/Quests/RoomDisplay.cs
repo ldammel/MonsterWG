@@ -14,7 +14,6 @@ namespace Game.Quests
         public int DoneQuestAmount { get; set; }
         public List<Quest> roomQuests;
         public bool startRoom;
-        private TaskDisplay[] _taskDisplays;
         public bool IsInitialized;
 
         private void Start()
@@ -25,16 +24,7 @@ namespace Game.Quests
 
         public void InitializeRoom()
         {
-            _taskDisplays = gameObject.GetComponentsInChildren<TaskDisplay>();
-            foreach (var t in _taskDisplays)
-            {
-                ActiveQuestAmount += t.ActiveQuestAmount;
-                foreach (var q in t.quests)
-                {
-                    roomQuests.Add(q);
-                }
-            }
-
+            ActiveQuestAmount = roomQuests.Count;
             IsInitialized = true;
             greyImage.gameObject.SetActive(false);
         }

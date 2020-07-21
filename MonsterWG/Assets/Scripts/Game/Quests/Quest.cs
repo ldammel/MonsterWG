@@ -27,6 +27,7 @@ namespace Game.Quests
             if (isDone || isRewarded) return;
             hasAmount++;
             ScoreDisplay.instance.AddScore(questReward);
+            isRewarded = true;
             if (hasAmount < doneAmount) return;
             isDone = true;
             QuestDisplay.instance.FinishQuest(this);
@@ -38,6 +39,7 @@ namespace Game.Quests
         CollectTrash,
         CleanDishes,
         CleanLaundry,
-        CleanEnvironment
+        CleanEnvironment,
+        MiniQuest
     }
 }

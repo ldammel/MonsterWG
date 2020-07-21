@@ -18,13 +18,13 @@ namespace Game.Interactions
         [FoldoutGroup("Events")]
         public UnityEvent onDrop;
         
-        [HideInInspector]public bool isInHand = false;
-        [HideInInspector]public bool inTrigger;
-        [HideInInspector]public bool pressedButton;
+        public bool isInHand = false;
+        public bool inTrigger;
+        public bool pressedButton;
+        public PlayerInteractionController player;
 
         private GameObject _interactionTarget;
-        private PlayerInteractionController _player;
-        private bool _isPickedUp;
+        public bool _isPickedUp;
         private bool _currentPlayer;
         private Rigidbody _rigidBody;
         #endregion
@@ -38,13 +38,13 @@ namespace Game.Interactions
 
         private void Update()
         {
-            if(_player)pressedButton = _player.InputS >= 1f;
+            if(player)pressedButton = player.InputS >= 1f;
 
             if (_isPickedUp)
             {
                 _rigidBody.isKinematic = true;
-                _interactionTarget.transform.position = _player.handGrabPosition.position;
-                _interactionTarget.transform.parent = _player.handGrabPosition;
+                _interactionTarget.transform.position = player.handGrabPosition.position;
+                _interactionTarget.transform.parent = player.handGrabPosition;
                 isInHand = true;
             }
             else
@@ -60,17 +60,17 @@ namespace Game.Interactions
         #region PickUp Functions
         public void PickUp()
         {
-            _player.CurrentItem = this;
+            player.CurrentItem = this;
             _isPickedUp = true;
             onPickUp.Invoke();
         }
 
         public void CancelPickUp()
         {
-            _player.CurrentItem = null;
+            if(player)player.CurrentItem = null;
             _isPickedUp = false;
             pressedButton = false;
-            _player = null;
+            player = null;
         }
         #endregion
         
@@ -80,8 +80,8 @@ namespace Game.Interactions
             if (other.CompareTag("Untagged")) return;
             if (other.CompareTag("Player") || other.CompareTag("Player2"))
             {
-                if (_player) return;
-                _player = other.GetComponentInChildren<PlayerInteractionController>();
+                if (player) return;
+                player = other.GetComponentInChildren<PlayerInteractionController>();
                 inTrigger = true;
             }
 
@@ -108,7 +108,7 @@ namespace Game.Interactions
             {
                 inTrigger = false;
                 if (isInHand) return;
-                _player = null;
+                player = null;
             }
         }
         #endregion

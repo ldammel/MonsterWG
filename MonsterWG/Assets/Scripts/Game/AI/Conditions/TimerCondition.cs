@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Character;
+using UnityEngine;
 
 namespace Game.AI.Conditions
 {
@@ -8,18 +9,19 @@ namespace Game.AI.Conditions
         [SerializeField] private float rotationSpeed;
         private bool _rotate;
         [SerializeField] private GameObject objectToRotate;
+        [SerializeField] private StateMachineBehaviour behaviour;
         
         private Quaternion localRotation;
         private bool _rotateLeft;
         public override bool IsMet()
         {
-            return timerEnded;
+            return timerEnded && !behaviour.isCalled;
         }
 
         public void Rotate()
         {
             timerEnded = false;
-            _rotate = true;
+            if(!NavMeshWalker.instance.MiniQuest)_rotate = true;
             localRotation = objectToRotate.transform.localRotation;
         }
 
@@ -31,7 +33,7 @@ namespace Game.AI.Conditions
 
         private void Update()
         {
-            if (_rotate)
+            if (_rotate && !behaviour.isCalled && !NavMeshWalker.instance.MiniQuest)
             {
                 if (_rotateLeft)
                 {

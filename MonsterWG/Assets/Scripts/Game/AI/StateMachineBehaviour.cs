@@ -7,8 +7,8 @@ namespace Game.AI
     public class StateMachineBehaviour : MonoBehaviour
     {
         [SerializeField] private State startingState = null;
-        [SerializeField] private bool _isCalled;
-        [SerializeField] private bool _canCall = true;
+        public bool isCalled;
+        [SerializeField] private bool canCall = true;
         [SerializeField] private TimerBehaviour callTimer;
         [SerializeField] private TimerBehaviour canCallTimer;
         [SerializeField] private NavMeshWalker walker;
@@ -26,35 +26,37 @@ namespace Game.AI
 
         private void Update()
         {
-            if (_isCalled) return;
+            if (isCalled) return;
             StateMachine.Tick();
         }
 
         public void Call(Transform target, float duration)
         {
-            if (!_canCall) return;
-            _isCalled = true;
-            _canCall = false;
+            if (!canCall) return;
+            isCalled = true;
+            canCall = false;
             callTimer.duration = duration;
-            walker.agent.isStopped = true;
+            if (!NavMeshWalker.instance.MiniQuest)walker.agent.isStopped = true;
+            walker.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             callTimer.StartTimer();
             walker.gameObject.transform.LookAt(target);
         }
 
         public void StopCall()
         {
+            if (!NavMeshWalker.instance.MiniQuest)walker.agent.isStopped = false;
             callTimer.EndTimer();
-            walker.agent.isStopped = false;
-            _isCalled = false;
+            walker.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            isCalled = false;
             canCallTimer.duration = 5;
-            _canCall = false;
+            canCall = false;
             canCallTimer.StartTimer();
         }
 
         public void CanCall()
         {
             canCallTimer.EndTimer();
-            _canCall = true;
+            canCall = true;
         }
 
         public void ChangeState(State state) => StateMachine.ChangeState(state);

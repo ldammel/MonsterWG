@@ -13,6 +13,7 @@ TagManager:
   - Pickup
   - Mom
   - Trash
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Walls
   - Dirt
   - Player
-  - 
+  - Mom
   - 
   - 
   - 

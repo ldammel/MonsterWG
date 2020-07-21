@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7adcb0107e6e14c9a99feede951754, type: 3}
   m_Name: MiniQuestTest
   m_EditorClassIdentifier: 
-  taskDisplay: {fileID: 0}
+  taskDisplay:
+  - {fileID: 0}
+  questType: 4
   doneAmount: 0
   questReward: 0
   miniQuestReward: 0
+  taskImage: {fileID: 0}
+  taskFailedImage: {fileID: 0}
+  taskSuccessImage: {fileID: 0}
   isDone: 0
   hasFailed: 0
   hasCheated: 0
   isRewarded: 0
+  hasAmount: 0

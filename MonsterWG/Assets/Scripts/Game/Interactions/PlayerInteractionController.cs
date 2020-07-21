@@ -14,13 +14,13 @@ namespace Game.Interactions
         public CharacterMovement character;
 
 
-        public Pickup CurrentItem { get; set; }
+        public Pickup CurrentItem;
         public float InputI { get; private set; }
         public float InputS { get; private set; }
         
         private bool _plan;
         private bool _pressedActivation;
-        private bool _storeInteraction;
+        public bool StoreInteraction;
         private ActivatePlan _activatePlan;
         private StoreInteraction _storeInteractionObject;
         private bool _pressedPickup;
@@ -60,7 +60,7 @@ namespace Game.Interactions
             {
                 _pressedPickup = true;
 
-                if (_storeInteraction && CurrentItem)
+                if (StoreInteraction && CurrentItem)
                 {
                     _storeInteractionObject.AddObject(CurrentItem.GetComponent<QuestAssign>());
                     return;
@@ -71,12 +71,6 @@ namespace Game.Interactions
                     _activatePlan.Toggle();
                     return;
                 }
-
-                /*if (pickups.Count < 1) return;
-                if (!pickups[0].gameObject.activeSelf) return;
-                if (currentItem != pickups[0] && currentItem) return;
-                pickups[0].player = this;
-                pickups[0].PickUp();*/
             }
             else if(input < 1f)
             {
@@ -100,7 +94,7 @@ namespace Game.Interactions
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (other.GetComponent<Interaction>() && other.gameObject.activeSelf)
             {
@@ -132,7 +126,7 @@ namespace Game.Interactions
             {
                 if (other.gameObject.activeSelf)
                 {
-                    _storeInteraction = true;
+                    StoreInteraction = true;
                     _storeInteractionObject = other.GetComponent<StoreInteraction>();
                 }
             }
@@ -166,9 +160,9 @@ namespace Game.Interactions
            //    other.GetComponent<Pickup>().player = null;
            //}
 
-            if (_storeInteraction)
+            if (StoreInteraction)
             {
-                _storeInteraction = false;
+                StoreInteraction = false;
                 _storeInteractionObject = null;
             }
             

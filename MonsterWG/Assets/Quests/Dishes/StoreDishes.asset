@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskDisplay: []
   questType: 1
-  doneAmount: 9
+  doneAmount: 1
   questReward: 100
   miniQuestReward: 0
   taskImage: {fileID: 0}
