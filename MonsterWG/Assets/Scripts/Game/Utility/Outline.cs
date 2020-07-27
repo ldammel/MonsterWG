@@ -6,7 +6,6 @@ namespace Game.Utility
     public class Outline : MonoBehaviour
     {
         [SerializeField] private Material outlineMaterial;
-        public BoxDissolve roomTarget;
         private Renderer _outlineRenderer;
         [SerializeField] private UIBehaviour behaviour;
         private static readonly int FirstOutlineColor = Shader.PropertyToID("_FirstOutlineColor");
@@ -32,10 +31,6 @@ namespace Game.Utility
 
         private void OnTriggerEnter(Collider other)
         {
-            if (roomTarget)
-            {
-                if (!roomTarget.RoomCleared) return;
-            }
             if (other.CompareTag("Untagged")) return;
             outlineMaterial.SetColor(FirstOutlineColor, other.CompareTag("Player") ? Color.blue : Color.green);
             _outlineRenderer.enabled = true;
@@ -60,10 +55,6 @@ namespace Game.Utility
 
         private void  OnTriggerExit(Collider other)
         {
-            if (roomTarget)
-            {
-                if (!roomTarget.RoomCleared) return;
-            }
             if (other.CompareTag("Untagged")) return;
             _outlineRenderer.enabled = false;
         }

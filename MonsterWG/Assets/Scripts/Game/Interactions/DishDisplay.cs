@@ -18,7 +18,7 @@ namespace Game.Interactions
 
         private void Update()
         {
-            if(interaction)interaction.CanStart = displayAmount >= 1;
+            if(interaction)interaction.canStart = displayAmount >= 1;
         }
 
         public void AddDisplay()

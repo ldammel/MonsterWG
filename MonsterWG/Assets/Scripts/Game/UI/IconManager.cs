@@ -25,7 +25,7 @@ namespace Game.UI
 
         private void Start()
         {
-            image.enabled = false;
+            //image.enabled = false;
         }
 
         public void DisplayIcon(Sprite icon)

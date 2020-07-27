@@ -37,19 +37,19 @@ namespace Game.Interactions
         [HideInInspector] public bool pressedButton;
         public PlayerInteractionController player;
         private Outline _outline;
-        public float _startTime;
-        public bool _stop = true;
-        public bool _isDone;
-        public int _interactAmount = 0;
+        private float _startTime;
+        private bool _stop = true;
+        private bool _isDone;
+        private int _interactAmount = 0;
         private CleanState _cleanState;
         public bool Stop => _stop;
-        public bool CanStart;
+        public bool canStart;
 
         private void Start()
         {
             _outline = GetComponentInChildren<Outline>();
             endHold = true;
-            if(!collector)CanStart = true;
+            if(!collector)canStart = true;
         }
 
 
@@ -59,7 +59,6 @@ namespace Game.Interactions
             {
                 if (!cleaningCondition.IsMet) return;
             }
-            if (!CheckRoom()) return;
             if (_isDone) return;
             if (useTimer)
             {
@@ -82,7 +81,6 @@ namespace Game.Interactions
 
         public void Cancel()
         {
-            if (!CheckRoom()) return;
             _stop = true;
             if (!saveProgress)
             {
@@ -95,7 +93,6 @@ namespace Game.Interactions
         {
             if(player)pressedButton = player.InputI >= 1f;
             if(_stop) return;
-            if (!CheckRoom()) return;
             _startTime += Time.deltaTime;
             if (!(_startTime >= duration)) return;
             _stop = true;
@@ -164,15 +161,6 @@ namespace Game.Interactions
                 timerImage.fillAmount = _startTime / duration;
                 yield return new WaitForSeconds(0.2f);
             }
-        }
-
-        private bool CheckRoom()
-        {
-            if(collector) if(collector.collectedItems.Count >= 1) CanStart = true;
-            if (!CanStart) return false;
-            if (!_outline) return true;
-            if (!_outline.roomTarget) return true;
-            return _outline.roomTarget.RoomCleared;
         }
 
     }

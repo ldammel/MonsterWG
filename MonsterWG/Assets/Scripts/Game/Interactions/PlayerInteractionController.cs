@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Character;
-using Game.Quests;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Interactions
 {
@@ -62,7 +59,7 @@ namespace Game.Interactions
 
                 if (StoreInteraction && CurrentItem)
                 {
-                    _storeInteractionObject.AddObject(CurrentItem.GetComponent<QuestAssign>());
+                    _storeInteractionObject.AddObject(CurrentItem.gameObject);
                     return;
                 }
                 
@@ -113,15 +110,6 @@ namespace Game.Interactions
                 }
             }
             
-            //if (other.GetComponent<Pickup>())
-            //{
-            //    if (!pickups.Contains(other.GetComponent<Pickup>()) && other.gameObject.activeSelf)
-            //    {
-            //        pickups.Add(other.GetComponent<Pickup>());
-            //        other.GetComponent<Pickup>().player = this;
-            //    }
-            //}
-            
             if (other.GetComponent<StoreInteraction>())
             {
                 if (other.gameObject.activeSelf)
@@ -153,12 +141,6 @@ namespace Game.Interactions
             {
                 _activations.Remove(other.GetComponent<OnActivation>());
             }
-            
-           //if (pickups.Contains(other.GetComponent<Pickup>()))
-           //{
-           //    pickups.Remove(other.GetComponent<Pickup>());
-           //    other.GetComponent<Pickup>().player = null;
-           //}
 
             if (StoreInteraction)
             {

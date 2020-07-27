@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Game.AI;
-using Game.Quests;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -19,6 +16,8 @@ namespace Game.Interactions
         [SerializeField] private int limit;
         [FoldoutGroup("Base")]
         [SerializeField] private List<GameObject> storedObjects;
+
+        [SerializeField] private bool cheatStorage;
         #endregion
 
         #region Events
@@ -31,14 +30,6 @@ namespace Game.Interactions
         [SerializeField] private int storedObjectsAmount = 0;
         #endregion
         
-        #region Quest
-        [FoldoutGroup("Quests")]
-        [Header("Is the Storage part of a Quest (e.g. Clean Dishes)")]
-        public bool isQuestStorage;
-        [FoldoutGroup("Quests")]
-        [SerializeField] private QuestType questType;
-        #endregion
-        
         #region Explosion
         [FoldoutGroup("Explosion")]
         [SerializeField] private Transform[] ExplosionTransforms;
@@ -46,27 +37,18 @@ namespace Game.Interactions
         [SerializeField] private UnityEvent onExplosion;
         #endregion
 
-        public void AddObject(QuestAssign o)
+        public void AddObject(GameObject o)
         {
             var pick = o.gameObject.GetComponent<Pickup>();
             pick.CancelPickUp();
             pick._isPickedUp = false;
             o.gameObject.GetComponentInChildren<InteractionStateBehaviour>().ResetStates();
             StartCoroutine(WaitTime(o.gameObject));
-            if (isQuestStorage)
+            if (!cheatStorage)
             {
                 storedObjectsAmount++;   
                 storedObjects.Add(o.gameObject);
-                if (o.quest.questType == questType)
-                {
-                    o.quest.CheckDone();
-                    if(useEvents)onStored[storedObjectsAmount].Invoke();
-                }
-                else
-                {
-                    o.quest.hasCheated = true;
-                    o.quest.CheckDone();
-                }
+                if(useEvents)onStored[storedObjectsAmount].Invoke();
             }
             else
             {

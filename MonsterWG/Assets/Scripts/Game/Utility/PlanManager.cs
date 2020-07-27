@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Game.Interactions;
-using Game.Quests;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Utility
 {
@@ -12,96 +9,17 @@ namespace Game.Utility
         [SerializeField] private GameObject planCanvas;
         [SerializeField] private float canvasStartWaitTime;
         [SerializeField] private GameObject[] menuObjects;
-        [SerializeField] private RoomDisplay[] roomdisplays;
-
-        private QuestDisplay _questManager;
+        
         public PlayerInteractionController CurPlayer { get; set; }
-        private int _count;
-        private bool _triggered;
-
-        private void Start()
-        {
-            _questManager = FindObjectOfType<QuestDisplay>();
-        }
-
-        private void Update()
-        {
-            if (!CurPlayer) return;
-            if (CurPlayer.character.canMove) return;
-            if (_triggered) return;
-            MoveElement();
-        }
 
         public void EnablePlanMovement()
         {
             CurPlayer.character.canMove = false;
-            _count = 0;
         }
 
         public void DisablePlanMovement()
         {
             CurPlayer.character.canMove = true;
-        }
-
-        public void MoveElement()
-        {
-            _triggered = true;
-            if (menuObjects.Length <= 1) return;
-            var movementInput = CurPlayer.isPlayerOne
-                ? CurPlayer.character.controls.Player.Move.ReadValue<Vector2>()
-                : CurPlayer.character.controls.Player2.Move.ReadValue<Vector2>();
-
-            var movement = new Vector3
-            {
-                x = movementInput.x,
-                z = movementInput.y
-            };
-            if (movement.x <= -1)
-            {
-                var baseCount = _count;
-                if (_count == menuObjects.Length - 1) _count = 0;
-                else _count++;
-                while(!roomdisplays[_count].IsInitialized)
-                {
-                    if (_count == menuObjects.Length -1)
-                    {
-                        StartCoroutine(WaitTrigger());
-                        menuObjects[baseCount].SetActive(false);
-                        menuObjects[0].SetActive(true);
-                        return;
-                    }
-                    _count++;
-                }
-                menuObjects[baseCount].SetActive(false);
-                menuObjects[_count].SetActive(true); 
-            }
-
-            if (movement.x >= 1)
-            {
-                var baseCount = _count;
-                if (_count == 0) _count = menuObjects.Length - 1;
-                else _count--;
-                while(!roomdisplays[_count].IsInitialized)
-                {
-                    if (_count == 0)
-                    {
-                        StartCoroutine(WaitTrigger());
-                        menuObjects[baseCount].SetActive(false);
-                        menuObjects[_count].SetActive(true);
-                        return;
-                    }
-                    _count--;
-                }
-                menuObjects[baseCount].SetActive(false);
-                menuObjects[_count].SetActive(true);
-            }
-            StartCoroutine(WaitTrigger());
-        }
-
-        private IEnumerator WaitTrigger()
-        {
-            yield return new WaitForSeconds(.1f);
-            _triggered = false;
         }
 
         public void EnableCanvas()

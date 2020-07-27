@@ -1,5 +1,4 @@
-﻿using Game.Quests;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
@@ -93,11 +92,7 @@ namespace Game.Interactions
 
             if (other.CompareTag("Storage") && !isInHand)
             {
-                if (other.gameObject.GetComponent<StoreInteraction>().isQuestStorage)
-                {
-                    //if(!cleaned) return;
-                }
-                other.gameObject.GetComponent<StoreInteraction>().AddObject(this.GetComponent<QuestAssign>());
+                other.gameObject.GetComponent<StoreInteraction>().AddObject(this.gameObject);
                 gameObject.SetActive(false);
             }
         }

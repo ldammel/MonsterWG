@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1037071756360446719}
-  - component: {fileID: 3369773245132072160}
   - component: {fileID: 1037071756360446718}
   - component: {fileID: 1026185526578041501}
   - component: {fileID: 1037071756360446693}
@@ -38,19 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3369773245132072160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1037071756360446716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688a5bbf12d64bf4ca91d49b8ce5169a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quest: {fileID: 11400000, guid: 26c0082962bbbb94bb3c295ab5b4b932, type: 2}
 --- !u!114 &1037071756360446718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,7 +600,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: 77d61211028bf2449b287e3212a41131, type: 2}
-  roomTarget: {fileID: 0}
   behaviour: {fileID: 0}
 --- !u!65 &2658004939278263172
 BoxCollider:
