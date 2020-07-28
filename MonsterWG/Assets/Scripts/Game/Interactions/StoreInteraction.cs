@@ -22,7 +22,7 @@ namespace Game.Interactions
 
         #region Events
         [FoldoutGroup("Events")]
-        [Header("OnStored Events --> Size == Limit! - used for model swap")]
+        [Header("0 = Timing MiniGame - 1 = Button Mash")]
         [SerializeField] private bool useEvents;
         [FoldoutGroup("Events")]
         [SerializeField] private UnityEvent[] onStored;
@@ -32,7 +32,7 @@ namespace Game.Interactions
         
         #region Explosion
         [FoldoutGroup("Explosion")]
-        [SerializeField] private Transform[] ExplosionTransforms;
+        [SerializeField] private Transform[] explosionTransforms;
         [FoldoutGroup("Explosion")]
         [SerializeField] private UnityEvent onExplosion;
         #endregion
@@ -48,7 +48,12 @@ namespace Game.Interactions
             {
                 storedObjectsAmount++;   
                 storedObjects.Add(o.gameObject);
-                if(useEvents)onStored[storedObjectsAmount].Invoke();
+                if (useEvents)
+                {
+                    if (storedObjectsAmount < 3) return;
+                    else if (storedObjectsAmount >= 3 && storedObjectsAmount < 5) onStored[0].Invoke();
+                    else if (storedObjectsAmount >= 5) onStored[1].Invoke();
+                }
             }
             else
             {
@@ -63,13 +68,13 @@ namespace Game.Interactions
 
         private void RemoveObjects()
         {
-            if(ExplosionTransforms.IsNullOrEmpty()) return;
+            if(explosionTransforms.IsNullOrEmpty()) return;
             
             for (int i = 0; i < storedObjects.Count; i++)
             {
                 storedObjects[i].GetComponent<Pickup>().CancelPickUp();
                 storedObjects[i].SetActive(true);
-                storedObjects[i].transform.position = ExplosionTransforms[i].position;
+                storedObjects[i].transform.position = explosionTransforms[i].position;
             }
             storedObjectsAmount = 0;
             storedObjects.Clear();

@@ -3116,19 +3116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423efa86fd423fb449d82eb0993a0811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayText: {fileID: 8052769}
-  fillImage: {fileID: 1004734483}
-  greyImage: {fileID: 1464146950}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  roomQuests:
-  - {fileID: 11400000, guid: 98f59bd512ed7854ebc8a81b23accd78, type: 2}
-  - {fileID: 11400000, guid: 923ee3adb4342004a964984288ca410a, type: 2}
-  - {fileID: 11400000, guid: 4eeee61a643df354fa9fcd7026c6e0b1, type: 2}
-  - {fileID: 11400000, guid: fadaf7ebc692fe44bb41af2639e5c09e, type: 2}
-  - {fileID: 11400000, guid: e291d4400ff312541b762987bccc6d67, type: 2}
-  startRoom: 0
-  IsInitialized: 0
 --- !u!1 &118578529
 GameObject:
   m_ObjectHideFlags: 0
@@ -5153,7 +5140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &196163954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5285,7 +5272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688a5bbf12d64bf4ca91d49b8ce5169a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest: {fileID: 11400000, guid: 0ddebb32a696e4d489fd93769925e8cd, type: 2}
 --- !u!4 &196163961
 Transform:
   m_ObjectHideFlags: 0
@@ -5567,6 +5553,79 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212454606}
   m_Mesh: {fileID: 4265090026261040765, guid: 8fe34f2e89d52bb4caf7f44a8c25b6d4, type: 3}
+--- !u!1 &214205280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 214205281}
+  - component: {fileID: 214205283}
+  - component: {fileID: 214205282}
+  m_Layer: 5
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &214205281
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214205280}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.28569004, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1498832612}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.27826053, y: 0}
+  m_SizeDelta: {x: 2, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &214205282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214205280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.39088652, g: 0.754717, b: 0.3809185, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &214205283
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214205280}
+  m_CullTransparentMesh: 0
 --- !u!1001 &214623572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5925,13 +5984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1824191768}
-  quests:
-  - {fileID: 11400000, guid: 4ecb89db97b5e2a4dbe01bd92efda27a, type: 2}
-  - {fileID: 11400000, guid: 982b92e338ce9ff40abcf47b22309ff7, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &216792008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6246,7 +6298,7 @@ MonoBehaviour:
   useEvents: 0
   onStored: []
   storedObjectsAmount: 0
-  ExplosionTransforms: []
+  explosionTransforms: []
   onExplosion:
     m_PersistentCalls:
       m_Calls: []
@@ -7613,12 +7665,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 539438914}
-  quests:
-  - {fileID: 11400000, guid: f07f2b47b1a5691409d31337c9beb1db, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &291703818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8177,12 +8223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 539438914}
-  quests:
-  - {fileID: 11400000, guid: 95785c23070d3a3478dbfcb5ace60c83, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &305508108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8385,7 +8425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: 582adbd84082fdb4faf7cd4beb1ccd14, type: 2}
   m_StaticLightingSkyUniqueID: 1
-  m_SkySettings: {fileID: 1564776385}
+  m_SkySettings: {fileID: 895428135}
   m_SkySettingsFromProfile: {fileID: 448115243408767295, guid: 582adbd84082fdb4faf7cd4beb1ccd14,
     type: 2}
 --- !u!4 &313761475
@@ -9383,10 +9423,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   storedObjectsAmount: 0
-  ExplosionTransforms:
-  - {fileID: 850420847}
-  - {fileID: 37384133}
-  - {fileID: 1942866703}
+  explosionTransforms: []
   onExplosion:
     m_PersistentCalls:
       m_Calls: []
@@ -11211,7 +11248,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-4196
+  m_Name: pb_Mesh-160468
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12580,7 +12617,7 @@ MonoBehaviour:
   useEvents: 0
   onStored: []
   storedObjectsAmount: 0
-  ExplosionTransforms: []
+  explosionTransforms: []
   onExplosion:
     m_PersistentCalls:
       m_Calls: []
@@ -13605,12 +13642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 117036982}
-  quests:
-  - {fileID: 11400000, guid: 98f59bd512ed7854ebc8a81b23accd78, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &503033044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14283,17 +14314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423efa86fd423fb449d82eb0993a0811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayText: {fileID: 2029041504}
-  fillImage: {fileID: 1545037440}
-  greyImage: {fileID: 1694732482}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  roomQuests:
-  - {fileID: 11400000, guid: f07f2b47b1a5691409d31337c9beb1db, type: 2}
-  - {fileID: 11400000, guid: 95785c23070d3a3478dbfcb5ace60c83, type: 2}
-  - {fileID: 11400000, guid: 52dd5c53faffa9a43b5a046c31473b77, type: 2}
-  startRoom: 0
-  IsInitialized: 0
 --- !u!1 &539829170
 GameObject:
   m_ObjectHideFlags: 0
@@ -14506,12 +14526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1824191768}
-  quests:
-  - {fileID: 11400000, guid: 87182099d8c7aba4c980ad81828e99de, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &543322686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16905,7 +16919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621335383}
   m_LocalRotation: {x: 0.19134171, y: -0.8001032, z: 0.46193978, w: 0.33141357}
-  m_LocalPosition: {x: 3.7810588, y: 5.540154, z: 9.521765}
+  m_LocalPosition: {x: 5.001345, y: 7.753902, z: 10.408821}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1725847395}
@@ -17539,11 +17553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1249616503}
-  quests: []
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &663063858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24656,7 +24665,7 @@ MonoBehaviour:
   useEvents: 0
   onStored: []
   storedObjectsAmount: 0
-  ExplosionTransforms: []
+  explosionTransforms: []
   onExplosion:
     m_PersistentCalls:
       m_Calls: []
@@ -24733,6 +24742,107 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889225621}
   m_CullTransparentMesh: 0
+--- !u!114 &895428135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b6606ef2548734bb6d11b9d160bc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  rotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  skyIntensityMode:
+    m_OverrideState: 0
+    m_Value: 0
+  exposure:
+    m_OverrideState: 0
+    m_Value: 11
+  multiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  upperHemisphereLuxValue:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  upperHemisphereLuxColor:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0, z: 0}
+  desiredLuxValue:
+    m_OverrideState: 0
+    m_Value: 20000
+  updateMode:
+    m_OverrideState: 0
+    m_Value: 0
+  updatePeriod:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  includeSunInBaking:
+    m_OverrideState: 0
+    m_Value: 0
+  hdriSky:
+    m_OverrideState: 0
+    m_Value: {fileID: 8900000, guid: 54a3a0570aebe8949bec4966f1376581, type: 3}
+  enableBackplate:
+    m_OverrideState: 0
+    m_Value: 0
+  backplateType:
+    m_OverrideState: 0
+    m_Value: 0
+  groundLevel:
+    m_OverrideState: 0
+    m_Value: 0
+  scale:
+    m_OverrideState: 0
+    m_Value: {x: 32, y: 32}
+  projectionDistance:
+    m_OverrideState: 0
+    m_Value: 16
+    min: 0.0000001
+  plateRotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  plateTexRotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  plateTexOffset:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0}
+  blendAmount:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 100
+  shadowTint:
+    m_OverrideState: 0
+    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  pointLightShadow:
+    m_OverrideState: 0
+    m_Value: 0
+  dirLightShadow:
+    m_OverrideState: 0
+    m_Value: 0
+  rectLightShadow:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!1 &902019205
 GameObject:
   m_ObjectHideFlags: 0
@@ -25085,16 +25195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423efa86fd423fb449d82eb0993a0811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayText: {fileID: 2018472760}
-  fillImage: {fileID: 1577812921}
-  greyImage: {fileID: 1687547562}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  roomQuests:
-  - {fileID: 11400000, guid: 03bea3bd609010b46a770983ca769c4b, type: 2}
-  - {fileID: 11400000, guid: c5ae65a6635021640af1f1fcdcfd0069, type: 2}
-  startRoom: 0
-  IsInitialized: 0
 --- !u!1 &918206867
 GameObject:
   m_ObjectHideFlags: 0
@@ -25885,12 +25985,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1824191768}
-  quests:
-  - {fileID: 11400000, guid: abf6f23e999d21b42beef29a50fd0aad, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &944258852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26514,12 +26608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 914003054}
-  quests:
-  - {fileID: 11400000, guid: 03bea3bd609010b46a770983ca769c4b, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &951576266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27451,7 +27539,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   storedObjectsAmount: 0
-  ExplosionTransforms: []
+  explosionTransforms: []
   onExplosion:
     m_PersistentCalls:
       m_Calls: []
@@ -29834,12 +29922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1643830237}
-  quests:
-  - {fileID: 11400000, guid: 0c25ec80d75b44f448206d37a0aa60f2, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1019280211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30742,12 +30824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1643830237}
-  quests:
-  - {fileID: 11400000, guid: 3b87aa5de8a02ad4c8e770b10a5ea462, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1050359629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35638,16 +35714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423efa86fd423fb449d82eb0993a0811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayText: {fileID: 1364941401}
-  fillImage: {fileID: 2043740563}
-  greyImage: {fileID: 140561052}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  roomQuests:
-  - {fileID: 11400000, guid: e8d31c17beccab845b138c1b845f2b57, type: 2}
-  - {fileID: 11400000, guid: b309ec27bcfd4434db0ecbce9fff7f8e, type: 2}
-  startRoom: 0
-  IsInitialized: 0
 --- !u!1 &1250490247
 GameObject:
   m_ObjectHideFlags: 0
@@ -35698,12 +35764,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 914003054}
-  quests:
-  - {fileID: 11400000, guid: c5ae65a6635021640af1f1fcdcfd0069, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1250490250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37513,6 +37573,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291535021}
   m_CullTransparentMesh: 0
+--- !u!1 &1295804517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1295804518}
+  - component: {fileID: 1295804520}
+  - component: {fileID: 1295804519}
+  m_Layer: 5
+  m_Name: fillbar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1295804518
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295804517}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1498832612}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1295804519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295804517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9716981, g: 0.29845777, b: 0.2704254, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c0d3a6db177335347a0ed993faf1e4f1, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 0.52
+  m_FillClockwise: 1
+  m_FillOrigin: 1
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1295804520
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295804517}
+  m_CullTransparentMesh: 0
 --- !u!1 &1295976309
 GameObject:
   m_ObjectHideFlags: 0
@@ -37972,7 +38105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297650280}
   m_LocalRotation: {x: 0.19134171, y: -0.8001032, z: 0.46193978, w: 0.33141357}
-  m_LocalPosition: {x: 3.7810588, y: 5.540154, z: 9.521765}
+  m_LocalPosition: {x: 5.001345, y: 7.753902, z: 10.408821}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 651063850}
@@ -39801,7 +39934,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-4064
+  m_Name: pb_Mesh-160338
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -40246,12 +40379,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 117036982}
-  quests:
-  - {fileID: 11400000, guid: 923ee3adb4342004a964984288ca410a, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1390588633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42638,11 +42765,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1643830237}
-  quests: []
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1451450679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44629,6 +44751,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.67, y: 2.01, z: 1.97}
   m_Center: {x: 0.32, y: 0.27, z: -0.53}
+--- !u!1 &1498832611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1498832612}
+  - component: {fileID: 1498832614}
+  - component: {fileID: 1498832613}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1498832612
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498832611}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.92, y: 0.24, z: 1}
+  m_Children:
+  - {fileID: 214205281}
+  - {fileID: 1295804518}
+  m_Father: {fileID: 1689775257}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1498832613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498832611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1498832614
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498832611}
+  m_CullTransparentMesh: 0
 --- !u!1 &1503323981
 GameObject:
   m_ObjectHideFlags: 0
@@ -45439,12 +45636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 117036982}
-  quests:
-  - {fileID: 11400000, guid: 4eeee61a643df354fa9fcd7026c6e0b1, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1541671802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46760,107 +46951,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1562947331}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1564776385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59b6606ef2548734bb6d11b9d160bc7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  rotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 360
-  skyIntensityMode:
-    m_OverrideState: 0
-    m_Value: 0
-  exposure:
-    m_OverrideState: 0
-    m_Value: 11
-  multiplier:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-  upperHemisphereLuxValue:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-  upperHemisphereLuxColor:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: 0, z: 0}
-  desiredLuxValue:
-    m_OverrideState: 0
-    m_Value: 20000
-  updateMode:
-    m_OverrideState: 0
-    m_Value: 0
-  updatePeriod:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-  includeSunInBaking:
-    m_OverrideState: 0
-    m_Value: 0
-  hdriSky:
-    m_OverrideState: 0
-    m_Value: {fileID: 8900000, guid: 54a3a0570aebe8949bec4966f1376581, type: 3}
-  enableBackplate:
-    m_OverrideState: 0
-    m_Value: 0
-  backplateType:
-    m_OverrideState: 0
-    m_Value: 0
-  groundLevel:
-    m_OverrideState: 0
-    m_Value: 0
-  scale:
-    m_OverrideState: 0
-    m_Value: {x: 32, y: 32}
-  projectionDistance:
-    m_OverrideState: 0
-    m_Value: 16
-    min: 0.0000001
-  plateRotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 360
-  plateTexRotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 360
-  plateTexOffset:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: 0}
-  blendAmount:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 100
-  shadowTint:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  pointLightShadow:
-    m_OverrideState: 0
-    m_Value: 0
-  dirLightShadow:
-    m_OverrideState: 0
-    m_Value: 0
-  rectLightShadow:
-    m_OverrideState: 0
-    m_Value: 0
 --- !u!1 &1567368158 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 429db0f5197c4d34b9dee1070f6f3774,
@@ -47784,7 +47874,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25660
+  m_Name: pb_Mesh64080
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -49324,19 +49414,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423efa86fd423fb449d82eb0993a0811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayText: {fileID: 54693069}
-  fillImage: {fileID: 1854387673}
-  greyImage: {fileID: 1437404496}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  roomQuests:
-  - {fileID: 11400000, guid: 26c0082962bbbb94bb3c295ab5b4b932, type: 2}
-  - {fileID: 11400000, guid: dff5e32a5da6a184db0a2efccdc09b93, type: 2}
-  - {fileID: 11400000, guid: fc635b6d55932024abd53f2c269de753, type: 2}
-  - {fileID: 11400000, guid: 0c25ec80d75b44f448206d37a0aa60f2, type: 2}
-  - {fileID: 11400000, guid: 3b87aa5de8a02ad4c8e770b10a5ea462, type: 2}
-  startRoom: 0
-  IsInitialized: 0
 --- !u!1 &1644969964
 GameObject:
   m_ObjectHideFlags: 0
@@ -50216,6 +50293,106 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687547560}
   m_CullTransparentMesh: 0
+--- !u!1 &1689775256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689775257}
+  - component: {fileID: 1689775260}
+  - component: {fileID: 1689775259}
+  - component: {fileID: 1689775258}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1689775257
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689775256}
+  m_LocalRotation: {x: -0.49999788, y: 0.5000001, z: 0.5000004, w: 0.50000155}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_Children:
+  - {fileID: 1498832612}
+  - {fileID: 1818749220}
+  m_Father: {fileID: 2902530061772270914}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 90.00001}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 150, y: 259.4}
+  m_SizeDelta: {x: 2, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1689775258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689775256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 7991
+--- !u!114 &1689775259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689775256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &1689775260
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689775256}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 1297650283}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1694732480
 GameObject:
   m_ObjectHideFlags: 0
@@ -51697,12 +51874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 539438914}
-  quests:
-  - {fileID: 11400000, guid: 52dd5c53faffa9a43b5a046c31473b77, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1754103553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52649,11 +52820,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 914003054}
-  quests: []
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1772747220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53502,12 +53668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1249616503}
-  quests:
-  - {fileID: 11400000, guid: b309ec27bcfd4434db0ecbce9fff7f8e, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1798457994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54382,6 +54542,161 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817940534}
   m_Mesh: {fileID: 4779313771175365, guid: 583dc87ce06f5404ab783b5bb5f050df, type: 3}
+--- !u!1 &1818749219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1818749220}
+  - component: {fileID: 1818749222}
+  - component: {fileID: 1818749221}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1818749220
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818749219}
+  m_LocalRotation: {x: -0.0000001937151, y: -1, z: 0.0000028461218, w: 0.0000032484531}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 0.009193305, y: 0.009193305, z: 0.009193305}
+  m_Children: []
+  m_Father: {fileID: 1689775257}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.058, y: -0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1818749221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818749219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: F
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_textAlignment: 514
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: -1
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 1818749221}
+    characterCount: 1
+    spriteCount: 0
+    spaceCount: 0
+    wordCount: 1
+    linkCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1818749222
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818749219}
+  m_CullTransparentMesh: 0
 --- !u!1 &1820132706
 GameObject:
   m_ObjectHideFlags: 0
@@ -54701,19 +55016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423efa86fd423fb449d82eb0993a0811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayText: {fileID: 1982709544}
-  fillImage: {fileID: 319694524}
-  greyImage: {fileID: 1029193346}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  roomQuests:
-  - {fileID: 11400000, guid: 982b92e338ce9ff40abcf47b22309ff7, type: 2}
-  - {fileID: 11400000, guid: abf6f23e999d21b42beef29a50fd0aad, type: 2}
-  - {fileID: 11400000, guid: 87182099d8c7aba4c980ad81828e99de, type: 2}
-  - {fileID: 11400000, guid: ee23410fbc8d84b47b0e664935ab2608, type: 2}
-  - {fileID: 11400000, guid: 4ecb89db97b5e2a4dbe01bd92efda27a, type: 2}
-  startRoom: 0
-  IsInitialized: 0
 --- !u!1 &1825052219
 GameObject:
   m_ObjectHideFlags: 0
@@ -56425,13 +56727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 117036982}
-  quests:
-  - {fileID: 11400000, guid: fadaf7ebc692fe44bb41af2639e5c09e, type: 2}
-  - {fileID: 11400000, guid: e291d4400ff312541b762987bccc6d67, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1881446706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57112,11 +57407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 539438914}
-  quests: []
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1906490390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58276,14 +58566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1643830237}
-  quests:
-  - {fileID: 11400000, guid: 26c0082962bbbb94bb3c295ab5b4b932, type: 2}
-  - {fileID: 11400000, guid: dff5e32a5da6a184db0a2efccdc09b93, type: 2}
-  - {fileID: 11400000, guid: fc635b6d55932024abd53f2c269de753, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1937101870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58935,12 +59217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1824191768}
-  quests:
-  - {fileID: 11400000, guid: ee23410fbc8d84b47b0e664935ab2608, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1951977874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59109,12 +59385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1249616503}
-  quests:
-  - {fileID: 11400000, guid: e8d31c17beccab845b138c1b845f2b57, type: 2}
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &1952852064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64596,11 +64866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 914003054}
-  quests: []
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &2027807896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65003,11 +65268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4fe777e6a67e4fb4053555f34b434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDisplay: {fileID: 1249616503}
-  quests: []
-  <ActiveQuestAmount>k__BackingField: 0
-  <DoneQuestAmount>k__BackingField: 0
-  _displayText: {fileID: 0}
 --- !u!114 &2029725164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68937,7 +69197,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688a5bbf12d64bf4ca91d49b8ce5169a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest: {fileID: 11400000, guid: fc635b6d55932024abd53f2c269de753, type: 2}
 --- !u!23 &1431056430201420325
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -70164,6 +70423,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1242164208}
+  - {fileID: 1689775257}
   m_Father: {fileID: 9008045839564687708}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
@@ -70969,6 +71229,7 @@ GameObject:
   - component: {fileID: 2902530061772270914}
   - component: {fileID: 3695071898572998075}
   - component: {fileID: 3695071898572998074}
+  - component: {fileID: 3695071898572998076}
   m_Layer: 0
   m_Name: Recycling_Bin
   m_TagString: Storage
@@ -70991,10 +71252,36 @@ MonoBehaviour:
   limit: 999
   storedObjects: []
   cheatStorage: 0
-  useEvents: 0
-  onStored: []
+  useEvents: 1
+  onStored:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3695071898572998076}
+        m_MethodName: StartTimingMiniGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3695071898572998076}
+        m_MethodName: StartMashingMiniGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   storedObjectsAmount: 0
-  ExplosionTransforms: []
+  explosionTransforms: []
   onExplosion:
     m_PersistentCalls:
       m_Calls: []
@@ -71011,6 +71298,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 138.5, y: 107.5, z: 109.78}
   m_Center: {x: 32.93, y: 57.4, z: -2.8}
+--- !u!114 &3695071898572998076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695071898572998073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a2f097f4b10c14285138babdefadf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timingObject: {fileID: 1498832611}
+  fillBar: {fileID: 1295804519}
+  fillSpeed: 1
+  neededMashAmount: 5
+  mashedAmount: 0
+  buttonObject: {fileID: 1818749219}
+  onSuccess:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &3697350121677827954
 Transform:
   m_ObjectHideFlags: 0
