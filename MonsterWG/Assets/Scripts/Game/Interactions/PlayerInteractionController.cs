@@ -14,7 +14,9 @@ namespace Game.Interactions
         public Pickup CurrentItem;
         public float InputI { get; private set; }
         public float InputS { get; private set; }
-        
+
+        public float InputMenu { get; private set; }
+
         private bool _plan;
         private bool _pressedActivation;
         public bool StoreInteraction;
@@ -32,6 +34,9 @@ namespace Game.Interactions
             InputS = isPlayerOne
                 ? character.controls.Player.Select.ReadValue<float>()
                 : character.controls.Player2.Select.ReadValue<float>();
+            InputMenu = isPlayerOne
+                ? character.controls.Player.Menu.ReadValue<float>()
+                : character.controls.Player2.Menu.ReadValue<float>();
             
             Interact(InputI);
             Pickups(InputS);
