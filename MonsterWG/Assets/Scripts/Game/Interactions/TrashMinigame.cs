@@ -16,6 +16,7 @@ namespace Game.Interactions
         [FoldoutGroup("Mashing MiniGame")] [SerializeField] private int neededMashAmount;
         [FoldoutGroup("Mashing MiniGame")] [SerializeField] private int mashedAmount;
         [FoldoutGroup("Mashing MiniGame")] [SerializeField] private GameObject buttonObject;
+        [FoldoutGroup("Mashing MiniGame")] [SerializeField] private Image mashFillBar;
 
         public UnityEvent onSuccess;
         
@@ -54,7 +55,7 @@ namespace Game.Interactions
                     if (_currentValue >= 1) _left = true;
                 }
 
-                if (_player.InputI >= 1f && !_pressed)
+                if (_player.InputInteraction >= 1f && !_pressed)
                 {
                     _pressed = true;
                     if (_currentValue >= 0.5f && _currentValue <= 0.75f) EndMiniGame();
@@ -68,13 +69,14 @@ namespace Game.Interactions
             }
             else
             {
-                if (_player.InputI >= 1f && !_pressed)
+                if (_player.InputInteraction >= 1f && !_pressed)
                 {
+                    mashFillBar.fillAmount = (float)mashedAmount / (float)neededMashAmount;
                     _pressed = true;
                     if (mashedAmount <= neededMashAmount)mashedAmount++;
                     else EndMiniGame();
                 }
-                else if(_player.InputI <= 0f && _pressed)
+                else if(_player.InputInteraction <= 0f && _pressed)
                 {
                     _pressed = false;
                 }
