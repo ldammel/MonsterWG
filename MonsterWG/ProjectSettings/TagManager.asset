@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PickupDest
+  - Hand
+  - Player2
+  - Dish
+  - Storage
+  - Interaction
+  - Pickup
+  - Mom
+  - Trash
+  - Water
+  - Dirt
+  - Wischmop
   layers:
   - Default
   - TransparentFX
@@ -14,10 +26,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
+  - Walls
+  - Dirt
+  - Player
+  - Mom
   - 
   - 
   - 

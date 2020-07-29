@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fd6c437e63b294397ac2a0a14cfac2, type: 3}
+  m_Name: KitchenMain
+  m_EditorClassIdentifier: 
+  subQuests:
+  - {fileID: 11400000, guid: 0c25ec80d75b44f448206d37a0aa60f2, type: 2}
+  - {fileID: 11400000, guid: 3b87aa5de8a02ad4c8e770b10a5ea462, type: 2}
+  - {fileID: 11400000, guid: 26c0082962bbbb94bb3c295ab5b4b932, type: 2}
+  - {fileID: 11400000, guid: dff5e32a5da6a184db0a2efccdc09b93, type: 2}
+  - {fileID: 11400000, guid: fc635b6d55932024abd53f2c269de753, type: 2}
+  questReward: 250
+  isDone: 0
+  hasFailed: 0
