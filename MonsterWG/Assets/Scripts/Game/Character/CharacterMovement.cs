@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.Character
 {
@@ -8,6 +9,7 @@ namespace Game.Character
         [SerializeField] private float movementSpeed = 2.0f;
         [SerializeField] private bool playerOne;
         [SerializeField] private GameObject playerModel;
+        private Vector3 _forwardAxis, _rightAxis;
 
         public InputMaster controls = null;
         public bool canMove = true;
@@ -22,6 +24,14 @@ namespace Game.Character
             if(playerOne)controls.Player.Enable();
             else controls.Player2.Enable();
             canMove = true;
+        }
+
+        private void Start()
+        {
+            Transform cameraAlign = Camera.main.transform;
+            Vector3 forward = cameraAlign.forward;
+            _forwardAxis = new Vector3(forward.x, 0, forward.z).normalized;
+            _rightAxis = Quaternion.Euler(0, 90, 0) * _forwardAxis;
         }
 
         private void OnDisable()
@@ -40,20 +50,21 @@ namespace Game.Character
         public void Move()
         {
             if (!canMove) return;
-            var movementInput = playerOne ? controls.Player.Move.ReadValue<Vector2>() : controls.Player2.Move.ReadValue<Vector2>();
-            var movement = new Vector3
-            {
-                x = movementInput.x,
-                z = movementInput.y
-            }.normalized;
+            Vector2 movementInput = playerOne ? controls.Player.Move.ReadValue<Vector2>() : controls.Player2.Move.ReadValue<Vector2>();
             
-            if (movement != Vector3.zero) {
-                playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, Quaternion.LookRotation(movement), 0.15F);
-            }
+            Vector3 rightMovement = movementSpeed * Time.deltaTime * movementInput.x * _rightAxis;
+            Vector3 upMovement = movementSpeed * Time.deltaTime * movementInput.y * _forwardAxis;
 
-            transform.Translate(Time.deltaTime * movementSpeed * movement);
+            Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
+            Vector3 position = transform.position;
+            Debug.DrawRay(position, heading * movementSpeed, Color.red);
+            transform.forward = Vector3.Slerp(transform.forward, heading, 0.15f);
+            position += rightMovement;
+            position += upMovement;
+            transform.position = position;
         }
 
         #endregion
     }
+    
 }
