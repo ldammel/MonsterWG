@@ -22,9 +22,13 @@ namespace Game.Interactions
         [FoldoutGroup("Settings")]
         [SerializeField] private bool useCleaningCondition;
         [FoldoutGroup("Settings")]
+        [SerializeField] private bool canBeDone = true;
+        [FoldoutGroup("Settings")]
         [SerializeField] private CleaningCondition cleaningCondition;
         [FoldoutGroup("Settings")]
         [SerializeField] private bool isWaterSource;
+        [FoldoutGroup("Settings")]
+        [SerializeField] private bool consumesItem;
         [FoldoutGroup("UI")]
         [SerializeField] private Image timerImage;
         [FoldoutGroup("UI")]
@@ -111,7 +115,23 @@ namespace Game.Interactions
 
         public void SetDone()
         {
-            _isDone = true;
+            if (canBeDone)
+            {
+                _isDone = true;
+            }
+
+            if (consumesItem)
+            {
+                Pickup pickup = player.CurrentItem;
+                pickup.CancelPickUp();
+
+                Destroy(pickup.gameObject);
+            }
+
+            if (dishDisplay)
+            {
+                dishDisplay.AddDisplay();
+            }
         }
 
         private void Update()

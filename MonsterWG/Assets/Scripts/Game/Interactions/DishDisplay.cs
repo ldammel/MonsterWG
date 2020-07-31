@@ -7,6 +7,7 @@ namespace Game.Interactions
     public class DishDisplay : MonoBehaviour
     {
         public GameObject[] dishes;
+        [Sirenix.OdinInspector.OnValueChanged(nameof(TestDishDisplay))]
         public int displayAmount;
         public Interaction interaction;
         public bool stayVisible;
@@ -19,6 +20,12 @@ namespace Game.Interactions
         private void Update()
         {
             if(interaction)interaction.canStart = displayAmount >= 1;
+        }
+
+        private void TestDishDisplay()
+        {
+            dishes.ForEach(d => d.SetActive(false));
+            DisplayDish();
         }
 
         public void AddDisplay()

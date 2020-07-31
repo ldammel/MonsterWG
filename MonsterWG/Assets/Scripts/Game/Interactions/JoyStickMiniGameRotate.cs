@@ -68,6 +68,13 @@ namespace Game.Interactions
             _fullRotations = 0;
         }
 
+        public override void StartMiniGame()
+        {
+            base.StartMiniGame();
+            _currentIndex = 0;
+            _fullRotations = 0;
+        }
+
         private void Update()
         {
             if (!_start) return;
