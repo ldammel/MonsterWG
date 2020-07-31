@@ -7,7 +7,7 @@ public class TvFlicker : MonoBehaviour
 {
     public AnimationCurve flickerCurve;
     private float _baseLight;
-    [Range(1f,100f)]
+    [Range(.1f,10f)]
     public float intensityScalar;
     [Range(0.1f, 2f)]
     public float timeScale;
@@ -23,6 +23,6 @@ public class TvFlicker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        light.intensity = _baseLight + (flickerCurve.Evaluate(Time.time * timeScale) * intensityScalar);
+        light.intensity = _baseLight * (flickerCurve.Evaluate(Time.time * timeScale) * intensityScalar);
     }
 }
