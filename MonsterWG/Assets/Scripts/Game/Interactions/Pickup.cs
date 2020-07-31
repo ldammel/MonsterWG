@@ -37,7 +37,7 @@ namespace Game.Interactions
 
         private void Update()
         {
-            if(player)pressedButton = player.InputS >= 1f;
+            if(player)pressedButton = player.InputPickUp >= 1f;
 
             if (_isPickedUp)
             {

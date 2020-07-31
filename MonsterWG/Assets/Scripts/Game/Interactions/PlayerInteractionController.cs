@@ -12,10 +12,10 @@ namespace Game.Interactions
 
 
         public Pickup CurrentItem;
-        public float InputI { get; private set; }
-        public float InputS { get; private set; }
-
+        public float InputInteraction { get; private set; }
+        public float InputPickUp { get; private set; }
         public float InputMenu { get; private set; }
+        public float InputCall { get; private set; }
 
         private bool _plan;
         private bool _pressedActivation;
@@ -28,19 +28,22 @@ namespace Game.Interactions
 
         private void Update()
         {
-            InputI = isPlayerOne
+            InputInteraction = isPlayerOne
                 ? character.controls.Player.Interact.ReadValue<float>()
                 : character.controls.Player2.Interact.ReadValue<float>();
-            InputS = isPlayerOne
+            InputPickUp = isPlayerOne
                 ? character.controls.Player.Select.ReadValue<float>()
                 : character.controls.Player2.Select.ReadValue<float>();
             InputMenu = isPlayerOne
                 ? character.controls.Player.Menu.ReadValue<float>()
                 : character.controls.Player2.Menu.ReadValue<float>();
+            InputCall = isPlayerOne
+                ? character.controls.Player.Notify.ReadValue<float>()
+                : character.controls.Player2.Notify.ReadValue<float>();
             
-            Interact(InputI);
-            Pickups(InputS);
-            Activation(InputI);
+            Interact(InputInteraction);
+            Pickups(InputPickUp);
+            Activation(InputInteraction);
         }
         
         public void Interact(float input)
