@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: 21 - Dosen
     second: {fileID: 2100000, guid: 4b0c1c8e014c79847983039827a9b3c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoseTop
+    second: {fileID: 2100000, guid: c986ad36dd52973459d194597a5ba72a, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -85,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 100
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
