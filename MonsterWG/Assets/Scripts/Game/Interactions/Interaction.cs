@@ -22,7 +22,13 @@ namespace Game.Interactions
         [FoldoutGroup("Settings")]
         [SerializeField] private bool useCleaningCondition;
         [FoldoutGroup("Settings")]
+        [SerializeField] private bool canBeDone = true;
+        [FoldoutGroup("Settings")]
         [SerializeField] private CleaningCondition cleaningCondition;
+        [FoldoutGroup("Settings")]
+        [SerializeField] private bool isWaterSource;
+        [FoldoutGroup("Settings")]
+        [SerializeField] private bool consumesItem;
         [FoldoutGroup("UI")]
         [SerializeField] private Image timerImage;
         [FoldoutGroup("UI")]
@@ -30,6 +36,8 @@ namespace Game.Interactions
         [FoldoutGroup("Events")]
         [Header("Size: 1 = Wash, 2 = Dry, 3 = Fold")]
         public UnityEvent[] onStart;
+        [FoldoutGroup("Events")]
+        public UnityEvent onCancel;
         [FoldoutGroup("Events")]
         public UnityEvent[] onEnd;
         
@@ -53,19 +61,32 @@ namespace Game.Interactions
         }
 
 
-        public void Interact()
+        public bool Interact()
         {
             if (useCleaningCondition)
             {
-                if (!cleaningCondition.IsMet) return;
+                if (!cleaningCondition.IsConditionMet()) return false;
             }
-            if (_isDone) return;
+            if (_isDone) return false;
             if (useTimer)
             {
                 StartTimer();
                 timerbase.SetActive(true);
             }
-            onStart[_interactAmount].Invoke();
+
+            if (isWaterSource)
+            {
+                if(player.CurrentItem && player.CurrentItem.NeedsWater)
+                {
+                    Debug.Log("Item Watered!", player.CurrentItem);
+                    player.CurrentItem.CurrentWaterAmount = 100;
+                }
+            }
+
+            if(onStart != null && _interactAmount < onStart.Length)
+                onStart[_interactAmount].Invoke();
+
+            return true;
         }
 
         public void Reset()
@@ -87,6 +108,30 @@ namespace Game.Interactions
                 _startTime = 0;
             }
             if(useTimer)timerbase.SetActive(false);
+
+            if (onCancel != null)
+                onCancel.Invoke();
+        }
+
+        public void SetDone()
+        {
+            if (canBeDone)
+            {
+                _isDone = true;
+            }
+
+            if (consumesItem)
+            {
+                Pickup pickup = player.CurrentItem;
+                pickup.CancelPickUp();
+
+                Destroy(pickup.gameObject);
+            }
+
+            if (dishDisplay)
+            {
+                dishDisplay.AddDisplay();
+            }
         }
 
         private void Update()

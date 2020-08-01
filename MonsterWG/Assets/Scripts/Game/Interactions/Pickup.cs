@@ -16,7 +16,11 @@ namespace Game.Interactions
         public UnityEvent onPickUp;
         [FoldoutGroup("Events")]
         public UnityEvent onDrop;
-        
+
+        [FoldoutGroup("Settings")]
+        public bool NeedsWater;
+        [FoldoutGroup("Settings"), ShowIf(nameof(NeedsWater))]
+        public int CurrentWaterAmount;
         public bool isInHand = false;
         public bool inTrigger;
         public bool pressedButton;
