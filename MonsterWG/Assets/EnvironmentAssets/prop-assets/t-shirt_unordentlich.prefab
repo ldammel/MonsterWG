@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2408424694702362966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8537706212337126634}
+  m_Layer: 0
+  m_Name: t-shirt_unordentlich
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8537706212337126634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408424694702362966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.001073, y: -2.7639022, z: -2.0768564}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5968773788421383807}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6151883416384668052
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8537706212337126634}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.8710728
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.57390213
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.1868563
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 22b0c7822c0734e4091bdcc1046e5b12, type: 2}
+    - target: {fileID: 919132149155446097, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+      propertyPath: m_Name
+      value: umgebung_tshirt_dreckig_low
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+--- !u!4 &5968773788421383807 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 68d23f062ca65ac48aaf8c87a90bbf8b, type: 3}
+  m_PrefabInstance: {fileID: 6151883416384668052}
+  m_PrefabAsset: {fileID: 0}
