@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Game.Interactions
@@ -11,12 +12,16 @@ namespace Game.Interactions
         [SerializeField] private GameObject buttonThreeColorImage;
         
         public UnityEvent onSuccess;
-        
+        public UnityEvent onClose;
+
         private bool _pressedPlaceButton;
         private bool _pressedCallButton;
         private PlayerInteractionController _player;
         private bool _active;
         private int _correctGuesses;
+        private bool _started;
+        private bool _closed;
+        private bool _closing;
         
         void Start()
         {
@@ -26,6 +31,7 @@ namespace Game.Interactions
 
         void Update()
         {
+            if(_closed) CloseMiniGame();
             if (!_active) return;
 
             if (_player.InputPickUp >= 1 && !_pressedPlaceButton)
@@ -81,10 +87,17 @@ namespace Game.Interactions
             }
             else if(_player.InputCall <= 0 && _pressedCallButton) _pressedCallButton = false;
 
+            if (_player.InputInteraction >= 1 && _closing)
+            {
+                CloseMiniGame();
+            }
         }
 
         public void StartMiniGame()
         {
+            if (_started || _closed || _closing) return;
+            StartCoroutine(Starting());
+            _started = true;
             _active = true;
             _pressedPlaceButton = false;
             _pressedCallButton = false;
@@ -92,7 +105,16 @@ namespace Game.Interactions
             imageContainer.SetActive(true);
             _player.character.canMove = false;
         }
-        
+
+        private void CloseMiniGame()
+        {
+            _active = false;
+            _correctGuesses = 0;
+            imageContainer.SetActive(false);
+            _player.character.canMove = true;
+            StartCoroutine(Closing());
+        }
+
         public void EndMiniGame()
         {
             _active = false;
@@ -112,5 +134,22 @@ namespace Game.Interactions
         {
             _player = null;
         }
+
+        IEnumerator Closing()
+        {
+            _closed = true;
+            yield return new WaitForSeconds(1);
+            onClose.Invoke();
+            _closed = false;
+            _closing = false;
+            _started = false;
+        }
+        
+        IEnumerator Starting()
+        {
+            yield return new WaitForSeconds(1);
+            _closing = true;
+        }
+        
     }
 }
