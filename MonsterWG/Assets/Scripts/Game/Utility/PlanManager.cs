@@ -8,18 +8,19 @@ namespace Game.Utility
     {
         [SerializeField] private GameObject planCanvas;
         [SerializeField] private float canvasStartWaitTime;
-        [SerializeField] private GameObject[] menuObjects;
-        
+
         public PlayerInteractionController CurPlayer { get; set; }
 
         public void EnablePlanMovement()
         {
             CurPlayer.character.canMove = false;
+            EnableCanvas();
         }
 
         public void DisablePlanMovement()
         {
             CurPlayer.character.canMove = true;
+            DisableCanvas();
         }
 
         public void EnableCanvas()

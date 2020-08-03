@@ -1,8 +1,4 @@
-﻿using System;
-using Sirenix.OdinInspector.Editor;
-using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
 namespace Game.Utility
 {

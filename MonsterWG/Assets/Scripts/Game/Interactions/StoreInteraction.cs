@@ -28,6 +28,12 @@ namespace Game.Interactions
         [SerializeField] private UnityEvent[] onStored;
         [FoldoutGroup("Events")]
         [SerializeField] private int storedObjectsAmount = 0;
+        [FoldoutGroup("Events")]
+        [Header("Ab wann beginnt das timing minigame")]
+        [SerializeField] private int timinglimit = 3;
+        [FoldoutGroup("Events")]
+        [Header("Ab wann beginnt das mashing minigame")]
+        [SerializeField] private int mashinglimit = 5;
         #endregion
         
         #region Explosion
@@ -40,6 +46,7 @@ namespace Game.Interactions
         public void AddObject(GameObject o)
         {
             var pick = o.gameObject.GetComponent<Pickup>();
+            if (!pick.canBeStored) return;
             pick.CancelPickUp();
             pick._isPickedUp = false;
             o.gameObject.GetComponentInChildren<InteractionStateBehaviour>().ResetStates();
@@ -50,9 +57,9 @@ namespace Game.Interactions
                 storedObjects.Add(o.gameObject);
                 if (useEvents)
                 {
-                    if (storedObjectsAmount < 3) return;
-                    else if (storedObjectsAmount >= 3 && storedObjectsAmount < 5) onStored[0].Invoke();
-                    else if (storedObjectsAmount >= 5) onStored[1].Invoke();
+                    if (storedObjectsAmount < timinglimit) return;
+                    else if (storedObjectsAmount >= timinglimit && storedObjectsAmount < mashinglimit) onStored[0].Invoke();
+                    else if (storedObjectsAmount >= mashinglimit) onStored[1].Invoke();
                 }
             }
             else
