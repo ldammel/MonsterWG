@@ -16,15 +16,19 @@ namespace Game.Interactions
         public float InputPickUp { get; private set; }
         public float InputMenu { get; private set; }
         public float InputCall { get; private set; }
-
+        public Vector2 InputMove { get; private set; }
+        
         private bool _plan;
         private bool _pressedActivation;
         public bool StoreInteraction;
         private ActivatePlan _activatePlan;
         private StoreInteraction _storeInteractionObject;
         private bool _pressedPickup;
+        private bool _pressedInteraction;
         public List<Interaction> _interactions = new List<Interaction>();
         private readonly List<OnActivation> _activations = new List<OnActivation>();
+
+        private Interaction _currentInteraction;
 
         private void Update()
         {
@@ -40,22 +44,69 @@ namespace Game.Interactions
             InputCall = isPlayerOne
                 ? character.controls.Player.Notify.ReadValue<float>()
                 : character.controls.Player2.Notify.ReadValue<float>();
+            InputMove = isPlayerOne
+                ? character.controls.Player.Move.ReadValue<Vector2>()
+                : character.controls.Player2.Move.ReadValue<Vector2>();
             
             Interact(InputInteraction);
             Pickups(InputPickUp);
             Activation(InputInteraction);
+
+            // Clear all deactivated interactions, otherwise they are stuck in the list after finishing the minigame
+            for (int i = _interactions.Count - 1; i >= 0; --i)
+            {
+                if (!_interactions[i].gameObject.activeSelf 
+                    || (CurrentItem && _interactions[i].gameObject == CurrentItem.gameObject))
+                {
+                    _interactions.Remove(_interactions[i]);
+                }
+            }
         }
         
         public void Interact(float input)
         {
+            if (input >= 1f && !_pressedInteraction)
+            {
+                _pressedInteraction = true;
+                if (_plan)
+                {
+                    _activatePlan.Toggle();
+                    return;
+                }
+            }
+            else if(input < 1f)
+            {
+                _pressedInteraction = false;
+            }
+            
             if (_interactions.Count < 1) return;
             if (input >= 1f && _interactions[0].gameObject.activeSelf)
             {
-                _interactions[0].Interact();
+                MultiInteraction multi = _interactions[0].GetComponentInParent<MultiInteraction>();
+                if (multi && multi.InteractionOrder == MultiInteraction.Order.Parallel)
+                {
+                    foreach(var interaction in multi.interactions)
+                    {
+                        if (interaction.Interact())
+                        {
+                            _currentInteraction = interaction;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    _currentInteraction = _interactions[0];
+                }
+
+                if (_currentInteraction)
+                {
+                    _currentInteraction.Interact();
+                }
             }
-            else if (!_interactions[0].Stop)
+            else if (_currentInteraction && !_currentInteraction.Stop)
             {
-                _interactions[0].Cancel();
+                _currentInteraction.Cancel();
             }
         }
         
@@ -68,12 +119,6 @@ namespace Game.Interactions
                 if (StoreInteraction && CurrentItem)
                 {
                     _storeInteractionObject.AddObject(CurrentItem.gameObject);
-                    return;
-                }
-                
-                if (_plan)
-                {
-                    _activatePlan.Toggle();
                     return;
                 }
             }

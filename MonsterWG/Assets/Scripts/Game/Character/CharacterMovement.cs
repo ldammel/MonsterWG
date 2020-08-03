@@ -13,6 +13,7 @@ namespace Game.Character
 
         public InputMaster controls = null;
         public bool canMove = true;
+        private Rigidbody _rb;
         
         #endregion
 
@@ -28,6 +29,7 @@ namespace Game.Character
 
         private void Start()
         {
+            _rb = GetComponent<Rigidbody>();
             Transform cameraAlign = Camera.main.transform;
             Vector3 forward = cameraAlign.forward;
             _forwardAxis = new Vector3(forward.x, 0, forward.z).normalized;
@@ -43,6 +45,7 @@ namespace Game.Character
         private void Update()
         {
             Move();
+            _rb.velocity = Vector3.zero;
         }
         #endregion
 

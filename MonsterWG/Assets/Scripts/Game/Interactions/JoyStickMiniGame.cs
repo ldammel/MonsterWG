@@ -6,77 +6,59 @@ namespace Game.Interactions
 {
     public class JoyStickMiniGame : MonoBehaviour
     {
-        [SerializeField] private Image progressBar;
-        [SerializeField] private GameObject leftArrow;
-        [SerializeField] private GameObject rightArrow;
-        [SerializeField] private GameObject uiObject;
+        [SerializeField] protected Image progressBar;
+
+        [SerializeField] protected GameObject uiObject;
+        [SerializeField] protected float inputThreshold = 0.5f;
         public UnityEvent onFinish;
-        private Interaction _interaction;
-        private float _currentValue;
-        private bool _start;
-        private bool _left;
+
+        protected Interaction _interaction;
+        protected float _currentValue;
+        protected bool _start;
+
+        private CleaningCondition _condition;
 
         private void Start()
         {
-            _left = false;
             _start = false;
             uiObject.SetActive(false);
             _currentValue = 0;
             _interaction = gameObject.GetComponent<Interaction>();
+            _condition = gameObject.GetComponent<CleaningCondition>();
+
+            OnStart();
         }
-
-        private void Update()
-        {
-            if (!_start) return;
-            if(Input.GetKeyDown(KeyCode.Escape)) EndMiniGame();
-            if (_left)
-            {
-                leftArrow.SetActive(true);
-                rightArrow.SetActive(false);
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    _currentValue += 0.1f;
-                    _left = false;
-                }
-                else if(_currentValue > 0)
-                {
-                    _currentValue -= 0.01f * Time.deltaTime;
-                }
-            }
-            else
-            {             
-                leftArrow.SetActive(false);
-                rightArrow.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    _currentValue += 0.1f;
-                    _left = true;
-                }
-                else if(_currentValue > 0)
-                {
-                    _currentValue -= 0.01f * Time.deltaTime;
-                }
-            }
-            progressBar.fillAmount = 1 / _currentValue;
-
-            if (!(_currentValue >= 1)) return;
-            EndMiniGame();
-            onFinish.Invoke();
-        }
-
-        public void StartMiniGame()
+        
+        public virtual void StartMiniGame()
         {
             _start = true;
             _currentValue = 0;
             _interaction.player.character.canMove = false;
             uiObject.SetActive(true);
         }
-        
-        public void EndMiniGame()
+
+
+        public virtual void EndMiniGame(bool success)
         {
             _start = false;
             uiObject.SetActive(false);
             _interaction.player.character.canMove = true;
+            if (!success)
+            {
+                return;
+            }
+
+            _interaction.SetDone();
+            
+            if(_interaction.player.CurrentItem && _interaction.player.CurrentItem.NeedsWater)
+            {
+                _interaction.player.CurrentItem.CurrentWaterAmount -= _condition.NeededWaterAmount;
+                Mathf.Clamp(_interaction.player.CurrentItem.CurrentWaterAmount, 0, 100);
+            }
+            onFinish.Invoke();
         }
+
+        protected virtual void OnStart() { }
+
     }
 }

@@ -11,11 +11,14 @@ namespace Game.Interactions
 
         [FoldoutGroup("Timing MiniGame")] [SerializeField] private GameObject timingObject;
         [FoldoutGroup("Timing MiniGame")] [SerializeField] private Image fillBar;
+        [FoldoutGroup("Timing MiniGame")] [SerializeField] private Image timingButtonPressed;
+        [FoldoutGroup("Timing MiniGame")] [SerializeField] private Animation arrowAnimation;
         [FoldoutGroup("Timing MiniGame")] [SerializeField] private float fillSpeed;
         
         [FoldoutGroup("Mashing MiniGame")] [SerializeField] private int neededMashAmount;
         [FoldoutGroup("Mashing MiniGame")] [SerializeField] private int mashedAmount;
         [FoldoutGroup("Mashing MiniGame")] [SerializeField] private GameObject buttonObject;
+        [FoldoutGroup("Mashing MiniGame")] [SerializeField] private GameObject mashButtonPressed;
         [FoldoutGroup("Mashing MiniGame")] [SerializeField] private Image mashFillBar;
 
         public UnityEvent onSuccess;
@@ -58,13 +61,20 @@ namespace Game.Interactions
                 if (_player.InputInteraction >= 1f && !_pressed)
                 {
                     _pressed = true;
+                    timingButtonPressed.gameObject.SetActive(true);
                     if (_currentValue >= 0.5f && _currentValue <= 0.75f) EndMiniGame();
                     else
                     {
+                        arrowAnimation.Stop();
                         _currentValue = 0;
                         _left = false;
                         _pressed = false;
+                        arrowAnimation.Play();
                     }
+                }
+                else
+                {
+                    timingButtonPressed.gameObject.SetActive(false);
                 }
             }
             else
@@ -72,12 +82,14 @@ namespace Game.Interactions
                 if (_player.InputInteraction >= 1f && !_pressed)
                 {
                     mashFillBar.fillAmount = (float)mashedAmount / (float)neededMashAmount;
+                    mashButtonPressed.SetActive(true);
                     _pressed = true;
                     if (mashedAmount <= neededMashAmount)mashedAmount++;
                     else EndMiniGame();
                 }
                 else if(_player.InputInteraction <= 0f && _pressed)
                 {
+                    mashButtonPressed.SetActive(false);
                     _pressed = false;
                 }
             }
@@ -92,6 +104,7 @@ namespace Game.Interactions
             _pressed = false;
             timingObject.SetActive(true);
             _player.character.canMove = false;
+            arrowAnimation.Play();
         }
         
         public void StartMashingMiniGame()
