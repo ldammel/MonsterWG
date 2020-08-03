@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2b85cf5bfbd6c7047a4aadabe3131c62
+guid: 74cccf0b289101044af46208b9cf5407
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 21 - Dosen
-    second: {fileID: 2100000, guid: 4b0c1c8e014c79847983039827a9b3c7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: DoseTop
-    second: {fileID: 2100000, guid: c986ad36dd52973459d194597a5ba72a, type: 2}
+      name: Schleim
+    second: {fileID: 2100000, guid: bfaa0bc48fc87824b9622de1bc327ab6, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -44,7 +39,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +85,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 100
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
