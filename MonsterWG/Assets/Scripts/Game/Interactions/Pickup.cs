@@ -12,6 +12,8 @@ namespace Game.Interactions
         [SerializeField] private Transform baseParent;
         [FoldoutGroup("Settings")]
         [SerializeField] private bool cleaned;
+        [FoldoutGroup("Settings")]
+        public bool canBeStored;
         [FoldoutGroup("Events")]
         public UnityEvent onPickUp;
         [FoldoutGroup("Events")]

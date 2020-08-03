@@ -137,6 +137,7 @@ namespace Game.Interactions
         private void Update()
         {
             if(player)pressedButton = player.InputInteraction >= 1f;
+            if(player)player.character.canMove = !pressedButton;
             if(_stop) return;
             _startTime += Time.deltaTime;
             if (!(_startTime >= duration)) return;

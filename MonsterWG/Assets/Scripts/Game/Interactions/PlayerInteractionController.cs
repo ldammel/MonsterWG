@@ -24,6 +24,7 @@ namespace Game.Interactions
         private ActivatePlan _activatePlan;
         private StoreInteraction _storeInteractionObject;
         private bool _pressedPickup;
+        private bool _pressedInteraction;
         public List<Interaction> _interactions = new List<Interaction>();
         private readonly List<OnActivation> _activations = new List<OnActivation>();
 
@@ -64,6 +65,20 @@ namespace Game.Interactions
         
         public void Interact(float input)
         {
+            if (input >= 1f && !_pressedInteraction)
+            {
+                _pressedInteraction = true;
+                if (_plan)
+                {
+                    _activatePlan.Toggle();
+                    return;
+                }
+            }
+            else if(input < 1f)
+            {
+                _pressedInteraction = false;
+            }
+            
             if (_interactions.Count < 1) return;
             if (input >= 1f && _interactions[0].gameObject.activeSelf)
             {
@@ -104,12 +119,6 @@ namespace Game.Interactions
                 if (StoreInteraction && CurrentItem)
                 {
                     _storeInteractionObject.AddObject(CurrentItem.gameObject);
-                    return;
-                }
-                
-                if (_plan)
-                {
-                    _activatePlan.Toggle();
                     return;
                 }
             }

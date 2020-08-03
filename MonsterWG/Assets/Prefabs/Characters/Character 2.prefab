@@ -46,7 +46,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.29
   m_Height: 1.29
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -170,8 +170,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 1
+  m_Constraints: 116
+  m_CollisionDetection: 3
 --- !u!95 &1620644833024910238
 Animator:
   serializedVersion: 3
@@ -253,7 +253,7 @@ Transform:
   - {fileID: 7067450436180706377}
   m_Father: {fileID: 1620644833024910231}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &5372308945951612816
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +571,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: ccd4161c552dfd64d9399e375d7b06d1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.256
+      value: 0.045
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ccd4161c552dfd64d9399e375d7b06d1,
         type: 3}
@@ -642,7 +642,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4c7e19700f9152045abe09e308b10ec7, type: 2}
+      objectReference: {fileID: 2100000, guid: 7cf80e8601e095045bf42652537d7930, type: 2}
     - target: {fileID: 3984187401033220755, guid: ccd4161c552dfd64d9399e375d7b06d1,
         type: 3}
       propertyPath: m_LocalRotation.y
