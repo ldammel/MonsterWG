@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &829588661
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3366407862069956295}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.01, z: 0.001}
-  m_Center: {x: 0, y: 0, z: 0.001}
 --- !u!114 &829588662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +109,37 @@ PrefabInstance:
     - target: {fileID: 8860682124453989056, guid: fd47650f1a11ad045b882e03d3edbc67,
         type: 3}
       propertyPath: m_Name
-      value: Cleanable Pickup
+      value: Cleanable Pickup (Plate)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860682124453989057, guid: fd47650f1a11ad045b882e03d3edbc67,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.22397691
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860682124453989057, guid: fd47650f1a11ad045b882e03d3edbc67,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.85204613
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860682124453989062, guid: fd47650f1a11ad045b882e03d3edbc67,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.014930412
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860682124453989062, guid: fd47650f1a11ad045b882e03d3edbc67,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.6524997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860682124453989062, guid: fd47650f1a11ad045b882e03d3edbc67,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.06703624
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860682124453989062, guid: fd47650f1a11ad045b882e03d3edbc67,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.5950039
       objectReference: {fileID: 0}
     - target: {fileID: 8860682124453989082, guid: fd47650f1a11ad045b882e03d3edbc67,
         type: 3}
