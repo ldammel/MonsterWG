@@ -24,7 +24,7 @@ namespace Game.Utility
         #endregion
 
         #region Functions
-        
+
         private void OnEnable()
         {
             StartTimer();
@@ -45,6 +45,12 @@ namespace Game.Utility
         {
             currentTime = 0;
         }
+
+        public void StopTimer()
+        {
+            _stop = true;
+        }
+
 
         private void Update() 
         {
