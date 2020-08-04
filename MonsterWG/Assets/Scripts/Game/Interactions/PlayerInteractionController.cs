@@ -68,7 +68,7 @@ namespace Game.Interactions
             if (input >= 1f && !_pressedInteraction)
             {
                 _pressedInteraction = true;
-                if (_plan)
+                if (_plan && !CurrentItem)
                 {
                     _activatePlan.Toggle();
                     return;

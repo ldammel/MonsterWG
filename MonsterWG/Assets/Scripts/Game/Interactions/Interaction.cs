@@ -124,7 +124,7 @@ namespace Game.Interactions
             if (consumesItem)
             {
                 Pickup pickup = player.CurrentItem;
-                pickup.CancelPickUp();
+                if(pickup)pickup.CancelPickUp();
 
                 Destroy(pickup.gameObject);
             }
