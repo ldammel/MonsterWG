@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseParent: {fileID: 0}
   cleaned: 0
-  canBeStored: 0
+  canNotBeStored: 1
   onPickUp:
     m_PersistentCalls:
       m_Calls: []

@@ -7,6 +7,8 @@ namespace Game.Interactions
     public class ActivatePlan : MonoBehaviour
     {
         [HideInInspector]public PlayerInteractionController player;
+        
+        [SerializeField] private float highlightTime = 5;
         [SerializeField] private GameObject vCam;
         private PlanManager _manager;
 
@@ -32,6 +34,8 @@ namespace Game.Interactions
                 _manager.DisablePlanMovement();
                 _manager.CurPlayer = null;
                 _active = false;
+
+                FindObjectOfType<UI.HighlightManager>().HighlightPlayerObjects(player, highlightTime);
             }
         }
     }

@@ -20,15 +20,15 @@ namespace Game.Interactions
         [FoldoutGroup("Settings")]
         [SerializeField] private DishDisplay dishDisplay;
         [FoldoutGroup("Settings")]
-        [SerializeField] private bool useCleaningCondition;
+        public bool useCleaningCondition;
         [FoldoutGroup("Settings")]
         [SerializeField] private bool canBeDone = true;
         [FoldoutGroup("Settings")]
-        [SerializeField] private CleaningCondition cleaningCondition;
+        public CleaningCondition cleaningCondition;
         [FoldoutGroup("Settings")]
-        [SerializeField] private bool isWaterSource;
+        public bool isWaterSource;
         [FoldoutGroup("Settings")]
-        [SerializeField] private bool consumesItem;
+        public bool consumesItem;
         [FoldoutGroup("UI")]
         [SerializeField] private Image timerImage;
         [FoldoutGroup("UI")]
@@ -133,6 +133,16 @@ namespace Game.Interactions
             {
                 dishDisplay.AddDisplay();
             }
+        }
+
+        public bool IsDone()
+        {
+            if (canBeDone)
+            {
+                return _isDone;
+            }
+
+            return false;
         }
 
         private void Update()

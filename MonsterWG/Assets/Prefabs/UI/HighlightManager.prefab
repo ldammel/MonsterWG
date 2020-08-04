@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8270971626729524552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2965914079422797415}
+  - component: {fileID: 1408536440538057050}
+  m_Layer: 0
+  m_Name: HighlightManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2965914079422797415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270971626729524552}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1408536440538057050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270971626729524552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d3e7d76f7c2ba4280c9555cf66afc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionOffset: {x: 0, y: 0.1, z: 0}
+  rotation: {x: -0.17101006, y: 0.81379765, z: -0.4698463, w: -0.2961981}
+  scale: {x: 0.005, y: 0.005, z: 0.005}
+  Prefab: {fileID: 6603995962893279348, guid: a07c24075b9a6ba48b4c0945fc24fc84, type: 3}
+  interactSpriteBase: {fileID: 21300000, guid: 07ec41f0f635b1d4d805acfd7fb89dcb, type: 3}
+  consumedInteractionSpriteP1: {fileID: 21300000, guid: 8d6351325d8881046abe7651a156f2e9,
+    type: 3}
+  consumedInteractionSpriteP2: {fileID: 21300000, guid: e3768840641baee45877c1b6380177c2,
+    type: 3}
+  interactionSpriteP1: {fileID: 21300000, guid: 1c6725d81db847c46a0aa99bc7a4e67d,
+    type: 3}
+  interactionSpriteP2: {fileID: 21300000, guid: 036f434fc6721444bb38659fa2af6e5d,
+    type: 3}
+  pickUpSprite: {fileID: 21300000, guid: 5b7b33d3ee5d6514b8da5b0d6a147fa8, type: 3}
+  cheatSpriteP1: {fileID: 21300000, guid: b484763ac9ce1cc4796fa71ac6fc6f63, type: 3}
+  cheatSpriteP2: {fileID: 21300000, guid: ba6e2e6d5e9bf364093dba1a3384187b, type: 3}
+  _transforms: []

@@ -14,6 +14,7 @@ namespace Game.Interactions
         [SerializeField] private bool cleaned;
         [FoldoutGroup("Settings")]
         public bool canNotBeStored;
+        public bool canBeStored => !canNotBeStored;
         [FoldoutGroup("Events")]
         public UnityEvent onPickUp;
         [FoldoutGroup("Events")]
