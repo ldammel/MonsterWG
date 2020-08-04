@@ -13,7 +13,7 @@ namespace Game.Interactions
         [FoldoutGroup("Settings")]
         [SerializeField] private bool cleaned;
         [FoldoutGroup("Settings")]
-        public bool canBeStored;
+        public bool canNotBeStored;
         [FoldoutGroup("Events")]
         public UnityEvent onPickUp;
         [FoldoutGroup("Events")]

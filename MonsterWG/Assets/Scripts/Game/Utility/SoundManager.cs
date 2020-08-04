@@ -18,7 +18,7 @@ namespace Game.Utility
             }
             Instance = this;
             
-            if (Clips.Any(c => c == null)) {
+            /*if (Clips.Any(c => c == null)) {
                 Debug.LogWarning(nameof(Clips) + " in " + nameof(SoundManager) + " may not contain null values", this);
                 Application.Quit();
             }
@@ -26,7 +26,7 @@ namespace Game.Utility
             if (Enum.GetNames(typeof(Sounds)).Length != Clips.Length) {
                 Debug.LogWarning("Enum item count of " + nameof(Sounds) + " in " + nameof(SoundManager) + " has to be equal to the length of " + nameof(Clips), this);
                 Application.Quit();
-            }
+            }*/
         }
         public AudioClip[] Clips;
         public enum Sounds
