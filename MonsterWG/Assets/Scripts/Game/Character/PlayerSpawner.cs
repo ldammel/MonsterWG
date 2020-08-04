@@ -48,6 +48,7 @@ public class PlayerSpawner : MonoBehaviour
 
         _inputManager.playerPrefab = prefabs[_inputManager.playerCount];
 
+        PlayerInput input = _inputManager.JoinPlayer(index, -1, null, device);
         if (device != null)
         {
             Debug.LogFormat("Spawned player with ID {0} for device {1}", index, device.ToString());
@@ -57,6 +58,8 @@ public class PlayerSpawner : MonoBehaviour
             Debug.LogFormat("Spawned player with ID {0}", index);
         }
 
-        return _inputManager.JoinPlayer(index, -1, null, device);
+        FindObjectOfType<Cinemachine.CinemachineTargetGroup>().AddMember(input.transform, 1, 4);
+
+        return input;
     }
 }

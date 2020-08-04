@@ -56,6 +56,11 @@ namespace Game.Interactions
                     _interactions.Remove(_interactions[i]);
                 }
             }
+
+            if(CurrentItem && !CurrentItem.gameObject.activeSelf)
+            {
+                CurrentItem = null;
+            }
         }
         
         public void Interact(float input)
@@ -141,6 +146,9 @@ namespace Game.Interactions
 
         public void Call(float input)
         {
+            if (!character.canMove)
+                return;
+
             if (input >= 1f && !_pressedCall)
             {
                 if (!highlightManager)

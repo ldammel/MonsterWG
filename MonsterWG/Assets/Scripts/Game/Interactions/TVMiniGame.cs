@@ -135,7 +135,8 @@ namespace Game.Interactions
         
         private void OnTriggerExit(Collider other)
         {
-            _player = null;
+            if (other.gameObject.GetComponent<PlayerInteractionController>())
+                _player = null;
         }
 
         IEnumerator Closing()

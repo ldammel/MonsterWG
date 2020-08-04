@@ -173,6 +173,8 @@ namespace Game.UI
         {
             if (timer <= 0) return false;
 
+            if (!sign.Original.gameObject.activeSelf) return false;
+
             switch (showMode)
             {
                 case ShowMode.None: return false;
@@ -222,7 +224,7 @@ namespace Game.UI
                     }
                     else if(sign.Type == UIType.Storage || sign.Type == UIType.Cheat)
                     {
-                        return player.CurrentItem.canBeStored;
+                        return player.CurrentItem.canBeStored && !sign.Original.GetComponent<StoreInteraction>().isFull;
                     }
                     return false;
             }
