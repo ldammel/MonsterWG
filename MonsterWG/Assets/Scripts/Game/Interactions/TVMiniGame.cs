@@ -110,6 +110,9 @@ namespace Game.Interactions
         {
             _active = false;
             _correctGuesses = 0;
+            buttonOneColorImage.SetActive(true);
+            buttonTwoColorImage.SetActive(true);
+            buttonThreeColorImage.SetActive(true);
             imageContainer.SetActive(false);
             if(_player)_player.character.canMove = true;
             StartCoroutine(Closing());

@@ -27,6 +27,11 @@ namespace Game.Character
             canMove = true;
         }
 
+        public void StopMove()
+        {
+            canMove = false;
+        }
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
