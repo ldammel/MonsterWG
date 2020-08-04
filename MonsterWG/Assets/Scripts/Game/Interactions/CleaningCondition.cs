@@ -19,24 +19,34 @@ public class CleaningCondition : MonoBehaviour
     public int NeededWaterAmount = 10;
     private PlayerInteractionController _controller;
 
+    public bool WouldMetCondition(PlayerInteractionController player)
+    {
+        return CheckConditionForPlayer(player, false);
+    }
+
     public bool IsConditionMet()
     {
-        // Player in range?
         _controller = GetComponent<Interaction>().player;
-        if (!_controller) { Debug.Log("No player in range!", gameObject); return false; }
+        return CheckConditionForPlayer(_controller, true);
+    }
+
+    private bool CheckConditionForPlayer(PlayerInteractionController player, bool log)
+    {
+        // Player in range?
+        if (!player) { if (log) { Debug.Log("No player in range!", gameObject); } return false; }
 
         // no item needed?
-        if (!NeedsItem && _controller.CurrentItem) { Debug.Log("Player needs free hands!", gameObject); return false; }
-        if (!NeedsItem && !_controller.CurrentItem) return true;
+        if (!NeedsItem && player.CurrentItem){ if (log) { Debug.Log("Player needs free hands!", gameObject); } return false; }
+        if (!NeedsItem && !player.CurrentItem) return true;
 
         // item needed?
-        if (!_controller.CurrentItem) { Debug.Log("Player has no item", gameObject); return false; }
+        if (!player.CurrentItem){ if (log) { Debug.Log("Player has no item", gameObject); } return false; } 
 
         // watered item needed?
-        if (NeedsWater && _controller.CurrentItem.CurrentWaterAmount < NeededWaterAmount) { Debug.Log("Item has not enough water!", gameObject); return false; }
+        if (NeedsWater && player.CurrentItem.CurrentWaterAmount < NeededWaterAmount){ if (log) { Debug.Log("Item has not enough water!", gameObject); } return false; } 
 
         // item has correct tag?
-        if(!_controller.CurrentItem.gameObject.CompareTag(cleaningObjectTag)) { Debug.Log("Item has incorrect tag!", gameObject); return false; }
+        if (!player.CurrentItem.gameObject.CompareTag(cleaningObjectTag)) { if (log) { Debug.Log("Item has incorrect tag!", gameObject); } return false; }
 
         return true;
     }

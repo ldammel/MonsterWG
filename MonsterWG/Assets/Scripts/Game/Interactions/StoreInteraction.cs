@@ -17,7 +17,7 @@ namespace Game.Interactions
         [FoldoutGroup("Base")]
         [SerializeField] private List<GameObject> storedObjects;
 
-        [SerializeField] private bool cheatStorage;
+        public bool cheatStorage;
         #endregion
 
         #region Events

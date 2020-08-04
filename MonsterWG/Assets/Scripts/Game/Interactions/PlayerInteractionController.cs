@@ -7,6 +7,7 @@ namespace Game.Interactions
     public class PlayerInteractionController : MonoBehaviour
     {
         public Transform handGrabPosition;
+        public float highlightTime = 3;
         public bool isPlayerOne;
         public CharacterMovement character;
 
@@ -20,6 +21,7 @@ namespace Game.Interactions
         
         private bool _plan;
         private bool _pressedActivation;
+        private bool _pressedCall;
         public bool StoreInteraction;
         private ActivatePlan _activatePlan;
         private StoreInteraction _storeInteractionObject;
@@ -29,6 +31,8 @@ namespace Game.Interactions
         private readonly List<OnActivation> _activations = new List<OnActivation>();
 
         private Interaction _currentInteraction;
+
+        private UI.HighlightManager highlightManager;
 
         private void Update()
         {
@@ -51,6 +55,7 @@ namespace Game.Interactions
             Interact(InputInteraction);
             Pickups(InputPickUp);
             Activation(InputInteraction);
+            Call(InputCall);
 
             // Clear all deactivated interactions, otherwise they are stuck in the list after finishing the minigame
             for (int i = _interactions.Count - 1; i >= 0; --i)
@@ -141,6 +146,26 @@ namespace Game.Interactions
             else if (input < 1f)
             {
                 _pressedActivation = false;
+            }
+        }
+
+        public void Call(float input)
+        {
+            if (input >= 1f && !_pressedCall)
+            {
+                if (!highlightManager)
+                {
+                    highlightManager = FindObjectOfType<UI.HighlightManager>();
+                }
+                if (highlightManager)
+                {
+                    highlightManager.HighlightPlayerObjects(isPlayerOne, highlightTime);
+                }
+                _pressedCall = true;
+            }
+            else if (input < 1f)
+            {
+                _pressedCall = false;
             }
         }
 

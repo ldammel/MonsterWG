@@ -79,6 +79,12 @@ namespace Game.Interactions
         {
             if (!_start) return;
 
+            if(_interaction.player == null)
+            {
+                EndMiniGame(false);
+                return;
+            }
+
             Vector2 input = _interaction.player.InputMove;
             Vector2 nextPos = _positions[_currentIndex];
 

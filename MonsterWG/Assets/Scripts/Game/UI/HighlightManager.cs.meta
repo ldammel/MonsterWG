@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 79d3e7d76f7c2ba4280c9555cf66afc0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Prefab: {fileID: 6603995962893279348, guid: a07c24075b9a6ba48b4c0945fc24fc84,
+      type: 3}
+  - interactSpriteBase: {fileID: 21300000, guid: 07ec41f0f635b1d4d805acfd7fb89dcb,
+      type: 3}
+  - consumedInteractionSpriteP1: {fileID: 21300000, guid: 8d6351325d8881046abe7651a156f2e9,
+      type: 3}
+  - consumedInteractionSpriteP2: {fileID: 21300000, guid: e3768840641baee45877c1b6380177c2,
+      type: 3}
+  - interactionSpriteP1: {fileID: 21300000, guid: 1c6725d81db847c46a0aa99bc7a4e67d,
+      type: 3}
+  - interactionSpriteP2: {fileID: 21300000, guid: 036f434fc6721444bb38659fa2af6e5d,
+      type: 3}
+  - pickUpSprite: {fileID: 21300000, guid: 5b7b33d3ee5d6514b8da5b0d6a147fa8, type: 3}
+  - cheatSpriteP1: {fileID: 21300000, guid: b484763ac9ce1cc4796fa71ac6fc6f63, type: 3}
+  - cheatSpriteP2: {fileID: 21300000, guid: ba6e2e6d5e9bf364093dba1a3384187b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
