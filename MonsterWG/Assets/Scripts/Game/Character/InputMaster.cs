@@ -20,27 +20,27 @@ public class @InputMaster : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""9fc57b61-ac0b-4944-80cd-0d43bd37c95a"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Stick"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""Interact"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""71e80b7e-68cf-462c-a028-45e26253541a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Select"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""120cb535-dbaf-4685-939d-bfd0969e8709"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Menu"",
@@ -48,7 +48,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""9b3d8488-b53e-4bff-8975-c1fd6b88366b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Notify"",
@@ -56,7 +56,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""64b1c2cf-1b65-4aa2-97bf-31fd816024c0"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Emotes"",
@@ -64,7 +64,15 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""4046b0c2-815d-4fbf-aebc-3ad57ec47631"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""MoveNew"",
+                    ""type"": ""Value"",
+                    ""id"": ""46c74357-3fa6-4ccb-b9f9-0d70848ed28c"",
+                    ""expectedControlType"": ""Stick"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -182,7 +190,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""98e31747-cffa-4cc8-bb5b-677ce263215e"",
                     ""path"": ""<Keyboard>/f"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Interact"",
@@ -193,7 +201,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""ffc9b62f-bb1c-4dac-b7a8-c6983b69050c"",
                     ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Interact"",
@@ -204,7 +212,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""12f2a5af-5f22-47fc-8f91-36856db38523"",
                     ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Menu"",
@@ -215,7 +223,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""dee6c7e5-a293-40b1-8773-a4c827805e3d"",
                     ""path"": ""<Gamepad>/start"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Menu"",
@@ -226,7 +234,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""5332299f-44a5-4e32-ac5a-f2768e25147e"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Select"",
@@ -237,7 +245,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""aeb345a4-e07e-445f-be82-3ba041918cb6"",
                     ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Select"",
@@ -248,7 +256,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""9c7b6ad6-455a-44ed-9f29-1903277f4fa0"",
                     ""path"": ""<Keyboard>/q"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Notify"",
@@ -259,7 +267,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""c170c5b0-0144-457c-a692-d4613ab29cae"",
                     ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Notify"",
@@ -353,6 +361,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Emotes"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""621bb033-b295-497c-a857-fde4a9496c28"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""MoveNew"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -362,27 +381,27 @@ public class @InputMaster : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""cc854ee5-d011-433c-9e52-29545934c2f0"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Stick"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""Interact"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""530d17a9-6742-469e-81fe-de092f49ba34"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Select"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""b0d262ac-b30c-4551-a2c7-3b07b6fb4c2e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Menu"",
@@ -390,7 +409,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""1ed2e82e-39e2-4da2-850b-c70cb3680d6c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Notify"",
@@ -398,7 +417,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""8786d84c-a9ed-4f22-86aa-259ec53be50a"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Emotes"",
@@ -406,7 +425,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""0e49e57c-c329-4e04-aaa7-ab2916917ff9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -524,7 +543,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""484b11d9-d06f-4184-b7a5-eaeec69f57e2"",
                     ""path"": ""<Keyboard>/h"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Interact"",
@@ -535,7 +554,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""17d455b8-83a2-4a75-ab53-0762e8fb9dc0"",
                     ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Interact"",
@@ -546,7 +565,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""a33389c1-235d-47d6-9467-966af342c918"",
                     ""path"": ""<Keyboard>/backspace"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Menu"",
@@ -557,7 +576,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""7163018a-2dfc-47aa-b524-09322f121f13"",
                     ""path"": ""<Gamepad>/start"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Menu"",
@@ -568,7 +587,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""536fc25b-4031-4089-a8c4-34e9be8f7b8f"",
                     ""path"": ""<Keyboard>/u"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Select"",
@@ -579,7 +598,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""ca13ef31-2b44-4c35-8f02-6d6851f5d0a9"",
                     ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Select"",
@@ -590,7 +609,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""c985070f-ead5-4b5a-9cf9-d3c7858d0ad7"",
                     ""path"": ""<Keyboard>/o"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Notify"",
@@ -601,7 +620,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""117cbc55-0f35-4de8-a8eb-ad2d4d285f4f"",
                     ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Notify"",
@@ -737,6 +756,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_Notify = m_Player.FindAction("Notify", throwIfNotFound: true);
         m_Player_Emotes = m_Player.FindAction("Emotes", throwIfNotFound: true);
+        m_Player_MoveNew = m_Player.FindAction("MoveNew", throwIfNotFound: true);
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Move = m_Player2.FindAction("Move", throwIfNotFound: true);
@@ -800,6 +820,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_Notify;
     private readonly InputAction m_Player_Emotes;
+    private readonly InputAction m_Player_MoveNew;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -810,6 +831,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputAction @Notify => m_Wrapper.m_Player_Notify;
         public InputAction @Emotes => m_Wrapper.m_Player_Emotes;
+        public InputAction @MoveNew => m_Wrapper.m_Player_MoveNew;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -837,6 +859,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Emotes.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEmotes;
                 @Emotes.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEmotes;
                 @Emotes.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEmotes;
+                @MoveNew.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveNew;
+                @MoveNew.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveNew;
+                @MoveNew.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveNew;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -859,6 +884,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Emotes.started += instance.OnEmotes;
                 @Emotes.performed += instance.OnEmotes;
                 @Emotes.canceled += instance.OnEmotes;
+                @MoveNew.started += instance.OnMoveNew;
+                @MoveNew.performed += instance.OnMoveNew;
+                @MoveNew.canceled += instance.OnMoveNew;
             }
         }
     }
@@ -962,6 +990,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMenu(InputAction.CallbackContext context);
         void OnNotify(InputAction.CallbackContext context);
         void OnEmotes(InputAction.CallbackContext context);
+        void OnMoveNew(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
     {

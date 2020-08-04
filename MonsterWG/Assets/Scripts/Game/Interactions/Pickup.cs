@@ -15,6 +15,7 @@ namespace Game.Interactions
         [SerializeField] private bool cleaned;
         [FoldoutGroup("Settings")]
         public bool canNotBeStored;
+        public bool canBeStored => !canNotBeStored;
         [FoldoutGroup("Settings")]
         public bool isTrash;
         [FoldoutGroup("Settings")]

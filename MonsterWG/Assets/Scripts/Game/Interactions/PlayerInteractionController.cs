@@ -36,21 +36,11 @@ namespace Game.Interactions
 
         private void Update()
         {
-            InputInteraction = isPlayerOne
-                ? character.controls.Player.Interact.ReadValue<float>()
-                : character.controls.Player2.Interact.ReadValue<float>();
-            InputPickUp = isPlayerOne
-                ? character.controls.Player.Select.ReadValue<float>()
-                : character.controls.Player2.Select.ReadValue<float>();
-            InputMenu = isPlayerOne
-                ? character.controls.Player.Menu.ReadValue<float>()
-                : character.controls.Player2.Menu.ReadValue<float>();
-            InputCall = isPlayerOne
-                ? character.controls.Player.Notify.ReadValue<float>()
-                : character.controls.Player2.Notify.ReadValue<float>();
-            InputMove = isPlayerOne
-                ? character.controls.Player.Move.ReadValue<Vector2>()
-                : character.controls.Player2.Move.ReadValue<Vector2>();
+            InputInteraction = character.interact;
+            InputPickUp = character.select;
+            InputMenu = character.menu;
+            InputCall = character.notify;
+            InputMove = character.move;
             
             Interact(InputInteraction);
             Pickups(InputPickUp);

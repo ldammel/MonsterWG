@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102354288298746964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.7, y: 0.99, z: 0.104}
+  m_LocalPosition: {x: 11.602, y: 1.025, z: -21.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8253273380605665561}
@@ -66,6 +66,11 @@ MonoBehaviour:
   playerOne: 1
   playerModel: {fileID: 4959269894561911562}
   canMove: 1
+  move: {x: 0, y: 0}
+  interact: 0
+  select: 0
+  notify: 0
+  menu: 0
 --- !u!114 &102354288298746967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: fae1db07b89c8c242ac8e5062c62f3ee,
     type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -152,7 +157,7 @@ MonoBehaviour:
     m_ActionId: 0e49e57c-c329-4e04-aaa7-ab2916917ff9
     m_ActionName: Player1/Emotes[/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/0]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -709,6 +714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handGrabPosition: {fileID: 102354288670548703}
+  highlightTime: 3
   isPlayerOne: 1
   character: {fileID: 102354288298746966}
   CurrentItem: {fileID: 0}
