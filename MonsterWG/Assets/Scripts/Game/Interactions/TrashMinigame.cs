@@ -35,8 +35,8 @@ namespace Game.Interactions
             _active = false;
             _currentValue = 0;
             mashedAmount = 0;
-            buttonObject.SetActive(false);
-            timingObject.SetActive(false);
+            if(buttonObject)buttonObject.SetActive(false);
+            if(timingObject)timingObject.SetActive(false);
         }
 
         private void Update()
@@ -114,7 +114,7 @@ namespace Game.Interactions
             mashedAmount = 0;
             _timing = false;
             _pressed = false;
-            _player.character.canMove = false;
+            if(_player)_player.character.canMove = false;
         }
         
         public void EndMiniGame()
@@ -122,9 +122,9 @@ namespace Game.Interactions
             _active = false;
             _timing = false;
             onSuccess.Invoke();
-            buttonObject.SetActive(false);
-            timingObject.SetActive(false);
-            _player.character.canMove = true;
+            if(buttonObject)buttonObject.SetActive(false);
+            if(timingObject)timingObject.SetActive(false);
+            if(_player)_player.character.canMove = true;
         }
 
         private void OnTriggerEnter(Collider other)

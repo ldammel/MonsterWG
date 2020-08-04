@@ -30,10 +30,18 @@ namespace Game.Interactions
         [SerializeField] private int storedObjectsAmount = 0;
         [FoldoutGroup("Events")]
         [Header("Ab wann beginnt das timing minigame")]
-        [SerializeField] private int timinglimit = 3;
+        [SerializeField] private int timinglimit = 3;        
+        [FoldoutGroup("Events")]
+        [SerializeField] private bool useTiming;
+        [FoldoutGroup("Events")]
+        [SerializeField] private UnityEvent timingEvent;
         [FoldoutGroup("Events")]
         [Header("Ab wann beginnt das mashing minigame")]
         [SerializeField] private int mashinglimit = 5;
+        [FoldoutGroup("Events")]
+        [SerializeField] private bool useMashing;
+        [FoldoutGroup("Events")]
+        [SerializeField] private UnityEvent mashingEvent;
         #endregion
         
         #region Explosion
@@ -46,7 +54,7 @@ namespace Game.Interactions
         public void AddObject(GameObject o)
         {
             var pick = o.gameObject.GetComponent<Pickup>();
-            if (!pick.canBeStored) return;
+            if (pick.canNotBeStored) return;
             pick.CancelPickUp();
             pick._isPickedUp = false;
             o.gameObject.GetComponentInChildren<InteractionStateBehaviour>().ResetStates();
@@ -58,8 +66,8 @@ namespace Game.Interactions
                 if (useEvents)
                 {
                     if (storedObjectsAmount < timinglimit) return;
-                    else if (storedObjectsAmount >= timinglimit && storedObjectsAmount < mashinglimit) onStored[0].Invoke();
-                    else if (storedObjectsAmount >= mashinglimit) onStored[1].Invoke();
+                    else if (storedObjectsAmount >= timinglimit && storedObjectsAmount < mashinglimit) timingEvent.Invoke();
+                    else if (storedObjectsAmount >= mashinglimit) mashingEvent.Invoke();
                 }
             }
             else
@@ -67,6 +75,7 @@ namespace Game.Interactions
                 if(useEvents)onStored[storedObjectsAmount].Invoke();
                 storedObjects.Add(o.gameObject);
                 storedObjectsAmount++; 
+                if(useMashing && storedObjectsAmount >= mashinglimit) mashingEvent.Invoke();
                 
                 if (storedObjectsAmount >= limit) RemoveObjects();
             }

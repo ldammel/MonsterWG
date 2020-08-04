@@ -103,6 +103,7 @@ namespace Game.Interactions
         public void Cancel()
         {
             _stop = true;
+            if (player) player.character.canMove = true;
             if (!saveProgress)
             {
                 _startTime = 0;
@@ -137,8 +138,8 @@ namespace Game.Interactions
         private void Update()
         {
             if(player)pressedButton = player.InputInteraction >= 1f;
-            if(player)player.character.canMove = !pressedButton;
             if(_stop) return;
+            if(player)player.character.canMove = !pressedButton;
             _startTime += Time.deltaTime;
             if (!(_startTime >= duration)) return;
             _stop = true;
@@ -159,6 +160,7 @@ namespace Game.Interactions
             }
             if (_isDone) player._interactions.Remove(this);
             _startTime = 0;
+            if (player) player.character.canMove = true;
         }
 
         private void SetCleanState()

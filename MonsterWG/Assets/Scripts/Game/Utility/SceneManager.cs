@@ -22,7 +22,7 @@ namespace Game.Utility
 
         private IEnumerator StartGame()
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(0.1f);
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
     }

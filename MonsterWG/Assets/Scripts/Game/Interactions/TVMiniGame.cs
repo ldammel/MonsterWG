@@ -103,7 +103,7 @@ namespace Game.Interactions
             _pressedCallButton = false;
             _correctGuesses = 0;
             imageContainer.SetActive(true);
-            _player.character.canMove = false;
+            if(_player)_player.character.canMove = false;
         }
 
         private void CloseMiniGame()
@@ -111,7 +111,7 @@ namespace Game.Interactions
             _active = false;
             _correctGuesses = 0;
             imageContainer.SetActive(false);
-            _player.character.canMove = true;
+            if(_player)_player.character.canMove = true;
             StartCoroutine(Closing());
         }
 
@@ -121,7 +121,7 @@ namespace Game.Interactions
             _correctGuesses = 0;
             onSuccess.Invoke();
             imageContainer.SetActive(false);
-            _player.character.canMove = true;
+            if(_player)_player.character.canMove = true;
         }
 
         private void OnTriggerEnter(Collider other)
