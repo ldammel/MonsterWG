@@ -76,7 +76,8 @@ namespace Game.Character
             transform.forward = Vector3.Slerp(transform.forward, heading, 0.15f);
             position += rightMovement;
             position += upMovement;
-            transform.position = position;
+            //transform.position = position;
+            _rb.MovePosition(position);
         }
 
         #region Input Overloads

@@ -79,7 +79,7 @@ namespace Game.Interactions
             }
             else
             {
-                SoundManager.Instance.Play(gameObject, SoundManager.Sounds.SchrankStopfen);
+                SoundManager.Instance.Play(gameObject, SoundManager.Sounds.SchrankKnallen);
                 storedObjectsAmount++; 
                 storedObjects.Add(o.gameObject);
 

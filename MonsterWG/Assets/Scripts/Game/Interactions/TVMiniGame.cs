@@ -43,15 +43,14 @@ namespace Game.Interactions
                 {
                     case 0:
                         buttonOneColorImage.SetActive(false);
-                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
                         _correctGuesses++;
                         break;
                     case 1:
                         buttonOneColorImage.SetActive(true);
                         buttonTwoColorImage.SetActive(true);
                         buttonThreeColorImage.SetActive(true);
-                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         _correctGuesses = 0;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         break;
                     case 2 :
                         buttonThreeColorImage.SetActive(false);
@@ -73,20 +72,19 @@ namespace Game.Interactions
                         buttonOneColorImage.SetActive(true);
                         buttonTwoColorImage.SetActive(true);
                         buttonThreeColorImage.SetActive(true);
-                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         _correctGuesses = 0;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         break;
                     case 1:
                         buttonTwoColorImage.SetActive(false);
-                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
                         _correctGuesses++;
                         break;
                     case 2 :
                         buttonOneColorImage.SetActive(true);
                         buttonTwoColorImage.SetActive(true);
                         buttonThreeColorImage.SetActive(true);
-                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         _correctGuesses = 0;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         break;
                     default:
                         break;
@@ -131,8 +129,9 @@ namespace Game.Interactions
             _correctGuesses = 0;
             onSuccess.Invoke();
             imageContainer.SetActive(false);
-            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.TvAusschalten);
             SoundManager.Instance.Stop();
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.TvAusschalten);
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
             if(_player)_player.character.canMove = true;
         }
 

@@ -278,6 +278,10 @@ MonoBehaviour:
           m_StringArgument: Cleaned
           m_BoolArgument: 0
         m_CallState: 2
+  bad: 0
+  geschirr: 0
+  bett: 0
+  wischen: 0
   circleImage: {fileID: 7524806502660532220}
   startPoint: 0
   rotateClockwise: 1
@@ -486,7 +490,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5831723866156118100}
-  m_LocalRotation: {x: -0.0011237195, y: 0.70710593, z: 0.70710593, w: 0.0011237195}
+  m_LocalRotation: {x: 0.0015882835, y: -0.99999875, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 81.369484, y: 86.37582, z: 76.86087}
   m_Children:
@@ -496,7 +500,7 @@ RectTransform:
   - {fileID: 7517691210903899211}
   m_Father: {fileID: 7304271348986610146}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 179.81801}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 40}

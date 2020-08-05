@@ -84,6 +84,7 @@ namespace Game.Interactions
                     mashFillBar.fillAmount = (float)mashedAmount / (float)neededMashAmount;
                     mashButtonPressed.SetActive(true);
                     _pressed = true;
+                    SoundManager.Instance.Play(gameObject, SoundManager.Sounds.SchrankStopfen);
                     if (mashedAmount <= neededMashAmount)mashedAmount++;
                     else EndMiniGame();
                 }
