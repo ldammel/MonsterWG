@@ -25,6 +25,7 @@ namespace Game.Interactions
         private bool _plan;
         private bool _pressedActivation;
         private bool _pressedCall;
+        public bool InMiniGame { get; set; }
         public bool StoreInteraction;
         private ActivatePlan _activatePlan;
         private StoreInteraction _storeInteractionObject;
@@ -46,7 +47,6 @@ namespace Game.Interactions
             InputMove = character.move;
             
             Interact(InputInteraction);
-            Pickups(InputPickUp);
             Activation(InputInteraction);
             Call(InputCall);
 
@@ -74,6 +74,11 @@ namespace Game.Interactions
                 if (_plan && !CurrentItem)
                 {
                     _activatePlan.Toggle();
+                    return;
+                }
+                if (StoreInteraction && CurrentItem)
+                {
+                    _storeInteractionObject.AddObject(CurrentItem.gameObject);
                     return;
                 }
             }
@@ -135,24 +140,6 @@ namespace Game.Interactions
             else if (_currentInteraction && !_currentInteraction.Stop)
             {
                 _currentInteraction.Cancel();
-            }
-        }
-
-        public void Pickups(float input)
-        {
-            if (input >= 1f && !_pressedPickup)
-            {
-                _pressedPickup = true;
-
-                if (StoreInteraction && CurrentItem)
-                {
-                    _storeInteractionObject.AddObject(CurrentItem.gameObject);
-                    return;
-                }
-            }
-            else if(input < 1f)
-            {
-                _pressedPickup = false;
             }
         }
 

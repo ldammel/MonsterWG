@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -85,6 +86,7 @@ namespace Game.Interactions
                 {
                     Debug.Log("Item Watered!", player.CurrentItem);
                     player.CurrentItem.CurrentWaterAmount = 100;
+                    SoundManager.Instance.Play(gameObject, SoundManager.Sounds.MopNässen);
                 }
             }
 

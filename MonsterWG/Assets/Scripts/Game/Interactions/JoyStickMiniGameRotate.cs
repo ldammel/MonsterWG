@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -85,6 +85,17 @@ namespace Game.Interactions
                 return;
             }
 
+            if (_interaction.player.InputInteraction <= 0 && !_canClose)
+            {
+                StartCoroutine(CheckClose(true));
+            }
+            else if (_interaction.player.InputInteraction >= 1 && _canClose)
+            {
+                EndMiniGame(false);
+                StartCoroutine(CheckClose(false));
+                return;
+            }
+
             Vector2 input = _interaction.player.InputMove;
 
             bool interactionCounted = true;
@@ -99,6 +110,8 @@ namespace Game.Interactions
                 {
                     _fullRotations++;
                     _currentIndex = 0;
+                    if(bad)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BadReinigen);
+                    else if(geschirr)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.GeschirrSpülen);
                 }
 
                 if (_fullRotations >= neededRotations)
@@ -107,7 +120,6 @@ namespace Game.Interactions
                 }
             }
         }
-
 
         private bool CheckInput(Vector2 input)
         {

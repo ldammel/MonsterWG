@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Utility;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -21,6 +22,17 @@ namespace Game.Interactions
         {
             if (!_start) return;
             float input = _interaction.player.InputMove[horizontal ? 0 : 1];
+            
+            if (_interaction.player.InputInteraction <= 0 && !_canClose)
+            {
+                StartCoroutine(CheckClose(true));
+            }
+            else if (_interaction.player.InputInteraction >= 1 && _canClose)
+            {
+                EndMiniGame(false);
+                StartCoroutine(CheckClose(false));
+                return;
+            }
 
             if (_switch)
             {
@@ -31,6 +43,8 @@ namespace Game.Interactions
                 {
                     _currentValue += 0.1f;
                     _switch = false;
+                    if(bett)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BettSchütteln);
+                    if(wischen)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BodenWischen);
                 }
                 else if (_currentValue > 0)
                 {
@@ -45,6 +59,8 @@ namespace Game.Interactions
                 {
                     _currentValue += 0.1f;
                     _switch = true;
+                    if(bett)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BettSchütteln);
+                    if(wischen)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BodenWischen);
                 }
                 else if (_currentValue > 0)
                 {

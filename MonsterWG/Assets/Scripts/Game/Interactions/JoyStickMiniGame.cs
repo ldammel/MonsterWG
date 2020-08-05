@@ -1,4 +1,5 @@
-﻿using Game.Utility;
+﻿using System.Collections;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ namespace Game.Interactions
         protected Interaction _interaction;
         protected float _currentValue;
         protected bool _start;
+        protected bool _canClose;
 
         private CleaningCondition _condition;
 
@@ -36,6 +38,7 @@ namespace Game.Interactions
         
         public virtual void StartMiniGame()
         {
+            if (_canClose) return;
             _start = true;
             _currentValue = 0;
             _interaction.player.character.canMove = false;
@@ -45,10 +48,7 @@ namespace Game.Interactions
 
         public virtual void EndMiniGame(bool success)
         {
-            if(bad)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BadReinigen);
-            else if(bett)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BettSchütteln);
-            else if(geschirr)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.GeschirrSpülen);
-            else if(wischen)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BodenWischen);
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
             _start = false;
             uiObject.SetActive(false);
             _interaction.player.character.canMove = true;
@@ -65,6 +65,12 @@ namespace Game.Interactions
                 Mathf.Clamp(_interaction.player.CurrentItem.CurrentWaterAmount, 0, 100);
             }
             onFinish.Invoke();
+        }
+        
+        protected IEnumerator CheckClose(bool value)
+        {
+            yield return new WaitForSeconds(0.3f);
+            _canClose = value;
         }
 
         protected virtual void OnStart() { }

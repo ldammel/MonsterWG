@@ -63,7 +63,6 @@ namespace Game.Interactions
                 {
                     trashBag.SetActive(true);
                     itemObject.SetActive(false);
-                    SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Interagieren);
                 }
                 _rigidBody.isKinematic = true;
                 _interactionTarget.transform.position = player.handGrabPosition.position;
@@ -91,6 +90,7 @@ namespace Game.Interactions
             player.CurrentItem = this;
             _isPickedUp = true;
             onPickUp.Invoke();
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Interagieren);
         }
 
         public void CancelPickUp()
