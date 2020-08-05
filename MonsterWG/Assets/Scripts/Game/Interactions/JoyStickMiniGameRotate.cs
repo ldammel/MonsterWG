@@ -86,66 +86,67 @@ namespace Game.Interactions
             }
 
             Vector2 input = _interaction.player.InputMove;
+
+            bool interactionCounted = true;
+            while (interactionCounted)
+            {
+                interactionCounted = CheckInput(input);
+
+                circleImage.fillAmount = (float)(_currentIndex - 1) / (float)(_positions.Count - 1);
+                progressBar.fillAmount = (float)_fullRotations / (float)neededRotations;
+
+                if (_currentIndex >= _positions.Count)
+                {
+                    _fullRotations++;
+                    _currentIndex = 0;
+                }
+
+                if (_fullRotations >= neededRotations)
+                {
+                    EndMiniGame(true);
+                }
+            }
+        }
+
+
+        private bool CheckInput(Vector2 input)
+        {
             Vector2 nextPos = _positions[_currentIndex];
 
-            if(nextPos.x < 0 && nextPos.y < 0)
+            if (nextPos.x < 0 && nextPos.y < 0)
             {
                 if (input.x <= nextPos.x && input.y <= nextPos.y)
                 {
                     _currentIndex++;
+                    return true;
                 }
             }
-            else if(nextPos.x >= 0 && nextPos.y >= 0)
+            else if (nextPos.x >= 0 && nextPos.y >= 0)
             {
                 if (input.x >= nextPos.x && input.y >= nextPos.y)
                 {
                     _currentIndex++;
+                    return true;
                 }
             }
-            else if(nextPos.x < 0 && nextPos.y >= 0)
+            else if (nextPos.x < 0 && nextPos.y >= 0)
             {
                 if (input.x <= nextPos.x && input.y >= nextPos.y)
                 {
                     _currentIndex++;
+                    return true;
                 }
             }
-            else if(nextPos.x >= 0 && nextPos.y < 0)
+            else if (nextPos.x >= 0 && nextPos.y < 0)
             {
                 if (input.x >= nextPos.x && input.y <= nextPos.y)
                 {
                     _currentIndex++;
+                    return true;
                 }
             }
 
-            //if(_currentIndex < 2 || _currentIndex == _positions.Count -1)
-            //{
-            //    if(input.x >= nextPos.x && input.y >= nextPos.y)
-            //    {
-            //        _currentIndex++;
-            //    }
-            //}
-            //else
-            //{
-            //    if (input.x <= nextPos.x && input.y <= nextPos.y)
-            //    {
-            //        _currentIndex++;
-            //    }
-            //}
-
-            circleImage.fillAmount = (float)(_currentIndex-1) / (float)(_positions.Count-1);
-            progressBar.fillAmount = (float)_fullRotations / (float)neededRotations;
-
-            if(_currentIndex >= _positions.Count)
-            {
-                _fullRotations++;
-                _currentIndex = 0;
-            }
-
-            if(_fullRotations >= neededRotations)
-            {
-                EndMiniGame(true);
-            }
+            return false;
         }
-
     }
 }
