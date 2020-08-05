@@ -64,6 +64,8 @@ namespace Game.Interactions
             {
                 CurrentItem = null;
             }
+
+            character.animationHelper.SetBool("HasTrash", CurrentItem && CurrentItem.canBeStored);
         }
         
         public void Interact(float input)
