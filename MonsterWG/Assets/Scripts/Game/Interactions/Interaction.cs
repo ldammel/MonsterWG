@@ -20,15 +20,15 @@ namespace Game.Interactions
         [FoldoutGroup("Settings")]
         [SerializeField] private DishDisplay dishDisplay;
         [FoldoutGroup("Settings")]
-        [SerializeField] private bool useCleaningCondition;
+        public bool useCleaningCondition;
         [FoldoutGroup("Settings")]
         [SerializeField] private bool canBeDone = true;
         [FoldoutGroup("Settings")]
-        [SerializeField] private CleaningCondition cleaningCondition;
+        public CleaningCondition cleaningCondition;
         [FoldoutGroup("Settings")]
-        [SerializeField] private bool isWaterSource;
+        public bool isWaterSource;
         [FoldoutGroup("Settings")]
-        [SerializeField] private bool consumesItem;
+        public bool consumesItem;
         [FoldoutGroup("UI")]
         [SerializeField] private Image timerImage;
         [FoldoutGroup("UI")]
@@ -61,13 +61,18 @@ namespace Game.Interactions
         }
 
 
-        public bool Interact()
+        public InteractionResult Interact()
         {
             if (useCleaningCondition)
             {
-                if (!cleaningCondition.IsConditionMet()) return false;
+                InteractionResult result = cleaningCondition.IsConditionMet();
+
+                if(result != InteractionResult.Success)
+                {
+                    return result;
+                }
             }
-            if (_isDone) return false;
+            if (_isDone) return InteractionResult.Failed;
             if (useTimer)
             {
                 StartTimer();
@@ -86,7 +91,7 @@ namespace Game.Interactions
             if(onStart != null && _interactAmount < onStart.Length)
                 onStart[_interactAmount].Invoke();
 
-            return true;
+            return InteractionResult.Success;
         }
 
         public void Reset()
@@ -103,6 +108,7 @@ namespace Game.Interactions
         public void Cancel()
         {
             _stop = true;
+            if (player) player.character.canMove = true;
             if (!saveProgress)
             {
                 _startTime = 0;
@@ -123,7 +129,7 @@ namespace Game.Interactions
             if (consumesItem)
             {
                 Pickup pickup = player.CurrentItem;
-                pickup.CancelPickUp();
+                if(pickup)pickup.ForceCancelPickUp();
 
                 Destroy(pickup.gameObject);
             }
@@ -134,11 +140,21 @@ namespace Game.Interactions
             }
         }
 
+        public bool IsDone()
+        {
+            if (canBeDone)
+            {
+                return _isDone;
+            }
+
+            return false;
+        }
+
         private void Update()
         {
             if(player)pressedButton = player.InputInteraction >= 1f;
-            if(player)player.character.canMove = !pressedButton;
             if(_stop) return;
+            if(player)player.character.canMove = !pressedButton;
             _startTime += Time.deltaTime;
             if (!(_startTime >= duration)) return;
             _stop = true;
@@ -159,6 +175,7 @@ namespace Game.Interactions
             }
             if (_isDone) player._interactions.Remove(this);
             _startTime = 0;
+            if (player) player.character.canMove = true;
         }
 
         private void SetCleanState()
@@ -207,6 +224,17 @@ namespace Game.Interactions
                 timerImage.fillAmount = _startTime / duration;
                 yield return new WaitForSeconds(0.2f);
             }
+        }
+
+        public enum InteractionResult
+        {
+            Invalid = -1,
+            Failed,
+            Success,
+            NeedsFreeHands,
+            NeedsItem,
+            NeedsWater,
+            WrongType
         }
 
     }

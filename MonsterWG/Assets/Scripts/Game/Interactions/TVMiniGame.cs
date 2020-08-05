@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,6 +26,7 @@ namespace Game.Interactions
         
         void Start()
         {
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.TvStaticSound);
             _correctGuesses = 0;
             imageContainer.SetActive(false);
         }
@@ -48,6 +50,7 @@ namespace Game.Interactions
                         buttonTwoColorImage.SetActive(true);
                         buttonThreeColorImage.SetActive(true);
                         _correctGuesses = 0;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         break;
                     case 2 :
                         buttonThreeColorImage.SetActive(false);
@@ -70,6 +73,7 @@ namespace Game.Interactions
                         buttonTwoColorImage.SetActive(true);
                         buttonThreeColorImage.SetActive(true);
                         _correctGuesses = 0;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         break;
                     case 1:
                         buttonTwoColorImage.SetActive(false);
@@ -80,6 +84,7 @@ namespace Game.Interactions
                         buttonTwoColorImage.SetActive(true);
                         buttonThreeColorImage.SetActive(true);
                         _correctGuesses = 0;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         break;
                     default:
                         break;
@@ -103,15 +108,18 @@ namespace Game.Interactions
             _pressedCallButton = false;
             _correctGuesses = 0;
             imageContainer.SetActive(true);
-            _player.character.canMove = false;
+            if(_player)_player.character.canMove = false;
         }
 
         private void CloseMiniGame()
         {
             _active = false;
             _correctGuesses = 0;
+            buttonOneColorImage.SetActive(true);
+            buttonTwoColorImage.SetActive(true);
+            buttonThreeColorImage.SetActive(true);
             imageContainer.SetActive(false);
-            _player.character.canMove = true;
+            if(_player)_player.character.canMove = true;
             StartCoroutine(Closing());
         }
 
@@ -121,7 +129,10 @@ namespace Game.Interactions
             _correctGuesses = 0;
             onSuccess.Invoke();
             imageContainer.SetActive(false);
-            _player.character.canMove = true;
+            SoundManager.Instance.Stop();
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.TvAusschalten);
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
+            if(_player)_player.character.canMove = true;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -132,7 +143,8 @@ namespace Game.Interactions
         
         private void OnTriggerExit(Collider other)
         {
-            _player = null;
+            if (other.gameObject.GetComponent<PlayerInteractionController>())
+                _player = null;
         }
 
         IEnumerator Closing()

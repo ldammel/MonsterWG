@@ -10,6 +10,7 @@ namespace Game.Utility
         [SerializeField] private float canvasStartWaitTime;
 
         public PlayerInteractionController CurPlayer { get; set; }
+        private bool _active;
 
         public void EnablePlanMovement()
         {
@@ -25,18 +26,20 @@ namespace Game.Utility
 
         public void EnableCanvas()
         {
-            StartCoroutine(ToggleCanvas(true, canvasStartWaitTime));
+            _active = true;
+            StartCoroutine(ToggleCanvas( canvasStartWaitTime));
         }
         
         public void DisableCanvas()
         {
-            StartCoroutine(ToggleCanvas(false, 0.1f));
+            _active = false;
+            StartCoroutine(ToggleCanvas( 0.1f));
         }
 
-        private IEnumerator ToggleCanvas(bool toggle, float time)
+        private IEnumerator ToggleCanvas(float time)
         {
             yield return new WaitForSeconds(time);
-            planCanvas.SetActive(toggle);
+            planCanvas.SetActive(_active);
         }
     }
 }

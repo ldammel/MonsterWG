@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Game.Utility;
+using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
@@ -13,7 +15,17 @@ namespace Game.Interactions
         [FoldoutGroup("Settings")]
         [SerializeField] private bool cleaned;
         [FoldoutGroup("Settings")]
-        public bool canBeStored;
+        public bool canNotBeStored;
+
+        public bool canBeStored => !canNotBeStored;
+        [FoldoutGroup("Settings")]
+        public bool isTrash;
+        [FoldoutGroup("Settings")]
+        [ShowIf(nameof(isTrash))]
+        public GameObject trashBag;
+        [FoldoutGroup("Settings")]
+        [ShowIf(nameof(isTrash))]
+        public GameObject itemObject;
         [FoldoutGroup("Events")]
         public UnityEvent onPickUp;
         [FoldoutGroup("Events")]
@@ -47,6 +59,12 @@ namespace Game.Interactions
 
             if (_isPickedUp)
             {
+                if (isTrash)
+                {
+                    trashBag.SetActive(true);
+                    itemObject.SetActive(false);
+                    SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Interagieren);
+                }
                 _rigidBody.isKinematic = true;
                 _interactionTarget.transform.position = player.handGrabPosition.position;
                 _interactionTarget.transform.parent = player.handGrabPosition;
@@ -54,6 +72,11 @@ namespace Game.Interactions
             }
             else
             {
+                if (isTrash)
+                {
+                    trashBag.SetActive(false);
+                    itemObject.SetActive(true);
+                }
                 _interactionTarget.transform.parent = baseParent;
                 _rigidBody.isKinematic = false;
                 isInHand = false;
@@ -72,11 +95,29 @@ namespace Game.Interactions
 
         public void CancelPickUp()
         {
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(Cancel());
+            }
+        }
+
+        public void ForceCancelPickUp()
+        {
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(Cancel());
+            }
+        }
+
+        private IEnumerator Cancel()
+        {
+            yield return new WaitForSeconds(0.1f);
             if(player)player.CurrentItem = null;
             _isPickedUp = false;
             pressedButton = false;
             player = null;
         }
+
         #endregion
         
         #region OnTriggerEnter/Exit

@@ -7,6 +7,8 @@ namespace Game.Interactions
     public class ActivatePlan : MonoBehaviour
     {
         [HideInInspector]public PlayerInteractionController player;
+        
+        [SerializeField] private float highlightTime = 5;
         [SerializeField] private GameObject vCam;
         private PlanManager _manager;
 
@@ -19,6 +21,7 @@ namespace Game.Interactions
 
         public void Toggle()
         {
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Putzplan);
             if (!_active)
             {
                 vCam.SetActive(true);
@@ -32,6 +35,7 @@ namespace Game.Interactions
                 _manager.DisablePlanMovement();
                 _manager.CurPlayer = null;
                 _active = false;
+                FindObjectOfType<UI.HighlightManager>().HighlightPlayerObjects(player, highlightTime);
             }
         }
     }

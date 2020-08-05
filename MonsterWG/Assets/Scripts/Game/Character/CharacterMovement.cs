@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Character
 {
@@ -14,7 +15,12 @@ namespace Game.Character
         public InputMaster controls = null;
         public bool canMove = true;
         private Rigidbody _rb;
-        
+
+        public Vector2 move;
+        public float interact;
+        public float select;
+        public float notify;
+        public float menu;
         #endregion
 
         #region Event Functions
@@ -25,6 +31,11 @@ namespace Game.Character
             if(playerOne)controls.Player.Enable();
             else controls.Player2.Enable();
             canMove = true;
+        }
+
+        public void StopMove()
+        {
+            canMove = false;
         }
 
         private void Start()
@@ -38,23 +49,24 @@ namespace Game.Character
 
         private void OnDisable()
         {
-            if(playerOne)controls.Player.Disable();
-            else controls.Player2.Disable();
+            //if(playerOne)controls.Player.Disable();
+            //else controls.Player2.Disable();
+
         }
 
         private void Update()
         {
-            Move();
+            DoMove();
             _rb.velocity = Vector3.zero;
         }
         #endregion
 
-        #region Public Functions
-        public void Move()
+        private void DoMove()
         {
             if (!canMove) return;
-            Vector2 movementInput = playerOne ? controls.Player.Move.ReadValue<Vector2>() : controls.Player2.Move.ReadValue<Vector2>();
-            
+            //Vector2 movementInput = playerOne ? controls.Player.Move.ReadValue<Vector2>() : controls.Player2.Move.ReadValue<Vector2>();
+            Vector2 movementInput = move;
+
             Vector3 rightMovement = movementSpeed * Time.deltaTime * movementInput.x * _rightAxis;
             Vector3 upMovement = movementSpeed * Time.deltaTime * movementInput.y * _forwardAxis;
 
@@ -64,7 +76,35 @@ namespace Game.Character
             transform.forward = Vector3.Slerp(transform.forward, heading, 0.15f);
             position += rightMovement;
             position += upMovement;
-            transform.position = position;
+            //transform.position = position;
+            _rb.MovePosition(position);
+        }
+
+        #region Input Overloads
+
+        private void OnMove(InputValue inputValue)
+        {
+            move = inputValue.Get<Vector2>();
+        }
+
+        private void OnInteract(InputValue value)
+        {
+            interact = value.Get<float>();
+        }
+
+        private void OnSelect(InputValue value)
+        {
+            select = value.Get<float>();
+        }
+
+        private void OnMenu(InputValue value)
+        {
+            menu = value.Get<float>();
+        }
+
+        private void OnNotify(InputValue value)
+        {
+            notify = value.Get<float>();
         }
 
         #endregion

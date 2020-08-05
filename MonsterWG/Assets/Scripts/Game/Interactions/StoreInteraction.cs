@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Game.AI;
+using Game.Utility;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -17,7 +18,9 @@ namespace Game.Interactions
         [FoldoutGroup("Base")]
         [SerializeField] private List<GameObject> storedObjects;
 
-        [SerializeField] private bool cheatStorage;
+        public bool cheatStorage;
+
+        public bool isFull => storedObjectsAmount >= limit;
         #endregion
 
         #region Events
@@ -30,10 +33,18 @@ namespace Game.Interactions
         [SerializeField] private int storedObjectsAmount = 0;
         [FoldoutGroup("Events")]
         [Header("Ab wann beginnt das timing minigame")]
-        [SerializeField] private int timinglimit = 3;
+        [SerializeField] private int timinglimit = 3;        
+        [FoldoutGroup("Events")]
+        [SerializeField] private bool useTiming;
+        [FoldoutGroup("Events")]
+        [SerializeField] private UnityEvent timingEvent;
         [FoldoutGroup("Events")]
         [Header("Ab wann beginnt das mashing minigame")]
         [SerializeField] private int mashinglimit = 5;
+        [FoldoutGroup("Events")]
+        [SerializeField] private bool useMashing;
+        [FoldoutGroup("Events")]
+        [SerializeField] private UnityEvent mashingEvent;
         #endregion
         
         #region Explosion
@@ -45,30 +56,41 @@ namespace Game.Interactions
 
         public void AddObject(GameObject o)
         {
+            if (isFull) return;
+
             var pick = o.gameObject.GetComponent<Pickup>();
-            if (!pick.canBeStored) return;
-            pick.CancelPickUp();
+            if (pick.canNotBeStored) return;
+            if (storedObjects.Contains(o)) return;
+            pick.ForceCancelPickUp();
             pick._isPickedUp = false;
             o.gameObject.GetComponentInChildren<InteractionStateBehaviour>().ResetStates();
             StartCoroutine(WaitTime(o.gameObject));
             if (!cheatStorage)
             {
+                SoundManager.Instance.Play(gameObject, SoundManager.Sounds.MüllWegwerfen);
                 storedObjectsAmount++;   
                 storedObjects.Add(o.gameObject);
                 if (useEvents)
                 {
                     if (storedObjectsAmount < timinglimit) return;
-                    else if (storedObjectsAmount >= timinglimit && storedObjectsAmount < mashinglimit) onStored[0].Invoke();
-                    else if (storedObjectsAmount >= mashinglimit) onStored[1].Invoke();
+                    else if (storedObjectsAmount >= timinglimit && storedObjectsAmount < mashinglimit) timingEvent.Invoke();
+                    else if (storedObjectsAmount >= mashinglimit) mashingEvent.Invoke();
                 }
             }
             else
             {
-                if(useEvents)onStored[storedObjectsAmount].Invoke();
-                storedObjects.Add(o.gameObject);
+                SoundManager.Instance.Play(gameObject, SoundManager.Sounds.SchrankKnallen);
                 storedObjectsAmount++; 
-                
-                if (storedObjectsAmount >= limit) RemoveObjects();
+                storedObjects.Add(o.gameObject);
+
+                if (storedObjectsAmount >= limit)
+                {
+                    RemoveObjects();
+                    return;
+                }
+
+                if(useEvents)onStored[storedObjectsAmount].Invoke();
+                if(useMashing && storedObjectsAmount >= mashinglimit) mashingEvent.Invoke();
             }
 
         }
@@ -76,24 +98,30 @@ namespace Game.Interactions
         private void RemoveObjects()
         {
             if(explosionTransforms.IsNullOrEmpty()) return;
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.SchrankKnallen);
             
             for (int i = 0; i < storedObjects.Count; i++)
             {
-                storedObjects[i].GetComponent<Pickup>().CancelPickUp();
+                storedObjects[i].GetComponent<Pickup>().ForceCancelPickUp();
                 storedObjects[i].SetActive(true);
                 storedObjects[i].transform.position = explosionTransforms[i].position;
             }
-            storedObjectsAmount = 0;
+            //storedObjectsAmount = 0;
             storedObjects.Clear();
             onExplosion.Invoke();
             enabled = false;
-            gameObject.SetActive(false);
+            GetComponent<Collider>().enabled = false;
+            //gameObject.SetActive(false);
         }
 
         IEnumerator WaitTime(GameObject o)
         {
             yield return new WaitForSeconds(0.1f);
-            o.SetActive(false);
+
+            if (storedObjects.Contains(o))
+            {
+                o.SetActive(false);
+            }
         }
     }
 }

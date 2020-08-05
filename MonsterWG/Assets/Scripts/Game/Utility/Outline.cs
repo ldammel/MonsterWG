@@ -23,7 +23,6 @@ namespace Game.Utility
             rend.material = outlineMat;
             rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             outlineObject.GetComponent<Outline>().enabled = false;
-            outlineObject.GetComponent<Collider>().enabled = false;
             rend.enabled = false;
 
             return rend;
@@ -33,18 +32,18 @@ namespace Game.Utility
         {
             if (other.CompareTag("Untagged")) return;
             outlineMaterial.SetColor(FirstOutlineColor, other.CompareTag("Player") ? Color.blue : Color.green);
-            _outlineRenderer.enabled = true;
+            //_outlineRenderer.enabled = true;
         }
 
         public void Select(Color color)
         {
             outlineMaterial.SetColor(FirstOutlineColor, color );
-            _outlineRenderer.enabled = true;
+            //_outlineRenderer.enabled = true;
         }
     
         public void Deselect()
         {
-            _outlineRenderer.enabled = false;
+            //_outlineRenderer.enabled = false;
         }
 
         public void Activate()
@@ -56,7 +55,7 @@ namespace Game.Utility
         private void  OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Untagged")) return;
-            _outlineRenderer.enabled = false;
+            //_outlineRenderer.enabled = false;
         }
     }
 }
