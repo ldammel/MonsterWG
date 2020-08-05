@@ -18,7 +18,6 @@ namespace Game.UI
             _character = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
             _character1 = GameObject.FindGameObjectWithTag("Player2").GetComponent<CharacterMovement>();
             _character.controls.Player.Menu.performed += _ => OnMenuPressed();
-            _character1.controls.Player2.Menu.performed += _ => OnMenuPressed();
         }
 
         private void OnMenuPressed()
