@@ -152,6 +152,29 @@ namespace Game.Interactions
             return false;
         }
 
+        public void StartAnimation(int id)
+        {
+            if (player)
+            {
+                player.character.animationHelper.SetInt("Interaction", id);
+            }
+        }
+
+        public void StartOneShotAnimation(int id)
+        {
+            if (player)
+            {
+                player.character.animationHelper.SetInt("Interaction", id);
+
+                StartCoroutine(StopAnimationAfterTime(0.1f));
+            }
+        }
+
+        public void StopAnimation()
+        {
+            player.character.animationHelper.SetInt("Interaction", 0);
+        }
+
         private void Update()
         {
             if(player)pressedButton = player.InputInteraction >= 1f;
@@ -226,6 +249,12 @@ namespace Game.Interactions
                 timerImage.fillAmount = _startTime / duration;
                 yield return new WaitForSeconds(0.2f);
             }
+        }
+
+        private IEnumerator StopAnimationAfterTime(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            StopAnimation();
         }
 
         public enum InteractionResult
