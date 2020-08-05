@@ -60,7 +60,7 @@ namespace Game.Interactions
             var pick = o.gameObject.GetComponent<Pickup>();
             if (pick.canNotBeStored) return;
             if (storedObjects.Contains(o)) return;
-            pick.CancelPickUp();
+            pick.ForceCancelPickUp();
             pick._isPickedUp = false;
             o.gameObject.GetComponentInChildren<InteractionStateBehaviour>().ResetStates();
             StartCoroutine(WaitTime(o.gameObject));
@@ -98,7 +98,7 @@ namespace Game.Interactions
             
             for (int i = 0; i < storedObjects.Count; i++)
             {
-                storedObjects[i].GetComponent<Pickup>().CancelPickUp();
+                storedObjects[i].GetComponent<Pickup>().ForceCancelPickUp();
                 storedObjects[i].SetActive(true);
                 storedObjects[i].transform.position = explosionTransforms[i].position;
             }

@@ -18,7 +18,9 @@ namespace Game.Interactions
         public float InputMenu { get; private set; }
         public float InputCall { get; private set; }
         public Vector2 InputMove { get; private set; }
-        
+
+        public bool HasInteraction => _interactions.Count > 0;
+
         private bool _plan;
         private bool _pressedActivation;
         private bool _pressedCall;

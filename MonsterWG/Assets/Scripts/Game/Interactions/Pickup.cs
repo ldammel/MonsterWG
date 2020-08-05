@@ -99,6 +99,14 @@ namespace Game.Interactions
             }
         }
 
+        public void ForceCancelPickUp()
+        {
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(Cancel());
+            }
+        }
+
         private IEnumerator Cancel()
         {
             yield return new WaitForSeconds(0.1f);

@@ -11,6 +11,7 @@ namespace Game.AI.Conditions
         {
             if (!_timerEnded) return false;
             if(pickup.player)if(pickup.player.StoreInteraction) return false;
+            if (pickup.player.HasInteraction) return false;
             return pickup.isInHand && pickup.pressedButton && !pickup.inTrigger;
         }
 
