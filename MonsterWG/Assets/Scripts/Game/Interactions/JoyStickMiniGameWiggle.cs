@@ -20,7 +20,6 @@ namespace Game.Interactions
         private void Update()
         {
             if (!_start) return;
-            if (Input.GetKeyDown(KeyCode.Escape)) EndMiniGame(false);
             float input = _interaction.player.InputMove[horizontal ? 0 : 1];
 
             if (_switch)

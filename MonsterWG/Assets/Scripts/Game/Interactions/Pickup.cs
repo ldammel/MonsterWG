@@ -93,7 +93,18 @@ namespace Game.Interactions
 
         public void CancelPickUp()
         {
-            StartCoroutine(Cancel());
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(Cancel());
+            }
+        }
+
+        public void ForceCancelPickUp()
+        {
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(Cancel());
+            }
         }
 
         private IEnumerator Cancel()

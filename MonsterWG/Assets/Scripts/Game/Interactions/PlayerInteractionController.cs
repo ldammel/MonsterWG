@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Character;
 using UnityEngine;
 
@@ -18,7 +19,9 @@ namespace Game.Interactions
         public float InputMenu { get; private set; }
         public float InputCall { get; private set; }
         public Vector2 InputMove { get; private set; }
-        
+
+        public bool HasInteraction => _interactions.Count > 0;
+
         private bool _plan;
         private bool _pressedActivation;
         private bool _pressedCall;
@@ -36,21 +39,11 @@ namespace Game.Interactions
 
         private void Update()
         {
-            InputInteraction = isPlayerOne
-                ? character.controls.Player.Interact.ReadValue<float>()
-                : character.controls.Player2.Interact.ReadValue<float>();
-            InputPickUp = isPlayerOne
-                ? character.controls.Player.Select.ReadValue<float>()
-                : character.controls.Player2.Select.ReadValue<float>();
-            InputMenu = isPlayerOne
-                ? character.controls.Player.Menu.ReadValue<float>()
-                : character.controls.Player2.Menu.ReadValue<float>();
-            InputCall = isPlayerOne
-                ? character.controls.Player.Notify.ReadValue<float>()
-                : character.controls.Player2.Notify.ReadValue<float>();
-            InputMove = isPlayerOne
-                ? character.controls.Player.Move.ReadValue<Vector2>()
-                : character.controls.Player2.Move.ReadValue<Vector2>();
+            InputInteraction = character.interact;
+            InputPickUp = character.select;
+            InputMenu = character.menu;
+            InputCall = character.notify;
+            InputMove = character.move;
             
             Interact(InputInteraction);
             Pickups(InputPickUp);
@@ -65,6 +58,11 @@ namespace Game.Interactions
                 {
                     _interactions.Remove(_interactions[i]);
                 }
+            }
+
+            if(CurrentItem && !CurrentItem.gameObject.activeSelf)
+            {
+                CurrentItem = null;
             }
         }
         
@@ -87,16 +85,32 @@ namespace Game.Interactions
             if (_interactions.Count < 1) return;
             if (input >= 1f && _interactions[0].gameObject.activeSelf)
             {
+                Interaction.InteractionResult lastFailedResult = Interaction.InteractionResult.Invalid;
+
                 MultiInteraction multi = _interactions[0].GetComponentInParent<MultiInteraction>();
                 if (multi && multi.InteractionOrder == MultiInteraction.Order.Parallel)
                 {
+                    bool found = false;
                     foreach(var interaction in multi.interactions)
                     {
-                        if (interaction.Interact())
+                        Interaction.InteractionResult result = interaction.Interact();
+
+                        if (result == Interaction.InteractionResult.Success)
                         {
                             _currentInteraction = interaction;
+                            found = true;
                             break;
                         }
+                        else
+                        {
+                            lastFailedResult = result;
+                            //character.GetComponentInChildren<UI.CharacterUI>().UpdateInteractionFailedUI(result);
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        _currentInteraction = null;
                     }
                 }
                 else
@@ -106,7 +120,16 @@ namespace Game.Interactions
 
                 if (_currentInteraction)
                 {
-                    _currentInteraction.Interact();
+                    Interaction.InteractionResult result = _currentInteraction.Interact();
+
+                    if (result != Interaction.InteractionResult.Success)
+                    {
+                        character.GetComponentInChildren<UI.CharacterUI>().UpdateInteractionFailedUI(result);
+                    }
+                }
+                else
+                {
+                    character.GetComponentInChildren<UI.CharacterUI>().UpdateInteractionFailedUI(lastFailedResult);
                 }
             }
             else if (_currentInteraction && !_currentInteraction.Stop)
@@ -114,7 +137,7 @@ namespace Game.Interactions
                 _currentInteraction.Cancel();
             }
         }
-        
+
         public void Pickups(float input)
         {
             if (input >= 1f && !_pressedPickup)
@@ -151,6 +174,9 @@ namespace Game.Interactions
 
         public void Call(float input)
         {
+            if (!character.canMove)
+                return;
+
             if (input >= 1f && !_pressedCall)
             {
                 if (!highlightManager)
@@ -233,6 +259,6 @@ namespace Game.Interactions
                 _activatePlan = null;
             }
 
-        } 
+        }
     }
 }

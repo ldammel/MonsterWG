@@ -173,6 +173,8 @@ namespace Game.UI
         {
             if (timer <= 0) return false;
 
+            if (!sign.Original.gameObject.activeSelf) return false;
+
             switch (showMode)
             {
                 case ShowMode.None: return false;
@@ -215,14 +217,14 @@ namespace Game.UI
 
                         if (interaction.useCleaningCondition)
                         {
-                            return interaction.cleaningCondition.WouldMetCondition(player);
+                            return interaction.cleaningCondition.WouldMetCondition(player) == Interaction.InteractionResult.Success;
                         }
 
                         return false;
                     }
                     else if(sign.Type == UIType.Storage || sign.Type == UIType.Cheat)
                     {
-                        return player.CurrentItem.canBeStored;
+                        return player.CurrentItem.canBeStored && !sign.Original.GetComponent<StoreInteraction>().isFull;
                     }
                     return false;
             }
@@ -246,7 +248,7 @@ namespace Game.UI
                             {
                                 if (interaction.useCleaningCondition)
                                 {
-                                    if (interaction.cleaningCondition.WouldMetCondition(player))
+                                    if (interaction.cleaningCondition.WouldMetCondition(player) == Interaction.InteractionResult.Success)
                                     {
                                         sign.SetSprite(player.isPlayerOne ? consumedInteractionSpriteP1 : consumedInteractionSpriteP2);
                                     }

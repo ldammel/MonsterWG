@@ -19,36 +19,36 @@ public class CleaningCondition : MonoBehaviour
     public int NeededWaterAmount = 10;
     private PlayerInteractionController _controller;
 
-    public bool WouldMetCondition(PlayerInteractionController player)
+    public Interaction.InteractionResult WouldMetCondition(PlayerInteractionController player)
     {
         return CheckConditionForPlayer(player, false);
     }
 
-    public bool IsConditionMet()
+    public Interaction.InteractionResult IsConditionMet()
     {
         _controller = GetComponent<Interaction>().player;
         return CheckConditionForPlayer(_controller, true);
     }
 
-    private bool CheckConditionForPlayer(PlayerInteractionController player, bool log)
+    private Interaction.InteractionResult CheckConditionForPlayer(PlayerInteractionController player, bool log)
     {
         // Player in range?
-        if (!player) { if (log) { Debug.Log("No player in range!", gameObject); } return false; }
+        if (!player) { if (log) { Debug.Log("No player in range!", gameObject); } return Interaction.InteractionResult.Failed; }
 
         // no item needed?
-        if (!NeedsItem && player.CurrentItem){ if (log) { Debug.Log("Player needs free hands!", gameObject); } return false; }
-        if (!NeedsItem && !player.CurrentItem) return true;
+        if (!NeedsItem && player.CurrentItem){ if (log) { Debug.Log("Player needs free hands!", gameObject); } return Interaction.InteractionResult.NeedsFreeHands; }
+        if (!NeedsItem && !player.CurrentItem) return Interaction.InteractionResult.Success;
 
         // item needed?
-        if (!player.CurrentItem){ if (log) { Debug.Log("Player has no item", gameObject); } return false; } 
-
-        // watered item needed?
-        if (NeedsWater && player.CurrentItem.CurrentWaterAmount < NeededWaterAmount){ if (log) { Debug.Log("Item has not enough water!", gameObject); } return false; } 
+        if (!player.CurrentItem){ if (log) { Debug.Log("Player has no item", gameObject); } return Interaction.InteractionResult.NeedsItem; } 
 
         // item has correct tag?
-        if (!player.CurrentItem.gameObject.CompareTag(cleaningObjectTag)) { if (log) { Debug.Log("Item has incorrect tag!", gameObject); } return false; }
+        if (!player.CurrentItem.gameObject.CompareTag(cleaningObjectTag)) { if (log) { Debug.Log("Item has incorrect tag!", gameObject); } return Interaction.InteractionResult.WrongType; }
 
-        return true;
+        // watered item needed?
+        if (NeedsWater && player.CurrentItem.CurrentWaterAmount < NeededWaterAmount){ if (log) { Debug.Log("Item has not enough water!", gameObject); } return Interaction.InteractionResult.NeedsWater; } 
+
+        return Interaction.InteractionResult.Success;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -61,13 +61,18 @@ namespace Game.Interactions
         }
 
 
-        public bool Interact()
+        public InteractionResult Interact()
         {
             if (useCleaningCondition)
             {
-                if (!cleaningCondition.IsConditionMet()) return false;
+                InteractionResult result = cleaningCondition.IsConditionMet();
+
+                if(result != InteractionResult.Success)
+                {
+                    return result;
+                }
             }
-            if (_isDone) return false;
+            if (_isDone) return InteractionResult.Failed;
             if (useTimer)
             {
                 StartTimer();
@@ -86,7 +91,7 @@ namespace Game.Interactions
             if(onStart != null && _interactAmount < onStart.Length)
                 onStart[_interactAmount].Invoke();
 
-            return true;
+            return InteractionResult.Success;
         }
 
         public void Reset()
@@ -124,7 +129,7 @@ namespace Game.Interactions
             if (consumesItem)
             {
                 Pickup pickup = player.CurrentItem;
-                if(pickup)pickup.CancelPickUp();
+                if(pickup)pickup.ForceCancelPickUp();
 
                 Destroy(pickup.gameObject);
             }
@@ -219,6 +224,17 @@ namespace Game.Interactions
                 timerImage.fillAmount = _startTime / duration;
                 yield return new WaitForSeconds(0.2f);
             }
+        }
+
+        public enum InteractionResult
+        {
+            Invalid = -1,
+            Failed,
+            Success,
+            NeedsFreeHands,
+            NeedsItem,
+            NeedsWater,
+            WrongType
         }
 
     }

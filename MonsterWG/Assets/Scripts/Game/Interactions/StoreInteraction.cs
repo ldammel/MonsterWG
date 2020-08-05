@@ -18,6 +18,8 @@ namespace Game.Interactions
         [SerializeField] private List<GameObject> storedObjects;
 
         public bool cheatStorage;
+
+        public bool isFull => storedObjectsAmount >= limit;
         #endregion
 
         #region Events
@@ -53,9 +55,12 @@ namespace Game.Interactions
 
         public void AddObject(GameObject o)
         {
+            if (isFull) return;
+
             var pick = o.gameObject.GetComponent<Pickup>();
             if (pick.canNotBeStored) return;
-            pick.CancelPickUp();
+            if (storedObjects.Contains(o)) return;
+            pick.ForceCancelPickUp();
             pick._isPickedUp = false;
             o.gameObject.GetComponentInChildren<InteractionStateBehaviour>().ResetStates();
             StartCoroutine(WaitTime(o.gameObject));
@@ -72,12 +77,17 @@ namespace Game.Interactions
             }
             else
             {
-                if(useEvents)onStored[storedObjectsAmount].Invoke();
-                storedObjects.Add(o.gameObject);
                 storedObjectsAmount++; 
+                storedObjects.Add(o.gameObject);
+
+                if (storedObjectsAmount >= limit)
+                {
+                    RemoveObjects();
+                    return;
+                }
+
+                if(useEvents)onStored[storedObjectsAmount].Invoke();
                 if(useMashing && storedObjectsAmount >= mashinglimit) mashingEvent.Invoke();
-                
-                if (storedObjectsAmount >= limit) RemoveObjects();
             }
 
         }
@@ -88,21 +98,26 @@ namespace Game.Interactions
             
             for (int i = 0; i < storedObjects.Count; i++)
             {
-                storedObjects[i].GetComponent<Pickup>().CancelPickUp();
+                storedObjects[i].GetComponent<Pickup>().ForceCancelPickUp();
                 storedObjects[i].SetActive(true);
                 storedObjects[i].transform.position = explosionTransforms[i].position;
             }
-            storedObjectsAmount = 0;
+            //storedObjectsAmount = 0;
             storedObjects.Clear();
             onExplosion.Invoke();
             enabled = false;
-            gameObject.SetActive(false);
+            GetComponent<Collider>().enabled = false;
+            //gameObject.SetActive(false);
         }
 
         IEnumerator WaitTime(GameObject o)
         {
             yield return new WaitForSeconds(0.1f);
-            o.SetActive(false);
+
+            if (storedObjects.Contains(o))
+            {
+                o.SetActive(false);
+            }
         }
     }
 }
