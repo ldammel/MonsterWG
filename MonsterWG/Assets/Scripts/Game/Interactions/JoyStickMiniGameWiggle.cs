@@ -34,7 +34,7 @@ namespace Game.Interactions
                 }
                 else if (_currentValue > 0)
                 {
-                    _currentValue -= 0.01f * Time.deltaTime;
+                    //_currentValue -= 0.01f * Time.deltaTime;
                 }
             }
             else
@@ -48,7 +48,7 @@ namespace Game.Interactions
                 }
                 else if (_currentValue > 0)
                 {
-                    _currentValue -= 0.01f * Time.deltaTime;
+                    //_currentValue -= 0.01f * Time.deltaTime;
                 }
             }
             progressBar.fillAmount = 1 * _currentValue;

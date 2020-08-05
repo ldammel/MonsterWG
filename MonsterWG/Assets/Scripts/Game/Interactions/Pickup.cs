@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
@@ -62,6 +63,7 @@ namespace Game.Interactions
                 {
                     trashBag.SetActive(true);
                     itemObject.SetActive(false);
+                    SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Interagieren);
                 }
                 _rigidBody.isKinematic = true;
                 _interactionTarget.transform.position = player.handGrabPosition.position;

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,6 +26,7 @@ namespace Game.Interactions
         
         void Start()
         {
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.TvStaticSound);
             _correctGuesses = 0;
             imageContainer.SetActive(false);
         }
@@ -48,6 +50,7 @@ namespace Game.Interactions
                         buttonTwoColorImage.SetActive(true);
                         buttonThreeColorImage.SetActive(true);
                         _correctGuesses = 0;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         break;
                     case 2 :
                         buttonThreeColorImage.SetActive(false);
@@ -70,6 +73,7 @@ namespace Game.Interactions
                         buttonTwoColorImage.SetActive(true);
                         buttonThreeColorImage.SetActive(true);
                         _correctGuesses = 0;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         break;
                     case 1:
                         buttonTwoColorImage.SetActive(false);
@@ -80,6 +84,7 @@ namespace Game.Interactions
                         buttonTwoColorImage.SetActive(true);
                         buttonThreeColorImage.SetActive(true);
                         _correctGuesses = 0;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
                         break;
                     default:
                         break;
@@ -124,6 +129,9 @@ namespace Game.Interactions
             _correctGuesses = 0;
             onSuccess.Invoke();
             imageContainer.SetActive(false);
+            SoundManager.Instance.Stop();
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.TvAusschalten);
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
             if(_player)_player.character.canMove = true;
         }
 

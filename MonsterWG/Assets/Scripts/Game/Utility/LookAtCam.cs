@@ -13,7 +13,7 @@ namespace Game.Utility
             target = FindObjectOfType<CinemachineVirtualCamera>().gameObject;
         }
 
-        void Update()
+        void LateUpdate()
         {
             transform.LookAt(target.transform);
         }

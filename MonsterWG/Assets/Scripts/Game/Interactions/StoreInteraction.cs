@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Game.AI;
+using Game.Utility;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -66,6 +67,7 @@ namespace Game.Interactions
             StartCoroutine(WaitTime(o.gameObject));
             if (!cheatStorage)
             {
+                SoundManager.Instance.Play(gameObject, SoundManager.Sounds.MüllWegwerfen);
                 storedObjectsAmount++;   
                 storedObjects.Add(o.gameObject);
                 if (useEvents)
@@ -77,6 +79,7 @@ namespace Game.Interactions
             }
             else
             {
+                SoundManager.Instance.Play(gameObject, SoundManager.Sounds.SchrankKnallen);
                 storedObjectsAmount++; 
                 storedObjects.Add(o.gameObject);
 
@@ -95,6 +98,7 @@ namespace Game.Interactions
         private void RemoveObjects()
         {
             if(explosionTransforms.IsNullOrEmpty()) return;
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.SchrankKnallen);
             
             for (int i = 0; i < storedObjects.Count; i++)
             {

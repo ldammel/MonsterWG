@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,8 +29,10 @@ namespace Game.Utility
                 Debug.LogWarning("Enum item count of " + nameof(Sounds) + " in " + nameof(SoundManager) + " has to be equal to the length of " + nameof(Clips), this);
                 Application.Quit();
             }*/
+            _audioSourceList = new List<AudioSource>();
         }
         public AudioClip[] Clips;
+        private List<AudioSource> _audioSourceList;
         public enum Sounds
         {
             MüllWegwerfen,
@@ -55,27 +59,32 @@ namespace Game.Utility
             TimerCountdown,
             TimerAuto,
             Putzplan,
-            StadtAmbiente,
             VögelAmbiente
         }
         
-        public static void Play(GameObject source, Sounds sound, int priority = 128, float volume = 1f) {
-            PlaySound(source, Instance.Clips[(int) sound], priority, volume);
+        public void Play(GameObject source, Sounds sound, int priority = 128, float volume = 1f) {
+            if(Instance.Clips[(int) sound] != null)PlaySound(source, Instance.Clips[(int) sound], priority, volume);
         }
 
-        public static void PlayDelayed(float delay, GameObject source, Sounds sound, int priority = 128, float volume = 1f) {
+        public void Stop()
+        {
+            _audioSourceList.ForEach(Destroy);
+        }
+
+        public void PlayDelayed(float delay, GameObject source, Sounds sound, int priority = 128, float volume = 1f) {
             Instance.StartCoroutine(ExecuteDelayed(
                 delay, delegate { PlaySound(source, Instance.Clips[(int) sound], priority, volume); }
             ));
         }
 
-        private static IEnumerator ExecuteDelayed(float delay, UnityAction action) {
+        private IEnumerator ExecuteDelayed(float delay, UnityAction action) {
             yield return new WaitForSeconds(delay);
             action.Invoke();
         }
 
-        private static void PlaySound(GameObject source, AudioClip clip, int priority = 128, float volume = 1f) {
+        private void PlaySound(GameObject source, AudioClip clip, int priority = 128, float volume = 1f) {
             var audioSource = source.AddComponent<AudioSource>();
+            _audioSourceList.Add(audioSource);
             audioSource.priority = priority;
             audioSource.clip = clip;
             audioSource.volume = volume;
@@ -83,7 +92,7 @@ namespace Game.Utility
             Destroy(audioSource, clip.length);
         }
 
-        public static AudioClip GetClip(Sounds s) {
+        public AudioClip GetClip(Sounds s) {
             return Instance.Clips[(int) s];
         }
     }

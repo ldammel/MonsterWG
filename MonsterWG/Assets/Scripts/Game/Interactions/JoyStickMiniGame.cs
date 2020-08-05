@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Utility;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -11,6 +12,10 @@ namespace Game.Interactions
         [SerializeField] protected GameObject uiObject;
         [SerializeField] protected float inputThreshold = 0.5f;
         public UnityEvent onFinish;
+        public bool bad;
+        public bool geschirr;
+        public bool bett;
+        public bool wischen;
 
         protected Interaction _interaction;
         protected float _currentValue;
@@ -40,6 +45,10 @@ namespace Game.Interactions
 
         public virtual void EndMiniGame(bool success)
         {
+            if(bad)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BadReinigen);
+            else if(bett)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BettSchütteln);
+            else if(geschirr)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.GeschirrSpülen);
+            else if(wischen)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BodenWischen);
             _start = false;
             uiObject.SetActive(false);
             _interaction.player.character.canMove = true;

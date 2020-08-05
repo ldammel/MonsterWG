@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Utility;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,7 +23,7 @@ namespace Game.Interactions
         [FoldoutGroup("Mashing MiniGame")] [SerializeField] private Image mashFillBar;
 
         public UnityEvent onSuccess;
-        
+
         private bool _active;
         private float _currentValue = 0;
         private PlayerInteractionController _player;
@@ -65,11 +66,10 @@ namespace Game.Interactions
                     if (_currentValue >= 0.5f && _currentValue <= 0.75f) EndMiniGame();
                     else
                     {
-                        arrowAnimation.Stop();
                         _currentValue = 0;
                         _left = false;
                         _pressed = false;
-                        arrowAnimation.Play();
+                        arrowAnimation.Rewind();
                     }
                 }
                 else
@@ -84,6 +84,7 @@ namespace Game.Interactions
                     mashFillBar.fillAmount = (float)mashedAmount / (float)neededMashAmount;
                     mashButtonPressed.SetActive(true);
                     _pressed = true;
+                    SoundManager.Instance.Play(gameObject, SoundManager.Sounds.SchrankStopfen);
                     if (mashedAmount <= neededMashAmount)mashedAmount++;
                     else EndMiniGame();
                 }
@@ -122,6 +123,7 @@ namespace Game.Interactions
             _active = false;
             _timing = false;
             onSuccess.Invoke();
+
             if(buttonObject)buttonObject.SetActive(false);
             if(timingObject)timingObject.SetActive(false);
             if(_player)_player.character.canMove = true;
