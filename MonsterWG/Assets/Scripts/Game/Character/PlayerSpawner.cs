@@ -9,7 +9,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private PlayerInputManager _inputManager;
 
-    private void Start()
+    private void Awake()
     {
         _inputManager = GetComponent<PlayerInputManager>();
 
