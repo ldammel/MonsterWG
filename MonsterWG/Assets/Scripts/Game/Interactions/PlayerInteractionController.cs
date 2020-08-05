@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Character;
 using UnityEngine;
 
@@ -84,16 +85,32 @@ namespace Game.Interactions
             if (_interactions.Count < 1) return;
             if (input >= 1f && _interactions[0].gameObject.activeSelf)
             {
+                Interaction.InteractionResult lastFailedResult = Interaction.InteractionResult.Invalid;
+
                 MultiInteraction multi = _interactions[0].GetComponentInParent<MultiInteraction>();
                 if (multi && multi.InteractionOrder == MultiInteraction.Order.Parallel)
                 {
+                    bool found = false;
                     foreach(var interaction in multi.interactions)
                     {
-                        if (interaction.Interact())
+                        Interaction.InteractionResult result = interaction.Interact();
+
+                        if (result == Interaction.InteractionResult.Success)
                         {
                             _currentInteraction = interaction;
+                            found = true;
                             break;
                         }
+                        else
+                        {
+                            lastFailedResult = result;
+                            //character.GetComponentInChildren<UI.CharacterUI>().UpdateInteractionFailedUI(result);
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        _currentInteraction = null;
                     }
                 }
                 else
@@ -103,7 +120,16 @@ namespace Game.Interactions
 
                 if (_currentInteraction)
                 {
-                    _currentInteraction.Interact();
+                    Interaction.InteractionResult result = _currentInteraction.Interact();
+
+                    if (result != Interaction.InteractionResult.Success)
+                    {
+                        character.GetComponentInChildren<UI.CharacterUI>().UpdateInteractionFailedUI(result);
+                    }
+                }
+                else
+                {
+                    character.GetComponentInChildren<UI.CharacterUI>().UpdateInteractionFailedUI(lastFailedResult);
                 }
             }
             else if (_currentInteraction && !_currentInteraction.Stop)
@@ -111,7 +137,7 @@ namespace Game.Interactions
                 _currentInteraction.Cancel();
             }
         }
-        
+
         public void Pickups(float input)
         {
             if (input >= 1f && !_pressedPickup)
@@ -233,6 +259,6 @@ namespace Game.Interactions
                 _activatePlan = null;
             }
 
-        } 
+        }
     }
 }

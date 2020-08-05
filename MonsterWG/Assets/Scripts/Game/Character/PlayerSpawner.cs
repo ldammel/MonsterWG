@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using Game.Utility;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -57,6 +59,8 @@ public class PlayerSpawner : MonoBehaviour
         {
             Debug.LogFormat("Spawned player with ID {0}", index);
         }
+
+        input.GetComponentInChildren<LookAtCam>().target = FindObjectOfType<CinemachineVirtualCamera>().gameObject;
 
         FindObjectOfType<Cinemachine.CinemachineTargetGroup>().AddMember(input.transform, 1, 4);
 

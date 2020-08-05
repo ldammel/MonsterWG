@@ -217,7 +217,7 @@ namespace Game.UI
 
                         if (interaction.useCleaningCondition)
                         {
-                            return interaction.cleaningCondition.WouldMetCondition(player);
+                            return interaction.cleaningCondition.WouldMetCondition(player) == Interaction.InteractionResult.Success;
                         }
 
                         return false;
@@ -248,7 +248,7 @@ namespace Game.UI
                             {
                                 if (interaction.useCleaningCondition)
                                 {
-                                    if (interaction.cleaningCondition.WouldMetCondition(player))
+                                    if (interaction.cleaningCondition.WouldMetCondition(player) == Interaction.InteractionResult.Success)
                                     {
                                         sign.SetSprite(player.isPlayerOne ? consumedInteractionSpriteP1 : consumedInteractionSpriteP2);
                                     }
