@@ -248,7 +248,10 @@ namespace Game.Interactions
 
         private void OnTriggerExit(Collider other)
         {
-            if(useTimer)timerbase.SetActive(false);
+            if (other.CompareTag("Untagged")) return;
+            if (!other.CompareTag("Player") && !other.CompareTag("Player2")) return;
+
+            if (useTimer)timerbase.SetActive(false);
             player = null;
         }
         
