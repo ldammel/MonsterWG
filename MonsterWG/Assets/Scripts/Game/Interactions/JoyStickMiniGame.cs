@@ -49,7 +49,10 @@ namespace Game.Interactions
             SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
             _start = false;
             uiObject.SetActive(false);
-            _interaction.player.character.canMove = true;
+            if(_interaction.player)
+            {
+                _interaction.player.character.canMove = true;
+            }
             if (!success)
             {
                 return;
@@ -57,7 +60,7 @@ namespace Game.Interactions
 
             _interaction.SetDone();
             
-            if(_interaction.player.CurrentItem && _interaction.player.CurrentItem.NeedsWater)
+            if(_interaction.player && _interaction.player.CurrentItem && _interaction.player.CurrentItem.NeedsWater)
             {
                 _interaction.player.CurrentItem.CurrentWaterAmount -= _condition.NeededWaterAmount;
                 Mathf.Clamp(_interaction.player.CurrentItem.CurrentWaterAmount, 0, 100);

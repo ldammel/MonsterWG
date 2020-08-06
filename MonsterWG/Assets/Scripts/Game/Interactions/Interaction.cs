@@ -103,6 +103,11 @@ namespace Game.Interactions
             if(onStart != null && _interactAmount < onStart.Length)
                 onStart[_interactAmount].Invoke();
 
+            if (consumesItem)
+            {
+                player.CurrentItem.Hide();
+            }
+
             return InteractionResult.Success;
         }
 
