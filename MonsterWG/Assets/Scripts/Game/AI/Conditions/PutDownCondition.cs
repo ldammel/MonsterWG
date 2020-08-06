@@ -13,7 +13,7 @@ namespace Game.AI.Conditions
             if(pickup.player)if(pickup.player.StoreInteraction) return false;
             if(pickup.player)if(pickup.player.InMiniGame) return false;
             if (pickup.player.HasInteraction) return false;
-            return pickup.isInHand && pickup.pressedButton && !pickup.inTrigger;
+            return pickup.isInHand && pickup.pressedButton && !pickup.inTrigger && !pickup.InWall;
         }
 
         public void StartTimer()

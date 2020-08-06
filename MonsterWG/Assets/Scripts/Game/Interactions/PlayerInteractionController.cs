@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Character;
+using Game.Utility;
 using UnityEngine;
 
 namespace Game.Interactions
@@ -8,6 +9,7 @@ namespace Game.Interactions
     public class PlayerInteractionController : MonoBehaviour
     {
         public Transform handGrabPosition;
+        public Transform bagPosition;
         public float highlightTime = 3;
         public bool isPlayerOne;
         public CharacterMovement character;
@@ -37,6 +39,11 @@ namespace Game.Interactions
         private Interaction _currentInteraction;
 
         private UI.HighlightManager highlightManager;
+
+        private void Start()
+        {
+            PlanStartUp.Instance.Startup(this);
+        }
 
         private void Update()
         {

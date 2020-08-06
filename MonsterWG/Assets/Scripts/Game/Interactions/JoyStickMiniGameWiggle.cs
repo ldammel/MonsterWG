@@ -22,17 +22,6 @@ namespace Game.Interactions
         {
             if (!_start) return;
             float input = _interaction.player.InputMove[horizontal ? 0 : 1];
-            
-            if (_interaction.player.InputInteraction <= 0 && !_canClose)
-            {
-                StartCoroutine(CheckClose(true));
-            }
-            else if (_interaction.player.InputInteraction >= 1 && _canClose)
-            {
-                EndMiniGame(false);
-                StartCoroutine(CheckClose(false));
-                return;
-            }
 
             if (_switch)
             {

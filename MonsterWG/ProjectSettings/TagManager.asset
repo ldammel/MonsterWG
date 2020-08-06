@@ -17,6 +17,7 @@ TagManager:
   - Dirt
   - Wischmop
   - "Gie\xDFkanne"
+  - Wall
   layers:
   - Default
   - TransparentFX

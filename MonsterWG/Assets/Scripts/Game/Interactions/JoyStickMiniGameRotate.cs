@@ -85,17 +85,6 @@ namespace Game.Interactions
                 return;
             }
 
-            if (_interaction.player.InputInteraction <= 0 && !_canClose)
-            {
-                StartCoroutine(CheckClose(true));
-            }
-            else if (_interaction.player.InputInteraction >= 1 && _canClose)
-            {
-                EndMiniGame(false);
-                StartCoroutine(CheckClose(false));
-                return;
-            }
-
             Vector2 input = _interaction.player.InputMove;
 
             bool interactionCounted = true;

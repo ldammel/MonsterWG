@@ -21,7 +21,6 @@ namespace Game.Interactions
         protected Interaction _interaction;
         protected float _currentValue;
         protected bool _start;
-        protected bool _canClose;
 
         private CleaningCondition _condition;
 
@@ -38,7 +37,6 @@ namespace Game.Interactions
         
         public virtual void StartMiniGame()
         {
-            if (_canClose) return;
             _start = true;
             _currentValue = 0;
             _interaction.player.character.canMove = false;
@@ -65,12 +63,6 @@ namespace Game.Interactions
                 Mathf.Clamp(_interaction.player.CurrentItem.CurrentWaterAmount, 0, 100);
             }
             onFinish.Invoke();
-        }
-        
-        protected IEnumerator CheckClose(bool value)
-        {
-            yield return new WaitForSeconds(0.3f);
-            _canClose = value;
         }
 
         protected virtual void OnStart() { }
