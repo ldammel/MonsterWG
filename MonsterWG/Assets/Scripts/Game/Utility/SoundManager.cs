@@ -50,7 +50,8 @@ namespace Game.Utility
             InputCorrect,
             InputWrong,
             Putzplan,
-            Ambiente
+            Ambiente,
+            CountDown
         }
         
         public void Play(GameObject source, Sounds sound, int priority = 128, float volume = 1f) {

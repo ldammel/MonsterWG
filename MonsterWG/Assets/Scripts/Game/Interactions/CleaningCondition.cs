@@ -42,7 +42,6 @@ public class CleaningCondition : MonoBehaviour
             {
                 Debug.Log("Player needs free hands!", gameObject);
             } 
-            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
             return Interaction.InteractionResult.NeedsFreeHands; 
         }
         if (!NeedsItem && !player.CurrentItem) return Interaction.InteractionResult.Success;
@@ -53,7 +52,6 @@ public class CleaningCondition : MonoBehaviour
             {
                 Debug.Log("Player has no item", gameObject);
             } 
-            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
             return Interaction.InteractionResult.NeedsItem; 
         } 
 
@@ -63,7 +61,6 @@ public class CleaningCondition : MonoBehaviour
             {
                 Debug.Log("Item has incorrect tag!", gameObject);
             } 
-            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
             return Interaction.InteractionResult.WrongType; 
         }
 

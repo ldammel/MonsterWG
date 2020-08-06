@@ -20,7 +20,8 @@ namespace Game.Utility
         public UnityEvent onFinish;
 
         private bool _stop = true;
-
+        private bool _played;
+        
         #endregion
 
         #region Functions
@@ -56,6 +57,11 @@ namespace Game.Utility
         {
             if(_stop) return;
             currentTime += Time.deltaTime;
+            if (timeLeft - currentTime <= 5 && !_played)
+            {
+                _played = true;
+                SoundManager.Instance.Play(gameObject, SoundManager.Sounds.CountDown);
+            }
             if (!(currentTime >= timeLeft)) return;
             _stop = true;
             if(target)target.ToggleObjects();
