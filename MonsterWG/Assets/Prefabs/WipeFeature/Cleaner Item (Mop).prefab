@@ -613,6 +613,7 @@ GameObject:
   - component: {fileID: 3724612639299983969}
   - component: {fileID: 3724612639299983968}
   - component: {fileID: 3724612639299983975}
+  - component: {fileID: 682896845263771013}
   m_Layer: 10
   m_Name: Cleaner Item (Mop)
   m_TagString: Wischmop
@@ -664,6 +665,9 @@ MonoBehaviour:
       m_Calls: []
   NeedsWater: 1
   CurrentWaterAmount: 0
+  mesh: {fileID: 0}
+  dryMaterial: {fileID: 0}
+  wetMaterial: {fileID: 0}
   isInHand: 0
   inTrigger: 0
   pressedButton: 0
@@ -724,6 +728,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.55, y: 0.85140896, z: 0.51}
   m_Center: {x: 0, y: 0.19929552, z: 0}
+--- !u!114 &682896845263771013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3724612639299983972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b12876e8acd46348ab0c30d6b7cd99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionOffsetJimmy: {x: -0.293, y: -0.161, z: 0.337}
+  rotationJimmy: {x: 0.007569991, y: 0.2602535, z: -0.61378145, w: 0.7453074}
+  scaleJimmy: {x: 0.5, y: 0.5, z: 0.5}
+  positionOffsetRoy: {x: 0.262, y: -0.012, z: 0.272}
+  rotationRoy: {x: 0.6420474, y: -0.030839643, z: -0.03675329, w: -0.7651622}
+  scaleRoy: {x: 0, y: 0, z: 0}
 --- !u!1 &3724612639607664960
 GameObject:
   m_ObjectHideFlags: 0

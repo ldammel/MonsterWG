@@ -89,10 +89,22 @@ namespace Game.Interactions
                 }
                 else
                 {
-                    _interactionTarget.transform.position = player.handGrabPosition.position;
-                    //_interactionTarget.transform.rotation = player.bagPosition.rotation;
-                    _interactionTarget.transform.localRotation = Quaternion.identity;
                     _interactionTarget.transform.parent = player.handGrabPosition;
+
+                    OverridePickupPosition overrideTransform = GetComponent<OverridePickupPosition>();
+                    if (overrideTransform)
+                    {
+                        _interactionTarget.transform.localPosition = overrideTransform.GetPosition(player.isPlayerOne);
+                        _interactionTarget.transform.localRotation = overrideTransform.GetRotation(player.isPlayerOne);
+                        //_interactionTarget.transform.rotation = player.bagPosition.rotation;
+                        //_interactionTarget.transform.localScale = overrideTransform.GetScale(player.isPlayerOne);
+                    }
+                    else
+                    {
+                        _interactionTarget.transform.localPosition = Vector3.zero;
+                        //_interactionTarget.transform.rotation = player.bagPosition.rotation;
+                        _interactionTarget.transform.localRotation = Quaternion.identity;
+                    }
                 }
                 _rigidBody.isKinematic = true;
                 isInHand = true;
