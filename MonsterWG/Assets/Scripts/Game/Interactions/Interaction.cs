@@ -105,7 +105,12 @@ namespace Game.Interactions
 
             if (consumesItem)
             {
-                player.CurrentItem.Hide();
+                player.CurrentItem.SetMeshVisibility(false);
+            }
+
+            if (player.CurrentItem && player.CurrentItem.NeedsWater && !isWaterSource)
+            {
+                player.CurrentItem.SetMeshVisibility(false);
             }
 
             return InteractionResult.Success;
@@ -154,6 +159,11 @@ namespace Game.Interactions
             if (dishDisplay)
             {
                 dishDisplay.AddDisplay();
+            }
+
+            if (player.CurrentItem && player.CurrentItem.NeedsWater && !isWaterSource)
+            {
+                player.CurrentItem.SetMeshVisibility(true);
             }
         }
 

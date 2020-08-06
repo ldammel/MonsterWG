@@ -119,12 +119,12 @@ namespace Game.Interactions
             
         }
         #endregion
-        
-        public void Hide()
+
+        public void SetMeshVisibility(bool visible)
         {
             foreach(var renderer in GetComponentsInChildren<Renderer>())
             {
-                renderer.enabled = false;
+                renderer.enabled = visible;
             }
         }
 
