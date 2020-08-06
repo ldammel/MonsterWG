@@ -43,7 +43,6 @@ namespace Game.Interactions
         private void Update()
         {
             if (!_active || !_player) return;
-            if(_player.InputMenu >= 1) EndMiniGame();
             if (_timing)
             {
                 if (_left)
@@ -59,11 +58,11 @@ namespace Game.Interactions
                     if (_currentValue >= 1) _left = true;
                 }
 
-                if (_player.InputInteraction >= 1f && !_pressed)
+                if (_player.InputPickUp >= 1f && !_pressed)
                 {
                     _pressed = true;
                     timingButtonPressed.gameObject.SetActive(true);
-                    if (_currentValue >= 0.5f && _currentValue <= 0.75f) EndMiniGame();
+                    if (_currentValue >= 0.33f && _currentValue <= 0.66f) EndMiniGame();
                     else
                     {
                         _currentValue = 0;
@@ -79,7 +78,7 @@ namespace Game.Interactions
             }
             else
             {
-                if (_player.InputInteraction >= 1f && !_pressed)
+                if (_player.InputPickUp >= 1f && !_pressed)
                 {
                     mashFillBar.fillAmount = (float)mashedAmount / (float)neededMashAmount;
                     mashButtonPressed.SetActive(true);
@@ -88,7 +87,7 @@ namespace Game.Interactions
                     if (mashedAmount <= neededMashAmount)mashedAmount++;
                     else EndMiniGame();
                 }
-                else if(_player.InputInteraction <= 0f && _pressed)
+                else if(_player.InputPickUp <= 0f && _pressed)
                 {
                     mashButtonPressed.SetActive(false);
                     _pressed = false;
@@ -103,6 +102,7 @@ namespace Game.Interactions
             _timing = true;
             _left = false;
             _pressed = false;
+            _player.InMiniGame = true;
             timingObject.SetActive(true);
             _player.character.canMove = false;
             arrowAnimation.Play();
@@ -115,15 +115,27 @@ namespace Game.Interactions
             mashedAmount = 0;
             _timing = false;
             _pressed = false;
+            _player.InMiniGame = true;
             if(_player)_player.character.canMove = false;
         }
-        
+
+        public void CancelMiniGame()
+        {
+            _active = false;
+            _timing = false;
+            _player.InMiniGame = false;
+            if(buttonObject)buttonObject.SetActive(false);
+            if(timingObject)timingObject.SetActive(false);
+            if(_player)_player.character.canMove = true;
+        }
+
         public void EndMiniGame()
         {
             _active = false;
             _timing = false;
+            _player.InMiniGame = false;
             onSuccess.Invoke();
-
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
             if(buttonObject)buttonObject.SetActive(false);
             if(timingObject)timingObject.SetActive(false);
             if(_player)_player.character.canMove = true;

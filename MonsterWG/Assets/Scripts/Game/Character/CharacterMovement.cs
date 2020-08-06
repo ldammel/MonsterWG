@@ -15,6 +15,7 @@ namespace Game.Character
         public InputMaster controls = null;
         public bool canMove = true;
         private Rigidbody _rb;
+        public AnimationHelper animationHelper { get; private set; }
 
         public Vector2 move;
         public float interact;
@@ -41,6 +42,7 @@ namespace Game.Character
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
+            animationHelper = GetComponentInChildren<AnimationHelper>();
             Transform cameraAlign = Camera.main.transform;
             Vector3 forward = cameraAlign.forward;
             _forwardAxis = new Vector3(forward.x, 0, forward.z).normalized;
@@ -63,9 +65,14 @@ namespace Game.Character
 
         private void DoMove()
         {
-            if (!canMove) return;
+            if (!canMove)
+            {
+                animationHelper.SetBool("Moving", false);
+                return;
+            }
             //Vector2 movementInput = playerOne ? controls.Player.Move.ReadValue<Vector2>() : controls.Player2.Move.ReadValue<Vector2>();
             Vector2 movementInput = move;
+            animationHelper.SetBool("Moving", movementInput.sqrMagnitude >= 0.5f);
 
             Vector3 rightMovement = movementSpeed * Time.deltaTime * movementInput.x * _rightAxis;
             Vector3 upMovement = movementSpeed * Time.deltaTime * movementInput.y * _forwardAxis;

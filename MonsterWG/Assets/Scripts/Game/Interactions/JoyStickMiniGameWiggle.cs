@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Utility;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -31,6 +32,8 @@ namespace Game.Interactions
                 {
                     _currentValue += 0.1f;
                     _switch = false;
+                    if(bett)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BettSchütteln);
+                    if(wischen)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BodenWischen);
                 }
                 else if (_currentValue > 0)
                 {
@@ -45,6 +48,8 @@ namespace Game.Interactions
                 {
                     _currentValue += 0.1f;
                     _switch = true;
+                    if(bett)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BettSchütteln);
+                    if(wischen)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BodenWischen);
                 }
                 else if (_currentValue > 0)
                 {

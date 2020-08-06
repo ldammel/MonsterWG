@@ -20,15 +20,12 @@ namespace Game.Utility
         public UnityEvent onFinish;
 
         private bool _stop = true;
+        private bool _played;
+        public bool Started { get; set; }
 
         #endregion
 
         #region Functions
-
-        private void OnEnable()
-        {
-            StartTimer();
-        }
 
         public void SetTimeLeft(float value)
         {
@@ -37,6 +34,7 @@ namespace Game.Utility
 
         public void StartTimer()
         {
+            Started = true;
             _stop = false;
             StartCoroutine(UpdateCoroutine());
         }
@@ -56,6 +54,11 @@ namespace Game.Utility
         {
             if(_stop) return;
             currentTime += Time.deltaTime;
+            if (timeLeft - currentTime <= 5 && !_played)
+            {
+                _played = true;
+                SoundManager.Instance.Play(gameObject, SoundManager.Sounds.CountDown);
+            }
             if (!(currentTime >= timeLeft)) return;
             _stop = true;
             if(target)target.ToggleObjects();

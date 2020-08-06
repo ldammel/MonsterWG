@@ -211,7 +211,6 @@ GameObject:
   - component: {fileID: 6254332562868397609}
   - component: {fileID: 2244316641460906815}
   - component: {fileID: 9122012531438225959}
-  - component: {fileID: 7928796104286842370}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -280,20 +279,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &7928796104286842370
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5067771257107646303}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &5170528166511873686
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,6 +568,7 @@ GameObject:
   - component: {fileID: 6652773319311024371}
   - component: {fileID: 6652773319311024368}
   - component: {fileID: 3991270623553293718}
+  - component: {fileID: 4335500439786670389}
   m_Layer: 10
   m_Name: Cleaner Item (Bucket)
   m_TagString: Water
@@ -634,6 +620,9 @@ MonoBehaviour:
       m_Calls: []
   NeedsWater: 0
   CurrentWaterAmount: 0
+  mesh: {fileID: 0}
+  dryMaterial: {fileID: 0}
+  wetMaterial: {fileID: 0}
   isInHand: 0
   inTrigger: 0
   pressedButton: 0
@@ -743,6 +732,24 @@ MonoBehaviour:
   cleaningObjectTag: Wischmop
   NeedsWater: 0
   NeededWaterAmount: 10
+--- !u!114 &4335500439786670389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6652773319311024366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b12876e8acd46348ab0c30d6b7cd99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionOffsetJimmy: {x: 0, y: 0, z: 0}
+  rotationJimmy: {x: 0, y: 0, z: 0, w: 0}
+  scaleJimmy: {x: 0, y: 0, z: 0}
+  positionOffsetRoy: {x: 0.049, y: 0.043, z: 0.262}
+  rotationRoy: {x: -0.49999994, y: -0.5, z: 0.5, w: 0.49999994}
+  scaleRoy: {x: 0, y: 0, z: 0}
 --- !u!1 &7176308326121077308
 GameObject:
   m_ObjectHideFlags: 0

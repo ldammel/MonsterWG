@@ -1,4 +1,5 @@
-﻿using Game.Utility;
+﻿using System.Collections;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -45,13 +46,13 @@ namespace Game.Interactions
 
         public virtual void EndMiniGame(bool success)
         {
-            if(bad)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BadReinigen);
-            else if(bett)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BettSchütteln);
-            else if(geschirr)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.GeschirrSpülen);
-            else if(wischen)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BodenWischen);
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
             _start = false;
             uiObject.SetActive(false);
-            _interaction.player.character.canMove = true;
+            if(_interaction.player)
+            {
+                _interaction.player.character.canMove = true;
+            }
             if (!success)
             {
                 return;
@@ -59,7 +60,7 @@ namespace Game.Interactions
 
             _interaction.SetDone();
             
-            if(_interaction.player.CurrentItem && _interaction.player.CurrentItem.NeedsWater)
+            if(_interaction.player && _interaction.player.CurrentItem && _interaction.player.CurrentItem.NeedsWater)
             {
                 _interaction.player.CurrentItem.CurrentWaterAmount -= _condition.NeededWaterAmount;
                 Mathf.Clamp(_interaction.player.CurrentItem.CurrentWaterAmount, 0, 100);

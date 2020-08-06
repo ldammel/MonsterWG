@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -99,6 +99,8 @@ namespace Game.Interactions
                 {
                     _fullRotations++;
                     _currentIndex = 0;
+                    if(bad)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BadReinigen);
+                    else if(geschirr)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.GeschirrSpülen);
                 }
 
                 if (_fullRotations >= neededRotations)
@@ -107,7 +109,6 @@ namespace Game.Interactions
                 }
             }
         }
-
 
         private bool CheckInput(Vector2 input)
         {

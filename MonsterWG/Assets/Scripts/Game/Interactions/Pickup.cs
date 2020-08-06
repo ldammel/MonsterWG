@@ -3,6 +3,7 @@ using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 
 
 namespace Game.Interactions
@@ -35,6 +36,12 @@ namespace Game.Interactions
         public bool NeedsWater;
         [FoldoutGroup("Settings"), ShowIf(nameof(NeedsWater))]
         public int CurrentWaterAmount;
+        [FoldoutGroup("Settings"), ShowIf(nameof(NeedsWater))] [SerializeField]
+        private MeshRenderer mesh;
+        [FoldoutGroup("Settings"), ShowIf(nameof(NeedsWater))] [SerializeField]
+        private Material dryMaterial;
+        [FoldoutGroup("Settings"), ShowIf(nameof(NeedsWater))] [SerializeField]
+        private Material wetMaterial;
         public bool isInHand = false;
         public bool inTrigger;
         public bool pressedButton;
@@ -44,6 +51,9 @@ namespace Game.Interactions
         public bool _isPickedUp;
         private bool _currentPlayer;
         private Rigidbody _rigidBody;
+        private Collider[] _cols;
+        public bool InWall { get; private set; }
+
         #endregion
         
         #region Start/Update
@@ -57,40 +67,86 @@ namespace Game.Interactions
         {
             if(player)pressedButton = player.InputPickUp >= 1f;
 
+            if(NeedsWater)mesh.material = CurrentWaterAmount > 0 ? wetMaterial : dryMaterial;
+
             if (_isPickedUp)
             {
+                foreach(var collider in GetComponentsInChildren<Collider>())
+                {
+                    if (!collider.isTrigger)
+                    {
+                        collider.enabled = false;
+                    }
+                }
                 if (isTrash)
                 {
-                    trashBag.SetActive(true);
+                    // Trashbag is now in animation
+                    trashBag.SetActive(false);
                     itemObject.SetActive(false);
-                    SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Interagieren);
+                    _interactionTarget.transform.position = player.bagPosition.position;
+                    _interactionTarget.transform.rotation = player.bagPosition.rotation;
+                    _interactionTarget.transform.parent = player.bagPosition;
+                }
+                else
+                {
+                    _interactionTarget.transform.parent = player.handGrabPosition;
+
+                    OverridePickupPosition overrideTransform = GetComponent<OverridePickupPosition>();
+                    if (overrideTransform)
+                    {
+                        _interactionTarget.transform.localPosition = overrideTransform.GetPosition(player.isPlayerOne);
+                        _interactionTarget.transform.localRotation = overrideTransform.GetRotation(player.isPlayerOne);
+                        //_interactionTarget.transform.rotation = player.bagPosition.rotation;
+                        //_interactionTarget.transform.localScale = overrideTransform.GetScale(player.isPlayerOne);
+                    }
+                    else
+                    {
+                        _interactionTarget.transform.localPosition = Vector3.zero;
+                        //_interactionTarget.transform.rotation = player.bagPosition.rotation;
+                        _interactionTarget.transform.localRotation = Quaternion.identity;
+                    }
                 }
                 _rigidBody.isKinematic = true;
-                _interactionTarget.transform.position = player.handGrabPosition.position;
-                _interactionTarget.transform.parent = player.handGrabPosition;
                 isInHand = true;
             }
             else
             {
+                foreach (var collider in GetComponentsInChildren<Collider>())
+                {
+                    if (!collider.isTrigger)
+                    {
+                        collider.enabled = true;
+                    }
+                }
                 if (isTrash)
                 {
                     trashBag.SetActive(false);
                     itemObject.SetActive(true);
                 }
                 _interactionTarget.transform.parent = baseParent;
+                _interactionTarget.transform.rotation = Quaternion.identity;
                 _rigidBody.isKinematic = false;
                 isInHand = false;
             }
             
         }
         #endregion
-        
+
+        public void SetMeshVisibility(bool visible)
+        {
+            foreach(var renderer in GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = visible;
+            }
+        }
+
         #region PickUp Functions
         public void PickUp()
         {
             player.CurrentItem = this;
             _isPickedUp = true;
             onPickUp.Invoke();
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Interagieren);
         }
 
         public void CancelPickUp()
@@ -124,6 +180,7 @@ namespace Game.Interactions
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Untagged")) return;
+            if (other.CompareTag("Wall")) InWall = true;
             if (other.CompareTag("Player") || other.CompareTag("Player2"))
             {
                 if (player) return;
@@ -146,6 +203,7 @@ namespace Game.Interactions
 
         private void OnTriggerExit(Collider other)
         {
+            if (other.CompareTag("Wall")) InWall = false;
             if (other.CompareTag("Player") || other.CompareTag("Player2"))
             {
                 inTrigger = false;

@@ -59,7 +59,7 @@ namespace Game.UI
             pauseMenu.SetActive(value);
             _character.character.canMove = !value;
             _character1.character.canMove = !value;
-            if(_character.character.canMove) timer.StartTimer();
+            if(_character.character.canMove && timer.Started) timer.StartTimer();
             else timer.StopTimer();
         }
     }

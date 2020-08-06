@@ -28,6 +28,7 @@ namespace Game.Utility
         {
             _active = true;
             StartCoroutine(ToggleCanvas( canvasStartWaitTime));
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Putzplan);
         }
         
         public void DisableCanvas()

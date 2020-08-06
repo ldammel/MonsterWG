@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -52,12 +53,18 @@ namespace Game.Interactions
         private CleanState _cleanState;
         public bool Stop => _stop;
         public bool canStart;
+        private bool _soundPlayed;
 
         private void Start()
         {
             _outline = GetComponentInChildren<Outline>();
             endHold = true;
             if(!collector)canStart = true;
+        }
+
+        public void ClearInteractions()
+        {
+            player._interactions.Clear();
         }
 
 
@@ -85,11 +92,26 @@ namespace Game.Interactions
                 {
                     Debug.Log("Item Watered!", player.CurrentItem);
                     player.CurrentItem.CurrentWaterAmount = 100;
-                }
+                    if (!_soundPlayed)
+                    {
+                        _soundPlayed = true;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.MopNässen,128,2);
+                    }
+                }else _soundPlayed = false;
             }
 
             if(onStart != null && _interactAmount < onStart.Length)
                 onStart[_interactAmount].Invoke();
+
+            if (consumesItem)
+            {
+                player.CurrentItem.SetMeshVisibility(false);
+            }
+
+            if (player.CurrentItem && player.CurrentItem.NeedsWater && !isWaterSource)
+            {
+                player.CurrentItem.SetMeshVisibility(false);
+            }
 
             return InteractionResult.Success;
         }
@@ -138,6 +160,11 @@ namespace Game.Interactions
             {
                 dishDisplay.AddDisplay();
             }
+
+            if (player.CurrentItem && player.CurrentItem.NeedsWater && !isWaterSource)
+            {
+                player.CurrentItem.SetMeshVisibility(true);
+            }
         }
 
         public bool IsDone()
@@ -148,6 +175,29 @@ namespace Game.Interactions
             }
 
             return false;
+        }
+
+        public void StartAnimation(int id)
+        {
+            if (player)
+            {
+                player.character.animationHelper.SetInt("Interaction", id);
+            }
+        }
+
+        public void StartOneShotAnimation(int id)
+        {
+            if (player)
+            {
+                player.character.animationHelper.SetInt("Interaction", id);
+
+                StartCoroutine(StopAnimationAfterTime(0.1f));
+            }
+        }
+
+        public void StopAnimation()
+        {
+            player.character.animationHelper.SetInt("Interaction", 0);
         }
 
         private void Update()
@@ -213,7 +263,10 @@ namespace Game.Interactions
 
         private void OnTriggerExit(Collider other)
         {
-            if(useTimer)timerbase.SetActive(false);
+            if (other.CompareTag("Untagged")) return;
+            if (!other.CompareTag("Player") && !other.CompareTag("Player2")) return;
+
+            if (useTimer)timerbase.SetActive(false);
             player = null;
         }
         
@@ -224,6 +277,12 @@ namespace Game.Interactions
                 timerImage.fillAmount = _startTime / duration;
                 yield return new WaitForSeconds(0.2f);
             }
+        }
+
+        private IEnumerator StopAnimationAfterTime(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            StopAnimation();
         }
 
         public enum InteractionResult
