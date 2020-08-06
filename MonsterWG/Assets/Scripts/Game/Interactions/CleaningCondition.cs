@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Interactions;
+using Game.Utility;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -36,17 +37,45 @@ public class CleaningCondition : MonoBehaviour
         if (!player) { if (log) { Debug.Log("No player in range!", gameObject); } return Interaction.InteractionResult.Failed; }
 
         // no item needed?
-        if (!NeedsItem && player.CurrentItem){ if (log) { Debug.Log("Player needs free hands!", gameObject); } return Interaction.InteractionResult.NeedsFreeHands; }
+        if (!NeedsItem && player.CurrentItem){
+            if (log)
+            {
+                Debug.Log("Player needs free hands!", gameObject);
+            } 
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
+            return Interaction.InteractionResult.NeedsFreeHands; 
+        }
         if (!NeedsItem && !player.CurrentItem) return Interaction.InteractionResult.Success;
 
         // item needed?
-        if (!player.CurrentItem){ if (log) { Debug.Log("Player has no item", gameObject); } return Interaction.InteractionResult.NeedsItem; } 
+        if (!player.CurrentItem){
+            if (log)
+            {
+                Debug.Log("Player has no item", gameObject);
+            } 
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
+            return Interaction.InteractionResult.NeedsItem; 
+        } 
 
         // item has correct tag?
-        if (!player.CurrentItem.gameObject.CompareTag(cleaningObjectTag)) { if (log) { Debug.Log("Item has incorrect tag!", gameObject); } return Interaction.InteractionResult.WrongType; }
+        if (!player.CurrentItem.gameObject.CompareTag(cleaningObjectTag)) {
+            if (log)
+            {
+                Debug.Log("Item has incorrect tag!", gameObject);
+            } 
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
+            return Interaction.InteractionResult.WrongType; 
+        }
 
         // watered item needed?
-        if (NeedsWater && player.CurrentItem.CurrentWaterAmount < NeededWaterAmount){ if (log) { Debug.Log("Item has not enough water!", gameObject); } return Interaction.InteractionResult.NeedsWater; } 
+        if (NeedsWater && player.CurrentItem.CurrentWaterAmount < NeededWaterAmount){
+            if (log)
+            {
+                Debug.Log("Item has not enough water!", gameObject);
+            } 
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputWrong);
+            return Interaction.InteractionResult.NeedsWater;
+        } 
 
         return Interaction.InteractionResult.Success;
     }

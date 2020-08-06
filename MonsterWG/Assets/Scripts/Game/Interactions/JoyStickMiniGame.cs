@@ -1,4 +1,5 @@
-﻿using Game.Utility;
+﻿using System.Collections;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -45,10 +46,7 @@ namespace Game.Interactions
 
         public virtual void EndMiniGame(bool success)
         {
-            if(bad)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BadReinigen);
-            else if(bett)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BettSchütteln);
-            else if(geschirr)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.GeschirrSpülen);
-            else if(wischen)SoundManager.Instance.Play(gameObject, SoundManager.Sounds.BodenWischen);
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.InputCorrect);
             _start = false;
             uiObject.SetActive(false);
             _interaction.player.character.canMove = true;

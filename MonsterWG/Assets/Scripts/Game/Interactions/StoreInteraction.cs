@@ -106,12 +106,21 @@ namespace Game.Interactions
                 storedObjects[i].SetActive(true);
                 storedObjects[i].transform.position = explosionTransforms[i].position;
             }
-            //storedObjectsAmount = 0;
+
             storedObjects.Clear();
             onExplosion.Invoke();
             enabled = false;
             GetComponent<Collider>().enabled = false;
+            StartCoroutine(WaitClear());
             //gameObject.SetActive(false);
+        }
+
+        IEnumerator WaitClear()
+        {
+            yield return new WaitForSeconds(1);
+            storedObjectsAmount = 0;
+            enabled = true;
+            GetComponent<Collider>().enabled = true;
         }
 
         IEnumerator WaitTime(GameObject o)

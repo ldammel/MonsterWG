@@ -266,7 +266,7 @@ MonoBehaviour:
   NeedsItem: 1
   cleaningObjectTag: Wischmop
   NeedsWater: 1
-  NeededWaterAmount: 10
+  NeededWaterAmount: 50
 --- !u!114 &2193317899968601470
 MonoBehaviour:
   m_ObjectHideFlags: 0

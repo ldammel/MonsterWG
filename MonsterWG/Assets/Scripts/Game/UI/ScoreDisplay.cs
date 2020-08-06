@@ -48,7 +48,7 @@ namespace Game.UI
         {
             tvText.text = "x" + tvCount;
             müllText.text = "x" + müllCount;
-            geschirrText.text = "x" + geschirrCount;
+            geschirrText.text = "x" + (geschirrCount/2);
             blumenText.text = "x" + blumenCount;
             wischenText.text = "x" + wischenCount;
             bettText.text = "x" + bettCount;
@@ -59,6 +59,7 @@ namespace Game.UI
         public void AddScore(int scoreAdd)
         {
             score += scoreAdd;
+            scoreText.text = score.ToString();
         }
 
         public void FinishQuest(string type)
@@ -85,8 +86,8 @@ namespace Game.UI
                     if (geschirrCount != 0)
                     {
                         geschirrCount--;
-                        geschirrText.text = "x" + geschirrCount;
-                        AddScore(geschirrReward);
+                        geschirrText.text = "x" + (geschirrCount/2);
+                        AddScore(geschirrReward/2);
                     }
                     break;
                 case "BLUMEN":

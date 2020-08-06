@@ -46,20 +46,11 @@ namespace Game.Utility
             BlumenGießen,
             TvAusschalten,
             TvStaticSound,
-            Glitzern,
-            Laufen,
             Interagieren,
             InputCorrect,
             InputWrong,
-            RoySchnarchen,
-            RoyMurmeln,     
-            JimmySchnarchen,
-            JimmyMurmeln,
-            TelefonKlingeln,
-            TimerCountdown,
-            TimerAuto,
             Putzplan,
-            VögelAmbiente
+            Ambiente
         }
         
         public void Play(GameObject source, Sounds sound, int priority = 128, float volume = 1f) {

@@ -3,6 +3,7 @@ using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 
 
 namespace Game.Interactions
@@ -35,6 +36,12 @@ namespace Game.Interactions
         public bool NeedsWater;
         [FoldoutGroup("Settings"), ShowIf(nameof(NeedsWater))]
         public int CurrentWaterAmount;
+        [FoldoutGroup("Settings"), ShowIf(nameof(NeedsWater))] [SerializeField]
+        private MeshRenderer mesh;
+        [FoldoutGroup("Settings"), ShowIf(nameof(NeedsWater))] [SerializeField]
+        private Material dryMaterial;
+        [FoldoutGroup("Settings"), ShowIf(nameof(NeedsWater))] [SerializeField]
+        private Material wetMaterial;
         public bool isInHand = false;
         public bool inTrigger;
         public bool pressedButton;
@@ -44,6 +51,9 @@ namespace Game.Interactions
         public bool _isPickedUp;
         private bool _currentPlayer;
         private Rigidbody _rigidBody;
+        private Collider[] _cols;
+        public bool InWall { get; private set; }
+
         #endregion
         
         #region Start/Update
@@ -57,6 +67,8 @@ namespace Game.Interactions
         {
             if(player)pressedButton = player.InputPickUp >= 1f;
 
+            if(NeedsWater)mesh.material = CurrentWaterAmount > 0 ? wetMaterial : dryMaterial;
+
             if (_isPickedUp)
             {
                 if (isTrash)
@@ -64,11 +76,16 @@ namespace Game.Interactions
                     // Trashbag is now in animation
                     //trashBag.SetActive(true);
                     itemObject.SetActive(false);
-                    SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Interagieren);
+                    _interactionTarget.transform.position = player.bagPosition.position;
+                    _interactionTarget.transform.rotation = player.bagPosition.rotation;
+                    _interactionTarget.transform.parent = player.bagPosition;
+                }
+                else
+                {
+                    _interactionTarget.transform.position = player.handGrabPosition.position;
+                    _interactionTarget.transform.parent = player.handGrabPosition;
                 }
                 _rigidBody.isKinematic = true;
-                _interactionTarget.transform.position = player.handGrabPosition.position;
-                _interactionTarget.transform.parent = player.handGrabPosition;
                 isInHand = true;
             }
             else
@@ -79,6 +96,7 @@ namespace Game.Interactions
                     itemObject.SetActive(true);
                 }
                 _interactionTarget.transform.parent = baseParent;
+                _interactionTarget.transform.rotation = Quaternion.identity;
                 _rigidBody.isKinematic = false;
                 isInHand = false;
             }
@@ -92,6 +110,7 @@ namespace Game.Interactions
             player.CurrentItem = this;
             _isPickedUp = true;
             onPickUp.Invoke();
+            SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Interagieren);
         }
 
         public void CancelPickUp()
@@ -125,6 +144,7 @@ namespace Game.Interactions
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Untagged")) return;
+            if (other.CompareTag("Wall")) InWall = true;
             if (other.CompareTag("Player") || other.CompareTag("Player2"))
             {
                 if (player) return;
@@ -147,6 +167,7 @@ namespace Game.Interactions
 
         private void OnTriggerExit(Collider other)
         {
+            if (other.CompareTag("Wall")) InWall = false;
             if (other.CompareTag("Player") || other.CompareTag("Player2"))
             {
                 inTrigger = false;

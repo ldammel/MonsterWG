@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -52,12 +53,18 @@ namespace Game.Interactions
         private CleanState _cleanState;
         public bool Stop => _stop;
         public bool canStart;
+        private bool _soundPlayed;
 
         private void Start()
         {
             _outline = GetComponentInChildren<Outline>();
             endHold = true;
             if(!collector)canStart = true;
+        }
+
+        public void ClearInteractions()
+        {
+            player._interactions.Clear();
         }
 
 
@@ -85,7 +92,12 @@ namespace Game.Interactions
                 {
                     Debug.Log("Item Watered!", player.CurrentItem);
                     player.CurrentItem.CurrentWaterAmount = 100;
-                }
+                    if (!_soundPlayed)
+                    {
+                        _soundPlayed = true;
+                        SoundManager.Instance.Play(gameObject, SoundManager.Sounds.MopNässen,128,2);
+                    }
+                }else _soundPlayed = false;
             }
 
             if(onStart != null && _interactAmount < onStart.Length)
