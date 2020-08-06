@@ -71,9 +71,17 @@ namespace Game.Interactions
 
             if (_isPickedUp)
             {
+                foreach(var collider in GetComponentsInChildren<Collider>())
+                {
+                    if (!collider.isTrigger)
+                    {
+                        collider.enabled = false;
+                    }
+                }
                 if (isTrash)
                 {
-                    trashBag.SetActive(true);
+                    // Trashbag is now in animation
+                    trashBag.SetActive(false);
                     itemObject.SetActive(false);
                     _interactionTarget.transform.position = player.bagPosition.position;
                     _interactionTarget.transform.rotation = player.bagPosition.rotation;
@@ -82,6 +90,8 @@ namespace Game.Interactions
                 else
                 {
                     _interactionTarget.transform.position = player.handGrabPosition.position;
+                    //_interactionTarget.transform.rotation = player.bagPosition.rotation;
+                    _interactionTarget.transform.localRotation = Quaternion.identity;
                     _interactionTarget.transform.parent = player.handGrabPosition;
                 }
                 _rigidBody.isKinematic = true;
@@ -89,6 +99,13 @@ namespace Game.Interactions
             }
             else
             {
+                foreach (var collider in GetComponentsInChildren<Collider>())
+                {
+                    if (!collider.isTrigger)
+                    {
+                        collider.enabled = true;
+                    }
+                }
                 if (isTrash)
                 {
                     trashBag.SetActive(false);
@@ -102,7 +119,15 @@ namespace Game.Interactions
             
         }
         #endregion
-        
+
+        public void SetMeshVisibility(bool visible)
+        {
+            foreach(var renderer in GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = visible;
+            }
+        }
+
         #region PickUp Functions
         public void PickUp()
         {

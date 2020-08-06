@@ -103,6 +103,16 @@ namespace Game.Interactions
             if(onStart != null && _interactAmount < onStart.Length)
                 onStart[_interactAmount].Invoke();
 
+            if (consumesItem)
+            {
+                player.CurrentItem.SetMeshVisibility(false);
+            }
+
+            if (player.CurrentItem && player.CurrentItem.NeedsWater && !isWaterSource)
+            {
+                player.CurrentItem.SetMeshVisibility(false);
+            }
+
             return InteractionResult.Success;
         }
 
@@ -149,6 +159,11 @@ namespace Game.Interactions
             if (dishDisplay)
             {
                 dishDisplay.AddDisplay();
+            }
+
+            if (player.CurrentItem && player.CurrentItem.NeedsWater && !isWaterSource)
+            {
+                player.CurrentItem.SetMeshVisibility(true);
             }
         }
 
@@ -248,7 +263,10 @@ namespace Game.Interactions
 
         private void OnTriggerExit(Collider other)
         {
-            if(useTimer)timerbase.SetActive(false);
+            if (other.CompareTag("Untagged")) return;
+            if (!other.CompareTag("Player") && !other.CompareTag("Player2")) return;
+
+            if (useTimer)timerbase.SetActive(false);
             player = null;
         }
         

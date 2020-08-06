@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Interactions;
@@ -90,6 +90,8 @@ public class CleaningCondition : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (!other.CompareTag("Player") || !other.CompareTag("Player2")) return;
+
         IsMet = false;
         _controller = null;
     }
