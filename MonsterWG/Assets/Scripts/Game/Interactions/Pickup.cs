@@ -61,7 +61,8 @@ namespace Game.Interactions
             {
                 if (isTrash)
                 {
-                    trashBag.SetActive(true);
+                    // Trashbag is now in animation
+                    //trashBag.SetActive(true);
                     itemObject.SetActive(false);
                     SoundManager.Instance.Play(gameObject, SoundManager.Sounds.Interagieren);
                 }
