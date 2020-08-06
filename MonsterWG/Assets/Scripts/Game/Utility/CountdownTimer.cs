@@ -21,15 +21,11 @@ namespace Game.Utility
 
         private bool _stop = true;
         private bool _played;
-        
+        public bool Started { get; set; }
+
         #endregion
 
         #region Functions
-
-        private void OnEnable()
-        {
-            StartTimer();
-        }
 
         public void SetTimeLeft(float value)
         {
@@ -38,6 +34,7 @@ namespace Game.Utility
 
         public void StartTimer()
         {
+            Started = true;
             _stop = false;
             StartCoroutine(UpdateCoroutine());
         }

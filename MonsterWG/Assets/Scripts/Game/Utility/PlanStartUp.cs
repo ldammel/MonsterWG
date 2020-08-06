@@ -2,6 +2,7 @@
 using System.Collections;
 using Game.Interactions;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Utility
 {
@@ -15,6 +16,7 @@ namespace Game.Utility
         }
 
         [SerializeField] private GameObject planCanvas;
+        public UnityEvent onstart;
         private PlayerInteractionController _player1;
         private PlayerInteractionController _player2;
         private bool _open;
@@ -24,6 +26,7 @@ namespace Game.Utility
             if (!_open) return;
             if (_player1.InputInteraction <= 0) return;
             _open = false;
+            onstart.Invoke();
             planCanvas.SetActive(false);
             _player1.character.canMove = true;
             _player2.character.canMove = true;
